@@ -34,6 +34,24 @@ var v = new java.lang.Runnable() {
             CI.run("setRefVariable", "user/races/" + rindex + "/summary/systems/0/text", "static/text/lexicon/UI/summary/systemsListTitle");
         }
 
+        // process ships
+        
+        // process systems
+        var systems = CI.run("getVariable user/galaxy/systems/count");
+        
+        for (sysindex = 1; sysindex < systems; sysindex++)
+        {
+            var inhabited = CI.run("getVariable user/galaxy/systems/" + sysindex + "/inhabited") === 'true';
+            var maxPop = parseInt(CI.run("getVariable user/galaxy/systems/" + sysindex + "/maxPop"));
+            var pop = parseInt(CI.run("getVariable user/galaxy/systems/" + sysindex + "/pop"));
+            
+            if (inhabited && pop < maxPop)
+            {
+                pop = pop + 1;
+                CI.run("setVariable user/galaxy/systems/" + sysindex + "/pop " + pop);
+            }
+        }
+        
         for (dindex = 1; dindex < 40; dindex++)
         {
             // test data for events list

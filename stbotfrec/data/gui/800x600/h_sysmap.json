@@ -229,17 +229,33 @@
             "triggers": [
                 {
                     "condition": {
-                        "operator": "==",
-                        "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPop]",
-                        "value2": "[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPopCapacity]"
+                        "operator": "AND",
+                        "value1": {
+                            "operator": "==",
+                            "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPop]",
+                            "value2": "[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPopCapacity]"
+                        },
+                        "value2": {
+                            "operator": "!=",
+                            "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/pop]",
+                            "value2": ""
+                        }
                     },
                     "onTriggered": "setVariable this/text \"[user/galaxy/systems/[runtime/ui/selectedSystem]/pop]\n[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPop]\nFIXME\nFIXME\""
                 },
                 {
                     "condition": {
-                        "operator": "!=",
-                        "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPop]",
-                        "value2": "[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPopCapacity]"
+                        "operator": "AND",
+                        "value1": {
+                            "operator": "!=",
+                            "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPop]",
+                            "value2": "[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPopCapacity]"
+                        },
+                        "value2": {
+                            "operator": "!=",
+                            "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/pop]",
+                            "value2": ""
+                        }
                     },
                     "onTriggered": "setVariable this/text \"[user/galaxy/systems/[runtime/ui/selectedSystem]/pop]\n[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPop]/[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPopCapacity]\nFIXME\nFIXME\""
                 }
