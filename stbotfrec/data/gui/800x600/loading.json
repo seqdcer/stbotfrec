@@ -1,0 +1,9 @@
+{
+    "background": "[static/stats/empires/smallPrefixes/[runtime/gamesetup/playerEmpire]]_load.png",
+    "x": 0,
+    "width": 800,
+    "y": 0,
+    "type": "container",
+    "height": 600,
+    "cursor": "[static/stats/empires/smallPrefixes/[runtime/gamesetup/playerEmpire]]wait.gif"
+}

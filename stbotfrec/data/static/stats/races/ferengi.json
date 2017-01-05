@@ -1,0 +1,66 @@
+{
+    "homeSystem": {
+        "name": "Ferenginar",
+        "starType": 2,
+        "numPlanets": 6,
+        "planets": [
+            {
+                "name": "Ferenginar 1",
+                "type": 5,
+                "size": 1,
+                "img": "vtom.gif",
+                "maxPop": 30,
+                "bonusPerc": 50,
+                "bonusType": 2,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Ferenginar 2",
+                "type": 7,
+                "size": 2,
+                "img": "jrol.gif",
+                "maxPop": 100,
+                "bonusPerc": 50,
+                "bonusType": 0,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Ferenginar 3",
+                "type": 3,
+                "size": 2,
+                "img": "orol.gif",
+                "maxPop": 95,
+                "bonusPerc": 40,
+                "bonusType": 0,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Ferenginar 4",
+                "type": 2,
+                "size": 1,
+                "img": "dtom.gif",
+                "maxPop": 40,
+                "bonusPerc": 50,
+                "bonusType": 2,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Ferenginar 5",
+                "type": 6,
+                "size": 0,
+                "img": "gmsl.gif",
+                "maxPop": 0
+            },
+            {
+                "name": "Ferenginar 6",
+                "type": 0,
+                "size": 1,
+                "img": "atom.gif",
+                "maxPop": 45,
+                "reqStartLevel": 0
+            }
+        ],
+        "hasDilithium": true,
+        "startingPopulation": [160, 230, 310, 310, 310]
+    }
+}

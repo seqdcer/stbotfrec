@@ -1,0 +1,34 @@
+{
+    "name": "Science Vessel",
+    "class": "Oberth",
+    "desc": "The Oberth class is designed for a single purpose: exploration.  It carries an efficient warp drive, an extended fuel supply,  sophisticated sensors and an on-board laboratory. The crew is largely composed of scientists, and should not be expected to perform well in combat.",
+    "function": "scout",
+    "nameGroup": 7,
+    "mapRange": 2,
+    "mapSpeed": 1,
+    "scanStr": 2,
+    "cost": 400,
+    "upkeep": 26,
+    "stealth": 0,
+    "beams": {
+        "acc": 115,
+        "num": 2,
+        "dmg": 15,
+        "minRange": 270,
+        "maxRange": 300
+    },
+    "torps": {
+        "acc": 112,
+        "num": 2,
+        "dmg": 28,
+        "minRange": 50,
+        "maxRange": 540
+    },
+    "shieldReg": 13,
+    "shields": 110,
+    "hull": 19,
+    "defense": 20,
+    "agility": 100,
+    "imgPrefix": "hu",
+    "techReq": [1, 1, 1, 1, 1, 1]
+}

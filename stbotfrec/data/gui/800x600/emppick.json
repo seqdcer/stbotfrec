@@ -1,0 +1,247 @@
+{
+    "components": [{
+            "imageOff": "es_acb1.png",
+            "x": 452,
+            "width": 160,
+            "y": 502,
+            "type": "button",
+            "height": 36,
+            "imageOn": "es_acb2.png",
+            "onClick": "runScript newSingle",
+            "clickSound": "sfx/success_click"
+        }, {
+            "imageOff": "es_cnlb1.png",
+            "x": 16,
+            "width": 160,
+            "y": 502,
+            "type": "button",
+            "height": 36,
+            "imageOn": "es_cnlb2.png",
+            "onClick": "showScreen gamesetup",
+            "clickSound": "sfx/success_click"
+        }, {
+            "imageOff": "es_fbtn1.png",
+            "x": 89,
+            "width": 272,
+            "y": 284,
+            "type": "toggle",
+            "height": 36,
+            "imageOn": "es_fbtn2.png",
+            "onMouseEntered": "setVariable local/playerEmpireHoverIndex 2",
+            "onMouseExited": "setVariable local/playerEmpireHoverIndex -1",
+            "toggleGroup": {
+                "toggleGroupRef": "runtime/gamesetup/playerEmpire",
+                "toggleIndex": 2
+            },
+            "toggleSound": "sfx/select_fer_emp",
+            "onToggle": "playVoice voice/[static/misc/soundmap/voices/empires/2/empirepick]",
+            "visible": false
+        }, {
+            "imageOff": "es_cbtn1.png",
+            "x": 89,
+            "width": 272,
+            "y": 146,
+            "type": "toggle",
+            "height": 36,
+            "imageOn": "es_cbtn2.png",
+            "onMouseEntered": "setVariable local/playerEmpireHoverIndex 0",
+            "onMouseExited": "setVariable local/playerEmpireHoverIndex -1",
+            "toggleGroup": {
+                "toggleGroupRef": "runtime/gamesetup/playerEmpire",
+                "toggleIndex": 0
+            },
+            "toggleSound": "sfx/select_car_emp",
+            "onToggle": "playVoice voice/[static/misc/soundmap/voices/empires/0/empirepick]",
+            "visible": false
+        }, {
+            "imageOff": "es_kbtn1.png",
+            "x": 89,
+            "width": 272,
+            "y": 353,
+            "type": "toggle",
+            "height": 36,
+            "imageOn": "es_kbtn2.png",
+            "onMouseEntered": "setVariable local/playerEmpireHoverIndex 3",
+            "onMouseExited": "setVariable local/playerEmpireHoverIndex -1",
+            "toggleGroup": {
+                "toggleGroupRef": "runtime/gamesetup/playerEmpire",
+                "toggleIndex": 3
+            },
+            "toggleSound": "sfx/select_kli_emp",
+            "onToggle": "playVoice voice/[static/misc/soundmap/voices/empires/3/empirepick]",
+            "visible": false
+        }, {
+            "imageOff": "es_hbtn1.png",
+            "x": 89,
+            "width": 272,
+            "y": 218,
+            "type": "toggle",
+            "height": 36,
+            "imageOn": "es_hbtn2.png",
+            "onMouseEntered": "setVariable local/playerEmpireHoverIndex 1",
+            "onMouseExited": "setVariable local/playerEmpireHoverIndex -1",
+            "toggleGroup": {
+                "toggleGroupRef": "runtime/gamesetup/playerEmpire",
+                "toggleIndex": 1
+            },
+            "toggleSound": "sfx/select_fed_emp",
+            "onToggle": "playVoice voice/[static/misc/soundmap/voices/empires/1/empirepick]"
+        }, {
+            "imageOff": "es_rbtn1.png",
+            "x": 89,
+            "width": 272,
+            "y": 422,
+            "type": "toggle",
+            "height": 36,
+            "imageOn": "es_rbtn2.png",
+            "onMouseEntered": "setVariable local/playerEmpireHoverIndex 4",
+            "onMouseExited": "setVariable local/playerEmpireHoverIndex -1",
+            "toggleGroup": {
+                "toggleGroupRef": "runtime/gamesetup/playerEmpire",
+                "toggleIndex": 4
+            },
+            "toggleSound": "sfx/select_rom_emp",
+            "onToggle": "playVoice voice/[static/misc/soundmap/voices/empires/4/empirepick]",
+            "visible": false
+        }, {
+            "x": 11,
+            "width": 71,
+            "y": 141,
+            "type": "imagebox",
+            "height": 80,
+            "image": "es_cicn1.png"
+        }, {
+            "x": 11,
+            "width": 71,
+            "y": 289,
+            "type": "imagebox",
+            "height": 50,
+            "image": "es_ficn1.png"
+        }, {
+            "x": 11,
+            "width": 71,
+            "y": 224,
+            "type": "imagebox",
+            "height": 62,
+            "image": "es_hicn1.png"
+        }, {
+            "x": 11,
+            "width": 71,
+            "y": 342,
+            "type": "imagebox",
+            "height": 70,
+            "image": "es_kicn1.png"
+        }, {
+            "x": 11,
+            "width": 71,
+            "y": 416,
+            "type": "imagebox",
+            "height": 58,
+            "image": "es_ricn1.png"
+        }, {
+            "text": "[static/text/races/[static/stats/empires/list/[local/playerEmpireHoverIndex]]/empireDescription]",
+            "textHeight": 340,
+            "textXPos": 0,
+            "textYPos": 0,
+            "x": 368,
+            "width": 240,
+            "y": 146,
+            "textWidth": 240,
+            "type": "textbox",
+            "height": 340,
+            "font": {
+                "fontFile": "human20.zip",
+                "color": "[static/misc/fontmap/emppick/empireDescription/[local/playerEmpireHoverIndex]/color]",
+                "style": "[static/misc/fontmap/emppick/empireDescription/[local/playerEmpireHoverIndex]/style]"
+            }
+        }, {
+            "text": "[settings/startingLevels/1]",
+            "textHeight": 17,
+            "textXPos": 0,
+            "textYPos": 0,
+            "x": 89,
+            "width": 150,
+            "y": 260,
+            "textWidth": 150,
+            "type": "textbox",
+            "height": 17,
+            "font": {
+                "fontFile": "human15.zip",
+                "color": "[static/misc/fontmap/options/settings/startingLevels/color/[settings/startingLevels/1/index]]",
+                "style": "[static/misc/fontmap/options/settings/startingLevels/style/[settings/startingLevels/1/index]]"
+            }
+        }, {
+            "text": "[settings/startingLevels/2]",
+            "textHeight": 17,
+            "textXPos": 0,
+            "textYPos": 0,
+            "x": 89,
+            "width": 150,
+            "y": 326,
+            "textWidth": 150,
+            "type": "textbox",
+            "height": 17,
+            "font": {
+                "fontFile": "human15.zip",
+                "color": "[static/misc/fontmap/options/settings/startingLevels/color/[settings/startingLevels/2/index]]",
+                "style": "[static/misc/fontmap/options/settings/startingLevels/style/[settings/startingLevels/2/index]]"
+            }
+        }, {
+            "text": "[settings/startingLevels/3]",
+            "textHeight": 17,
+            "textXPos": 0,
+            "textYPos": 0,
+            "x": 89,
+            "width": 150,
+            "y": 396,
+            "textWidth": 150,
+            "type": "textbox",
+            "height": 17,
+            "font": {
+                "fontFile": "human15.zip",
+                "color": "[static/misc/fontmap/options/settings/startingLevels/color/[settings/startingLevels/3/index]]",
+                "style": "[static/misc/fontmap/options/settings/startingLevels/style/[settings/startingLevels/3/index]]"
+            }
+        }, {
+            "text": "[settings/startingLevels/4]",
+            "textHeight": 17,
+            "textXPos": 0,
+            "textYPos": 0,
+            "x": 89,
+            "width": 150,
+            "y": 464,
+            "textWidth": 150,
+            "type": "textbox",
+            "height": 17,
+            "font": {
+                "fontFile": "human15.zip",
+                "color": "[static/misc/fontmap/options/settings/startingLevels/color/[settings/startingLevels/4/index]]",
+                "style": "[static/misc/fontmap/options/settings/startingLevels/style/[settings/startingLevels/4/index]]"
+            }
+        }, {
+            "text": "[settings/startingLevels/0]",
+            "textHeight": 17,
+            "textXPos": 0,
+            "textYPos": 0,
+            "x": 89,
+            "width": 150,
+            "y": 190,
+            "textWidth": 150,
+            "type": "textbox",
+            "height": 17,
+            "font": {
+                "fontFile": "human15.zip",
+                "color": "[static/misc/fontmap/options/settings/startingLevels/color/[settings/startingLevels/0/index]]",
+                "style": "[static/misc/fontmap/options/settings/startingLevels/style/[settings/startingLevels/0/index]]"
+            }
+        }],
+    "background": "es_bkgd.png",
+    "x": 0,
+    "width": 800,
+    "y": 0,
+    "type": "container",
+    "height": 600,
+    "playerEmpireHoverIndex": -1,
+    "onLoad": "playVoice voice/emppick",
+    "cursor": "hempire.gif"
+}

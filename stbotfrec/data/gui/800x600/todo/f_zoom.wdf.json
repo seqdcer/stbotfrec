@@ -1,0 +1,1 @@
+{"components":[{"background":"fm_zin.png","imageOff":"fm_zin.png","x":6,"width":113,"y":7,"type":"toggle","height":16,"imageOn":"fm_zinon.png"},{"background":"fm_zot.png","imageOff":"fm_zot.png","x":3,"width":118,"y":27,"type":"toggle","height":17,"imageOn":"fm_zoton.png"}],"background":"fm_zmbkg.png","x":0,"width":182,"y":0,"type":"container","height":85}

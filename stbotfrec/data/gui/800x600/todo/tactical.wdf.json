@@ -1,0 +1,1 @@
+{"components":[{"background":"autotxto.png","imageOff":"autotxto.png","x":20,"width":124,"y":36,"type":"toggle","height":28,"imageOn":"auto_on.png"},{"background":"man-txt.png","imageOff":"man-txt.png","x":20,"width":124,"y":68,"type":"toggle","height":28,"imageOn":"man_on.png"}],"background":"tactbkg.png","x":0,"width":144,"y":0,"type":"container","height":96}

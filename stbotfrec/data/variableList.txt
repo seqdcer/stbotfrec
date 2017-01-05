@@ -1,0 +1,45 @@
+List of notable varibles
+
+runtime/gamesetup
+
+Contains temporary game setup data that isn't part of settings. (e.g. runtime/gamesetup/playerEmpire)
+
+
+runtime/galaxyViewMode
+
+Controls what galaxy view is currently active. 0 - Military, 1 - events, 2 - economic
+
+
+user/player/playerEmpire
+
+Player empire index.
+
+
+user/races
+
+Contains races data.
+
+
+user/races/summary
+
+Contains summary data for the summary dialog. (events, systems, relations)
+
+
+runtime/txtdialog/text
+
+Contains text for the text dialog to use. (*txtdlg.json)
+
+
+runtime/player/empireSmallPreffix
+
+Empire prefix for the player's empire - conveniance variable.
+
+
+user/game/turn
+
+Turn number. user/game should contain game meta-data.
+
+
+user/galaxy
+
+Contains the galactic map and everything in it. (map, systems, taskforces, ships)

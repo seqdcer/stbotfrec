@@ -1,0 +1,58 @@
+{
+    "homeSystem": {
+        "name": "Romulus",
+        "starType": 2,
+        "numPlanets": 5,
+        "planets": [
+            {
+                "name": "Romulus 1",
+                "type": 5,
+                "size": 2,
+                "img": "vsal.gif",
+                "maxPop": 65,
+                "bonusPerc": 100,
+                "bonusType": 2,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Romulus 2",
+                "type": 4,
+                "size": 2,
+                "img": "trol.gif",
+                "maxPop": 120,
+                "bonusPerc": 15,
+                "bonusType": 0,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Romulus 3",
+                "type": 4,
+                "size": 2,
+                "img": "trol.gif",
+                "maxPop": 120,
+                "bonusPerc": 15,
+                "bonusType": 0,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Romulus 4",
+                "type": 6,
+                "size": 0,
+                "img": "gmel.gif",
+                "maxPop": 0
+            },
+            {
+                "name": "Romulus 5",
+                "type": 3,
+                "size": 0,
+                "img": "otos.gif",
+                "maxPop": 50,
+                "bonusPerc": 15,
+                "bonusType": 0,
+                "reqStartLevel": 0
+            }
+        ],
+        "hasDilithium": true,
+        "startingPopulation": [180, 270, 355, 355, 355]
+    }
+}

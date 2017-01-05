@@ -1,0 +1,49 @@
+{
+    "options": {
+        "settings": {
+            "startingLevels": ["BEGINNING", "EARLY", "DEVELOPED", "EXPANDED", "ADVANCED"],
+            "tacticalCombat": ["MANUAL", "AUTOMATIC"],
+            "tacticalTimer": ["NONE", "00:15", "00:30", "00:45", "01:00"],
+            "victoryCondition": ["DOMINATION", "VENDETTA"],
+            "strategicTimer": ["NONE", "01:00", "02:00", "03:00", "04:00", "05:00"],
+            "difficulty": ["SIMPLE", "EASY", "NORMAL", "HARD", "IMPOSSIBLE"],
+            "minorRaces": ["NONE", "FEW", "SOME", "MANY"],
+            "galaxySize": ["Small", "Medium", "Large"],
+            "galaxyShape": ["Irregular", "Elliptical", "Ring", "Spiral"],
+            "randomEvents": ["ON", "OFF"]
+        }
+    },
+    "UI": {
+        "description": "Description",
+        "processingTurn": "PROCESSING TURN",
+        "sectorDescriptor": "%s1 Sector %s2.%s3",
+        "summary": {
+            "eventsListTitle": "Events This Turn",
+            "relationshipsListTitle": "NAME\t%s\t%s\t%s\t%s\t%s",
+            "systemsListTitle": "NAME\tINDUSTRY\tFOOD\tMORALE\tBUILD"
+        },
+        "sysInfoPanel": "POPULATION\nMAX POP\nGROWTH RATE\nORBITALS"
+    },
+    "galaxy": {
+        "star": ["Blue Star", "Orange Star", "Red Giant", "White Star", "Yellow Star"],
+        "anomaly": ["Neutron Star", "Black Hole", "Nebula", "Radio Pulsar", "Worm Hole", "X-Ray Pulsar"],
+        "planetType": ["Arctic", "Barren", "Desert", "Oceanic", "Terran", "Volcanic", "Gas Giant", "Jungle"],
+        "planet": ["Arctic Planet", "Barren Planet", "Desert Planet", "Oceanic Planet", "Terran Planet", "Volcanic Planet", "Gas Giant", "Jungle Planet"],
+        "system": "System",
+        "uninhabited": "Uninhabited",
+        "anomalyDescription": [
+            "Radiative emissions from the Neutron Star make sensor readings of this sector unreliable.  Ships which enter the sector may be damaged or destroyed by the Neutron Star's magnetic field.",
+            "The gravity well caused by the Black Hole makes sensor readings of this sector unreliable.  Starships in this sector may be destroyed if they drift too close to the event horizon.",
+            "Sensor readings are less reliable within the Nebula.  Starships will not be protected by shields within the Nebula.",
+            "Radiative emissions from the Radio Pulsar disrupt sensors in this sector and adjacent sectors.  As the Radio Pulsar rotates, its effects move clockwise through the eight adjacent sectors.",
+            "Wormholes are subspace shortcuts.  A wormhole allows starships to cover great distances in a single move, but if the wormhole does not have an endpoint, the starships will be lost.",
+            "Radiative emissions from the X-Ray Pulsar disrupt sensors in this sector.  Radiative pulses also obscure sensor readings in a ring of sectors which expands and contracts around the pulsar."
+        ]
+    },
+    "economy": {
+        "basicResource": ["Food", "Industry", "Energy", "Intel", "Research"]
+    },
+    "tech": {
+        "damageTypes": ["Gravimetric"]
+    }
+}

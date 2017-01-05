@@ -1,0 +1,1 @@
+{"components":[{"background":"h_zin.png","imageOff":"h_zin.png","x":20,"width":88,"y":0,"type":"toggle","height":18,"imageOn":"h_zinon.png"},{"background":"h_zot.png","imageOff":"h_zot.png","x":20,"width":88,"y":22,"type":"toggle","height":18,"imageOn":"h_zoton.png"}],"background":"h_zoombk.png","x":0,"width":175,"y":0,"type":"container","height":76}

@@ -1,0 +1,184 @@
+{
+    "components": [{
+            "imageOff": "hps_eve0.png",
+            "x": 45,
+            "width": 116,
+            "y": 22,
+            "type": "toggle",
+            "height": 27,
+            "imageOn": "hps_eve1.png",
+            "toggleGroup": {
+                "toggleGroupRef": "local/selectedScreen",
+                "toggleIndex": 7
+            }
+        }, {
+            "imageOff": "hps_tf0.png",
+            "x": 45,
+            "width": 116,
+            "y": 53,
+            "type": "toggle",
+            "height": 27,
+            "imageOn": "hps_tf1.png",
+            "toggleGroup": {
+                "toggleGroupRef": "local/selectedScreen",
+                "toggleIndex": 8
+            }
+        }, {
+            "imageOff": "hps_sys0.png",
+            "x": 45,
+            "width": 116,
+            "y": 84,
+            "type": "toggle",
+            "height": 27,
+            "imageOn": "hps_sys1.png",
+            "toggleGroup": {
+                "toggleGroupRef": "local/selectedScreen",
+                "toggleIndex": 9
+            }
+        }, {
+            "imageOff": "hps_cls0.png",
+            "x": 45,
+            "width": 116,
+            "y": 445,
+            "type": "button",
+            "height": 27,
+            "imageOn": "hps_cls1.png",
+            "onClick": "closeDialog hsummary"
+        }, {
+            "repeatClicks": true,
+            "repeatClickRate": 3,
+            "imageOff": "hps_sup0.png",
+            "x": 174,
+            "width": 9,
+            "y": 253,
+            "type": "button",
+            "height": 7,
+            "imageOn": "hps_sup1.png",
+            "onClick": "modVariable local/components/[local/selectedScreen]/listOffset -1 0 [local/components/[local/selectedScreen]/maxListOffset]"
+        }, {
+            "repeatClicks": true,
+            "repeatClickRate": 3,
+            "imageOff": "hps_sdn0.png",
+            "x": 174,
+            "width": 9,
+            "y": 425,
+            "type": "button",
+            "height": 7,
+            "imageOn": "hps_sdn1.png",
+            "onClick": "modVariable local/components/[local/selectedScreen]/listOffset 1 0 [local/components/[local/selectedScreen]/maxListOffset]"
+        }, {
+            "handleOff": "hps_tmb0.png",
+            "background": "hps_slid.png",
+            "x": 167,
+            "width": 24,
+            "handleOn": "hps_tmb1.png",
+            "y": 265,
+            "type": "scrollbar",
+            "height": 155,
+            "min": 0,
+            "max": "[local/components/[local/selectedScreen]/maxListOffset]",
+            "valueRef": "local/components/[local/selectedScreen]/listOffset",
+            "handleTreshold": "[local/components/[local/selectedScreen]/maxVisibleItems]"
+        }, {
+            "fontOn": {
+                "fontFile": "human15.zip",
+                "color": "e09F6347",
+                "style": "bold"
+            },
+            "x": 195,
+            "width": 500,
+            "y": 223,
+            "fontOff": {
+                "fontFile": "human15.zip"
+            },
+            "type": "list",
+            "height": 240,
+            "columns": [
+                {
+                    "width": 500
+                }
+            ],
+            "sourceList": "user/races/[user/player/playerEmpire]/summary/events",
+            "selectedIndex" : 1,
+            "visible": "[local/components/0/isOn]"
+        }, {
+            "fontOn": {
+                "fontFile": "human15.zip",
+                "color": "e09F6347",
+                "style": "bold"
+            },
+            "x": 195,
+            "width": 500,
+            "y": 223,
+            "fontOff": {
+                "fontFile": "human15.zip"
+            },
+            "type": "list",
+            "height": 240,
+            "columns": [
+                {
+                    "width": 85
+                },
+                {
+                    "width": 83
+                },
+                {
+                    "width": 83
+                },
+                {
+                    "width": 83
+                },
+                {
+                    "width": 83
+                },
+                {
+                    "width": 83
+                }
+            ],
+            "sourceList": "user/races/[user/player/playerEmpire]/summary/relations",
+            "selectedIndex" : 1,
+            "visible": "[local/components/1/isOn]"
+        }, {
+            "fontOn": {
+                "fontFile": "human15.zip",
+                "color": "e09F6347",
+                "style": "bold"
+            },
+            "x": 195,
+            "width": 500,
+            "y": 223,
+            "fontOff": {
+                "fontFile": "human15.zip"
+            },
+            "type": "list",
+            "height": 240,
+            "columns": [
+                {
+                    "width": 90
+                },
+                {
+                    "width": 65
+                },
+                {
+                    "width": 50
+                },
+                {
+                    "width": 70
+                },
+                {
+                    "width": 225
+                }
+            ],
+            "sourceList": "user/races/[user/player/playerEmpire]/summary/systems",
+            "selectedIndex" : 1,
+            "visible": "[local/components/2/isOn]"
+        }],
+    "background": "hps_scrn.png",
+    "x": 0,
+    "width": 750,
+    "y": 0,
+    "type": "container",
+    "height": 494,
+    "cursor": "hempire.gif",
+    "selectedScreen": 7
+}

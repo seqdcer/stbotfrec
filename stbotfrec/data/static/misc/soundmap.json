@@ -1,0 +1,21 @@
+{
+    "voices": {
+        "empires": [
+            {
+                "empirepick": "car_emppick"
+            },
+            {
+                "empirepick": "fed_emppick"
+            },
+            {
+                "empirepick": "fer_emppick"
+            },
+            {
+                "empirepick": "kli_emppick"
+            },
+            {
+                "empirepick": "rom_emppick"
+            }
+        ]
+    }
+}

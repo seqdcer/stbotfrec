@@ -1,0 +1,99 @@
+{
+    "components": [{
+            "x": 219,
+            "width": 300,
+            "y": 18,
+            "type": "imagebox",
+            "height": 100,
+            "image": "[static/gen/galaxy/anomaly/[user/galaxy/anomalies/[runtime/ui/selectedAnomaly]/anomalyType]/imgPrefix].zip"
+        }, {
+            "textHeight": 17,
+            "textXPos": 0,
+            "textYPos": 0,
+            "x": 239,
+            "width": 126,
+            "y": 0,
+            "textWidth": 126,
+            "type": "textbox",
+            "height": 17,
+            "text": "[user/galaxy/anomalies/[runtime/ui/selectedAnomaly]/name]",
+            "font": {
+                "fontFile": "human15.zip",
+                "color": "e09F6347",
+                "style": "bold"
+            }
+        }, {
+            "textHeight": 17,
+            "textXPos": 0,
+            "textYPos": 0,
+            "x": 604,
+            "width": 126,
+            "y": 0,
+            "textWidth": 126,
+            "type": "textbox",
+            "text": "[static/text/lexicon/UI/description]",
+            "height": 17,
+            "font": {
+                "fontFile": "human15.zip",
+                "color": "e09F6347",
+                "style": "bold"
+            }
+        }, {
+            "textHeight": 100,
+            "textXPos": 0,
+            "textYPos": 0,
+            "x": 525,
+            "width": 220,
+            "y": 18,
+            "textWidth": 220,
+            "type": "textbox",
+            "text": "[static/text/lexicon/galaxy/anomalyDescription/[user/galaxy/anomalies/[runtime/ui/selectedAnomaly]/anomalyType]]",
+            "height": 100,
+            "font": {
+                "fontFile": "human15.zip",
+                "color": "7F2F2307",
+                "style": "bold"
+            }
+        }],
+    "background": "h_sysbkg.png",
+    "x": 0,
+    "width": 786,
+    "y": 0,
+    "type": "container",
+    "height": 134,
+    "triggers": [{
+            "condition": {
+                "operator": "AND",
+                "value1": {
+                    "operator": "AND",
+                    "value1": {
+                        "operator": ">=",
+                        "value1": "[runtime/ui/selectedSectorY]",
+                        "value2": "0"
+                    },
+                    "value2": {
+                        "operator": ">=",
+                        "value1": "[runtime/ui/selectedSectorX]",
+                        "value2": "0"
+                    }
+                },
+                "value2": {
+                    "operator": "!=",
+                    "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/anomaly]",
+                    "value2": ""
+                }
+            },
+            "onTriggered": [
+                "setVariable runtime/ui/selectedAnomaly [user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/anomaly]",
+                "setVariable this/visible true"
+            ]
+        }, {
+            "condition": {
+                "operator": "==",
+                "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/anomaly]",
+                "value2": ""
+            },
+            "onTriggered": "setVariable this/visible false"
+        }
+    ]
+}

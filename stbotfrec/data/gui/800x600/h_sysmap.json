@@ -1,0 +1,298 @@
+{
+    "components": [{
+            "x": 200,
+            "width": 548,
+            "y": 18,
+            "type": "container",
+            "height": 100,
+            "components": [{
+                    "x": 0,
+                    "width": 100,
+                    "y": 0,
+                    "type": "imagebox",
+                    "height": 100,
+                    "image": "[static/gen/galaxy/star/[user/galaxy/systems/[runtime/ui/selectedSystem]/starType]/imgPrefix].zip",
+                    "triggers": [{
+                            "condition": {
+                                "operator": "!=",
+                                "value1": "[static/gen/galaxy/star/[user/galaxy/systems/[runtime/ui/selectedSystem]/starType]/imgPrefix]",
+                                "value2": ""
+                            },
+                            "onTriggered": [
+                                "setVariable this/width [this/image/width]",
+                                "setVariable this/x [local/width]",
+                                "subVariable this/x [this/width]"
+                            ]
+                        }]
+                }, {
+                    "x": 0,
+                    "width": 100,
+                    "y": 0,
+                    "type": "imagebox",
+                    "height": 100,
+                    "image": "bid.png",
+                    "triggers": [{
+                            "condition": {
+                                "operator": "!=",
+                                "value1": "[this/image]",
+                                "value2": ""
+                            },
+                            "onTriggered": [
+                                "setVariable this/width [this/image/width]",
+                                "setVariable this/height [this/image/height]",
+                                "setVariable this/x [local/components/0/x]"
+                            ]
+                        }],
+                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/hasDilithium]"
+                }, {
+                    "x": 0,
+                    "y": 0,
+                    "type": "externalComponent",
+                    "height": 100,
+                    "width": 0,
+                    "component": "hplanet",
+                    "planetIndex": 0,
+                    "offsetIndex": 0,
+                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/0/name]"
+                }, {
+                    "x": 0,
+                    "y": 0,
+                    "type": "externalComponent",
+                    "height": 100,
+                    "width": 0,
+                    "component": "hplanet",
+                    "planetIndex": 1,
+                    "offsetIndex": 2,
+                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/1/name]"
+                }, {
+                    "x": 0,
+                    "y": 0,
+                    "type": "externalComponent",
+                    "height": 100,
+                    "width": 0,
+                    "component": "hplanet",
+                    "planetIndex": 2,
+                    "offsetIndex": 3,
+                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/2/name]"
+                }, {
+                    "x": 0,
+                    "y": 0,
+                    "type": "externalComponent",
+                    "height": 100,
+                    "width": 0,
+                    "component": "hplanet",
+                    "planetIndex": 3,
+                    "offsetIndex": 4,
+                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/3/name]"
+                }, {
+                    "x": 0,
+                    "y": 0,
+                    "type": "externalComponent",
+                    "height": 100,
+                    "width": 0,
+                    "component": "hplanet",
+                    "planetIndex": 4,
+                    "offsetIndex": 5,
+                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/4/name]"
+                }, {
+                    "x": 0,
+                    "y": 0,
+                    "type": "externalComponent",
+                    "height": 100,
+                    "width": 0,
+                    "component": "hplanet",
+                    "planetIndex": 5,
+                    "offsetIndex": 6,
+                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/5/name]"
+                }, {
+                    "x": 0,
+                    "y": 0,
+                    "type": "externalComponent",
+                    "height": 100,
+                    "width": 0,
+                    "component": "hplanet",
+                    "planetIndex": 6,
+                    "offsetIndex": 7,
+                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/6/name]"
+                }, {
+                    "x": 0,
+                    "y": 0,
+                    "type": "externalComponent",
+                    "height": 100,
+                    "width": 0,
+                    "component": "hplanet",
+                    "planetIndex": 7,
+                    "offsetIndex": 8,
+                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/7/name]"
+                }, {
+                    "x": 0,
+                    "y": 0,
+                    "type": "externalComponent",
+                    "height": 100,
+                    "width": 0,
+                    "component": "hplanet",
+                    "planetIndex": 8,
+                    "offsetIndex": 9,
+                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/8/name]"
+                }]
+        }, {
+            "text": "[static/text/lexicon/galaxy/system]",
+            "textHeight": 17,
+            "textXPos": 0,
+            "textYPos": 0,
+            "x": 239,
+            "width": 126,
+            "y": 0,
+            "textWidth": 126,
+            "type": "textbox",
+            "height": 17,
+            "font": {
+                "fontFile": "human15.zip",
+                "color": "e09F6347",
+                "style": "bold"
+            }
+        }, {
+            "text": "[user/galaxy/systems/[runtime/ui/selectedSystem]/name]",
+            "textHeight": 17,
+            "textXPos": 52,
+            "x": 239,
+            "width": 126,
+            "y": 0,
+            "textWidth": 126,
+            "type": "textbox",
+            "height": 17,
+            "font": {
+                "fontFile": "human15.zip",
+                "color": "FF00FF00"
+            }
+        }, {
+            "textHeight": 17,
+            "x": 604,
+            "width": 126,
+            "y": 0,
+            "textWidth": 126,
+            "type": "textbox",
+            "height": 17,
+            "font": {
+                "fontFile": "human15.zip",
+                "upperCase": true
+            },
+            "triggers": [
+                {
+                    "condition": {
+                        "operator": "==",
+                        "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/inhabited]",
+                        "value2": "true"
+                    },
+                    "onTriggered": "setVariable this/text [static/text/races/[user/galaxy/systems/[runtime/ui/selectedSystem]/race]/populationLabel"
+                },
+                {
+                    "condition": {
+                        "operator": "!=",
+                        "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/inhabited]",
+                        "value2": "true"
+                    },
+                    "onTriggered": "setVariable this/text [static/text/lexicon/galaxy/uninhabited]"
+                }
+            ]
+        }, {
+            "text": "[static/text/lexicon/UI/sysInfoPanel]",
+            "textHeight": 68,
+            "x": 56,
+            "width": 100,
+            "y": 52,
+            "textWidth": 100,
+            "horizontalTextAlignment": "left",
+            "verticalTextAlignment": "top",
+            "type": "textbox",
+            "height": 68,
+            "font": {
+                "fontFile": "human15.zip",
+                "color": "e09F6347",
+                "style": "bold"
+            }
+        }, {
+            "textHeight": 68,
+            "textXPos": 0,
+            "textYPos": 0,
+            "x": 111,
+            "width": 75,
+            "y": 52,
+            "textWidth": 75,
+            "type": "textbox",
+            "height": 68,
+            "horizontalTextAlignment": "right",
+            "verticalTextAlignment": "top",
+            "font": {
+                "fontFile": "human15.zip"
+            },
+            "triggers": [
+                {
+                    "condition": {
+                        "operator": "==",
+                        "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPop]",
+                        "value2": "[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPopCapacity]"
+                    },
+                    "onTriggered": "setVariable this/text \"[user/galaxy/systems/[runtime/ui/selectedSystem]/pop]\n[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPop]\nFIXME\nFIXME\""
+                },
+                {
+                    "condition": {
+                        "operator": "!=",
+                        "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPop]",
+                        "value2": "[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPopCapacity]"
+                    },
+                    "onTriggered": "setVariable this/text \"[user/galaxy/systems/[runtime/ui/selectedSystem]/pop]\n[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPop]/[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPopCapacity]\nFIXME\nFIXME\""
+                }
+            ]
+        }],
+    "background": "h_sysbkg.png",
+    "x": 0,
+    "width": 786,
+    "y": 0,
+    "type": "container",
+    "height": 134,
+    "triggers": [{
+            "condition": {
+                "operator": "AND",
+                "value1": {
+                    "operator": "AND",
+                    "value1": {
+                        "operator": ">=",
+                        "value1": "[runtime/ui/selectedSectorY]",
+                        "value2": "0"
+                    },
+                    "value2": {
+                        "operator": ">=",
+                        "value1": "[runtime/ui/selectedSectorX]",
+                        "value2": "0"
+                    }
+                },
+                "value2": {
+                    "operator": "!=",
+                    "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/system]",
+                    "value2": ""
+                }
+            },
+            "onTriggered": [
+                "setVariable runtime/ui/selectedSystem [user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/system]",
+                "setVariable this/components/0/components/2/setup true",
+                "setVariable this/components/0/components/3/setup true",
+                "setVariable this/components/0/components/4/setup true",
+                "setVariable this/components/0/components/5/setup true",
+                "setVariable this/components/0/components/6/setup true",
+                "setVariable this/components/0/components/7/setup true",
+                "setVariable this/components/0/components/8/setup true",
+                "setVariable this/components/0/components/9/setup true",
+                "setVariable this/components/0/components/10/setup true",
+                "setVariable this/visible true"
+            ]
+        }, {
+            "condition": {
+                "operator": "==",
+                "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/system]",
+                "value2": ""
+            },
+            "onTriggered": "setVariable this/visible false"
+        }
+    ]
+}

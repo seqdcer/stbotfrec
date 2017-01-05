@@ -1,0 +1,1 @@
+{"components":[{"background":"km_zin.png","imageOff":"km_zin.png","x":0,"width":145,"y":2,"type":"toggle","height":22,"imageOn":"km_zinon.png"},{"background":"km_zot.png","imageOff":"km_zot.png","x":13,"width":145,"y":27,"type":"toggle","height":22,"imageOn":"km_zoton.png"}],"background":"km_zmbkg.png","x":0,"width":202,"y":0,"type":"container","height":81}

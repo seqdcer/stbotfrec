@@ -1,0 +1,49 @@
+{
+    "homeSystem": {
+        "name": "Qo'nos",
+        "starType": 1,
+        "numPlanets": 4,
+        "planets": [
+            {
+                "name": "Qo'nos 1",
+                "type": 5,
+                "size": 2,
+                "img": "vtol.gif",
+                "maxPop": 75,
+                "bonusPerc": 75,
+                "bonusType": 2,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Qo'nos 2",
+                "type": 7,
+                "size": 2,
+                "img": "jrol.gif",
+                "maxPop": 120,
+                "bonusPerc": 25,
+                "bonusType": 0,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Qo'nos 3",
+                "type": 2,
+                "size": 2,
+                "img": "dtol.gif",
+                "maxPop": 85,
+                "bonusPerc": 50,
+                "bonusType": 2,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Qo'nos 4",
+                "type": 0,
+                "size": 2,
+                "img": "arol.gif",
+                "maxPop": 95,
+                "reqStartLevel": 0
+            }
+        ],
+        "hasDilithium": true,
+        "startingPopulation": [190, 280, 370, 370, 370]
+    }
+}

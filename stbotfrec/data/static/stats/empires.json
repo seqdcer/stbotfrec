@@ -1,0 +1,10 @@
+{
+    "list": [
+        "cardassians",
+        "federation",
+        "ferengi",
+        "klingons",
+        "romulans"
+    ],
+    "smallPrefixes": ["c", "h", "f", "k", "r"]
+}

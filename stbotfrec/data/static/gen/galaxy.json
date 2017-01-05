@@ -1,0 +1,314 @@
+{
+    "size": [
+        {
+            "width": 13,
+            "height": 10
+        },
+        {
+            "width": 16,
+            "height": 12
+        },
+        {
+            "width": 25,
+            "height": 18
+        }
+    ],
+    "star": [
+        {
+            "occurance": 0.15,
+            "dilChance": 0.05,
+            "planetTypeChance": [0.2, 0.05, 0.05, 0.05, 0.05, 0.3, 0.25, 0.05],
+            "imgPrefix": "s-b-"
+        },
+        {
+            "occurance": 0.3,
+            "dilChance": 0.2,
+            "planetTypeChance": [0.3, 0.05, 0.05, 0.05, 0.05, 0.2, 0.25, 0.05],
+            "imgPrefix": "s-o-"
+        },
+        {
+            "class": "r",
+            "occurance": 0.1,
+            "dilChance": 0.8,
+            "planetTypeChance": [0.35, 0.05, 0.05, 0.05, 0.05, 0.15, 0.25, 0.05],
+            "imgPrefix": "s-r-"
+        },
+        {
+            "class": "w",
+            "occurance": 0.2,
+            "dilChance": 0.1,
+            "planetTypeChance": [0.2, 0.05, 0.05, 0.05, 0.05, 0.3, 0.25, 0.05],
+            "imgPrefix": "s-w-"
+        },
+        {
+            "class": "y",
+            "occurance": 0.25,
+            "dilChance": 0.16,
+            "planetTypeChance": [0.25, 0.05, 0.05, 0.05, 0.05, 0.25, 0.25, 0.05],
+            "imgPrefix": "s-y-"
+        }
+    ],
+    "anomaly": [
+        {
+            "occurance": 0.25,
+            "damageChance": 0.25,
+            "minDamage": 5,
+            "maxDamage": 100,
+            "damageType": 0,
+            "ghostShipChance": 0.1,
+            "effectRange": 0,
+            "effectDistLoss": 0.5,
+            "imgPrefix": "ns",
+            "mapScanMod": -32
+        },
+        {
+            "occurance": 0.125,
+            "damageChance": 0.5,
+            "minDamage": 5,
+            "maxDamage": 200,
+            "damageType": 0,
+            "ghostShipChance": 0.2,
+            "effectRange": 1,
+            "mapScanMod": -48,
+            "effectDistLoss": 0.5,
+            "imgPrefix": "blkh"
+        },
+        {
+            "occurance": 0.25,
+            "hideShipStats": true,
+            "shieldMod": -1,
+            "mapScanMod": -32,
+            "imgPrefix": "neb-"
+        },
+        {
+            "occurance": 0.125,
+            "hideShipStats": true,
+            "effectRange": 3,
+            "effectPattern": 1,
+            "shroudShipChance": 0.3,
+            "mapScanMod": -48,
+            "effectDistLoss": 0.5,
+            "imgPrefix": "rpls"
+        },
+        {
+            "occurance": 0.125,
+            "imgPrefix": "worm",
+            "shipDisplacement": true,
+            "linkChance": 0.75
+        },
+        {
+            "occurance": 0.125,
+            "hideShipStats": true,
+            "effectRange": 3,
+            "effectPattern": 2,
+            "shroudShipChance": 0.2,
+            "mapScanMod": -48,
+            "effectDistLoss": 0.5,
+            "imgPrefix": "xp-"
+        }
+    ],
+    "planet": [
+        {
+            "class": "P",
+            "sortPos": [4],
+            "maxPop": [
+                [25, 30, 30, 30, 35, 35, 35, 35, 35],
+                [45, 45, 50, 50, 50, 50, 50, 50, 55],
+                [80, 80, 85, 85, 90, 90, 90, 95, 95]
+            ],
+            "terraformCostMult": 8,
+            "img": [
+                ["aros.gif", "atos.gif"],
+                ["arom.gif", "atom.gif"],
+                ["arol.gif", "atol.gif"]
+            ]
+        },
+        {
+            "class": "J",
+            "sortPos": [2, 4],
+            "maxPop": [
+                [15, 15, 20, 20, 20, 20, 25, 25, 25],
+                [20, 20, 25, 25, 30, 30, 30, 35, 35],
+                [60, 60, 60, 65, 65, 65, 65, 70, 70]
+            ],
+            "terraformCostMult": 10,
+            "img": [
+                ["bnos.gif", "btos.gif"],
+                ["bnom.gif", "btom.gif"],
+                ["bnol.gif", "btol.gif"]
+            ]
+        },
+        {
+            "class": "G",
+            "sortPos": [2],
+            "maxPop": [
+                [20, 20, 25, 25, 25, 25, 30, 30, 30],
+                [35, 40, 40, 40, 40, 40, 45, 45, 50],
+                [75, 75, 80, 80, 80, 80, 80, 85, 85]
+            ],
+            "bonusPerc": [
+                [0, 0, 0, 0, 0, 0, 25, 25, 25],
+                [0, 0, 0, 25, 25, 25, 50, 50, 50],
+                [25, 25, 25, 50, 50, 50, 75, 75, 75]
+            ],
+            "bonusType": 2,
+            "terraformCostMult": 7,
+            "img": [
+                ["dros.gif", "dtos.gif"],
+                ["drom.gif", "dtom.gif"],
+                ["drol.gif", "dtol.gif"]
+            ]
+        },
+        {
+            "class": "O",
+            "sortPos": [2],
+            "maxPop": [
+                [40, 40, 40, 45, 45, 45, 45, 50, 50],
+                [55, 55, 60, 60, 60, 60, 60, 65, 65],
+                [95, 95, 95, 100, 100, 100, 100, 105, 110]
+            ],
+            "bonusPerc": [
+                [0, 0, 0, 10, 10, 10, 15, 15, 15],
+                [0, 0, 0, 15, 15, 15, 25, 25, 25],
+                [0, 0, 0, 25, 25, 25, 40, 40, 40]
+            ],
+            "bonusType": 0,
+            "terraformCostMult": 4,
+            "img": [
+                ["oros.gif", "otos.gif"],
+                ["orom.gif", "otom.gif"],
+                ["orol.gif", "otol.gif"]
+            ]
+        },
+        {
+            "class": "M",
+            "sortPos": [2],
+            "maxPop": [
+                [50, 50, 55, 55, 55, 55, 55, 60, 60],
+                [75, 75, 80, 80, 80, 80, 80, 85, 85],
+                [120, 125, 130, 130, 130, 130, 135, 135, 140]
+            ],
+            "bonusPerc": [
+                [0, 0, 0, 0, 0, 0, 5, 5, 5],
+                [0, 0, 0, 0, 0, 0, 1, 1, 1],
+                [0, 0, 0, 0, 0, 0, 15, 15, 15]
+            ],
+            "bonusType": 0,
+            "img": [
+                ["tros.gif"],
+                ["trom.gif"],
+                ["trol.gif"]
+            ]
+        },
+        {
+            "class": "Y",
+            "sortPos": [1],
+            "maxPop": [
+                [15, 15, 20, 20, 20, 25, 25, 25, 30],
+                [30, 30, 30, 35, 35, 35, 35, 40, 40],
+                [65, 65, 65, 70, 70, 70, 70, 75, 75]
+            ],
+            "bonusPerc": [
+                [0, 0, 0, 25, 25, 25, 50, 50, 50],
+                [25, 25, 25, 50, 50, 50, 75, 75, 75],
+                [100, 100, 100, 50, 50, 50, 75, 75, 75]
+            ],
+            "bonusType": 2,
+            "terraformCostMult": 12,
+            "img": [
+                ["vros.gif", "vtos.gif", "vsas.gif"],
+                ["vrom.gif", "vtom.gif", "vsam.gif"],
+                ["vrol.gif", "vtol.gif", "vsal.gif"]
+            ]
+        },
+        {
+            "class": "B",
+            "sortPos": [3],
+            "maxPop": [
+                [0]
+            ],
+            "img": [
+                ["gmel.gif", "gmrl.gif", "gmsl.gif"]
+            ]
+        },
+        {
+            "class": "L",
+            "sortPos": [2],
+            "maxPop": [
+                [40, 40, 45, 45, 50, 50, 50, 55, 55],
+                [65, 65, 70, 70, 70, 70, 70, 70, 75],
+                [100, 105, 105, 110, 110, 110, 115, 115, 120]
+            ],
+            "bonusPerc": [
+                [0, 0, 0, 10, 10, 10, 20, 20, 20],
+                [0, 0, 0, 20, 20, 20, 35, 35, 35],
+                [0, 0, 0, 25, 25, 25, 50, 50, 50]
+            ],
+            "bonusType": 0,
+            "terraformCostMult": 6,
+            "img": [
+                ["jros.gif"],
+                ["jrom.gif"],
+                ["jrol.gif"]
+            ]
+        }
+    ],
+    "starNames": [
+        "Adelphous", "Aldebaran", "Alpha Cygnus", "Altair", "Altec", "Andevian", "Angel One",
+        "Antos", "Archanis", "Archer", "Arcturus", "Arcybite", "Ariannus", "Arkaria",
+        "Armus", "Arvada", "Atair", "Atalia", "Aucdet", "Axanar", "Babel", "Balosnee",
+        "Barkon", "Beltane", "Benecia", "Berengaria", "Bersallis", "Beta Agni", "Beta Antares",
+        "Betelgeuse", "Beth Delta", "Bilana", "Bilaren", "Blue Horizon", "Boreal", "Boreth",
+        "Borka", "Bracas", "Brax", "Bre'el", "Brentalia", "Browder", "Bryma", "Caldos",
+        "Camus", "Canopus", "Carema", "Castor", "Catullan", "Celtris", "Cerebus",
+        "Cestus", "Ceti Alpha", "Cheron", "Cirrus", "Coltar", "Cor Caroli", "Coridan",
+        "Corinth", "Corvan", "Cygnet", "Cygnia Minor", "Danula", "Daran", "Dayos",
+        "Deinonychus", "Delb", "Delinia", "Delos", "Delta Rana", "Delta Vega", "Deneva",
+        "Denius", "Deriben", "Dimorus", "Doraf", "Dorvan", "Draken", "Draylon", "Drema",
+        "Dulisian", "Durenia", "Dytallix B", "Eden", "Ekos", "El-Adrel", "Elba", "Emila",
+        "Eminiar", "Ennan", "Erabus", "Errikang", "Evadne", "Exo", "Fahleena", "Farius",
+        "Fendaus", "Forlat", "Gagarin", "Galador", "Galdonterre", "Galen", "Galvin",
+        "Gamelan", "Gamma", "Gamma Hromi", "Gamma Hydra", "Gamma Tauri", "Gamma Vertis",
+        "Garon", "Gaspar", "Gemulon", "Gideon", "Gonal", "Gothos", "Harod", "Harrakis",
+        "Haven", "Hoek", "Holberg 917G", "Hurada", "Hurkos", "Icor", "Indri", "Ingraham B",
+        "Invernia", "Itamish", "Jaros", "Kaelon", "Kaldra", "Kataan", "Kavis Alpha",
+        "Kea", "Kenda", "Kentanna", "Khefka", "Khitomer", "Kholfa", "Klabnia", "Klavdia",
+        "Kora", "Korris", "Kostolain", "Kraus", "Krios", "Kurill", "Kurl", "Lamenda",
+        "Landris", "Largo", "Lavinius", "Ledonia", "Lemma", "Ligobis", "Ligos", "Loren",
+        "Mab-Bu", "Makus", "Malaya", "Malurian", "Manark", "Manu", "Marcus", "Marejaretus",
+        "Mariah", "Marlonia", "Maxia Zeta", "Meldrar", "Meles", "Melina", "Melnos",
+        "Melona", "Merak", "Mertens", "Metaline", "Midos", "Milika", "Minara", "Minos Korva",
+        "Miridian", "Moab", "Mordan", "Morikin", "Morska", "Mudor", "Myrmidon", "Nahmi",
+        "Narenda", "Nasreldine", "Nelvana", "Nervala", "Halana", "Nimbus", "No'Mat",
+        "Norpin", "Oceanus", "Ogus", "Ohniaka", "Omicron", "Omicron Ceti", "Ophiucus",
+        "Orellius", "Otar", "Pacifica", "Parada", "Parliament", "Peliar Zel", "Pelleus",
+        "Pentarus", "Penthara", "Persephone", "Polaris", "Pollux", "Prakal", "Praxis",
+        "Psi 2000", "Pyris", "Pythro", "Quadra Sigma", "Qualor", "Quazulu", "Ramatis",
+        "Regula", "Regulus", "Relva", "Rhymus Major", "Rigel", "Risa", "Rochani", "Ruah",
+        "Rura Penthe", "Saltok", "Sarona", "Sarpeidon", "Sarthong", "Scothis", "Secarus",
+        "Seldonis", "Setlik", "Shiralea", "Sigma Iotia", "Sirius", "Solais", "Solarion",
+        "Spica", "Stakoron", "Straleb", "Styris", "Sumiko", "Surata", "Suvin", "T'Lani",
+        "T'lli Beta", "Tantalus", "Tarchannen", "Tarod", "Tarsas", "Tarsus", "Tartaras",
+        "Tau Ceti", "Tau Cygna", "Taurus", "Tavela Minor", "Terosa Prime", "Tessen",
+        "Tethys", "Thalos", "Thelka", "Theta", "Theta Cygni", "Tiburon", "Tilonus",
+        "Titus", "Tohvun", "Torman", "Triacus", "Turkana", "Tycho", "Tyrellia", "Tyrus",
+        "Ultima Thule", "Umoth", "Vadris", "Vagra", "Vandor", "Vendikar", "Vilmor", "Volchok",
+        "Volon", "Xanthras", "Xerxes", "Yadera", "Zadar", "Zayra", "Zeta Alpha", "Zytchin"
+    ],
+    "anomalyNames": [
+        ["Neutron Star %s1.%s2"],
+        ["Black Hole %s1.%s2"],
+        [
+            "Agrat-mot Nebula", "Alwanir Nebula", "Amleth Nebula", "Azure Nebula", "Baber Nebula", "Barnes Nebula", "Betreka Nebula", "Borgolis Nebula",
+            "Chamra Nebula", "Foster Nebula", "Gullory Nebula", "Helaspont Nebula", "Hodges Nebula", "Hugora Nebula",
+            "Ionite Nebula", "Jenkata Nebula", "Lantar Nebula", "Lauritson Nebula", "Mar Oscura Nebula", "Mutara Nebula", "Nekrit Nebula", "Omarion Nebula", "Ordek Nebula",
+            "Orion Nebula", "Orpisay Nebula", "Rolor Nebula", "Trifid Nebula", "Vodrey Nebula", "Volterra Nebula"],
+        ["Radio Pulsar %s1.%s2"],
+        ["Worm Hole %s1.%s2"],
+        ["X-Ray Pulsar %s1.%s2"]
+    ],
+    "galaxyDensity": [0.25, 0.25, 0.25, 0.25],
+    "anomalyRatio": [0.2, 0.2, 0.2, 0.2],
+    "minDesiredEmpireDistance": [4, 4, 6],
+    "maxPlanetsPerSystem": 7
+}

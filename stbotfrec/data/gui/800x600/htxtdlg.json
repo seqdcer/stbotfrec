@@ -1,0 +1,25 @@
+{
+    "components": [{
+            "text": "[runtime/txtdialog/text]",
+            "horizontalTextAlignment": "center",
+            "textHeight": 102,
+            "textXPos": 0,
+            "textYPos": 0,
+            "x": 100,
+            "width": 200,
+            "y": 30,
+            "textWidth": 200,
+            "type": "textbox",
+            "height": 102,
+            "font": {
+                "fontFile": "human15.zip"
+            }
+        }],
+    "background": "hw_scrn3.png",
+    "x": 0,
+    "width": 400,
+    "y": 0,
+    "type": "container",
+    "height": 165,
+    "cursor": "hwait.gif"
+}

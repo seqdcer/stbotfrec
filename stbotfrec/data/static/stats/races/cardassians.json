@@ -1,0 +1,65 @@
+{
+    "homeSystem": {
+        "name": "Cardassia",
+        "starType": 1, 
+        "numPlanets": 6,
+        "planets": [
+            {
+                "name": "Cardassia 1",
+                "type": 2,
+                "size": 2,
+                "img": "drol.gif",
+                "maxPop": 80,
+                "bonusPerc": 25,
+                "bonusType": 2,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Cardassia 2",
+                "type": 5,
+                "size": 2,
+                "img": "vrol.gif",
+                "maxPop": 70,
+                "bonusPerc": 50,
+                "bonusType": 2,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Cardassia 3",
+                "type": 2,
+                "size": 2,
+                "img": "drol.gif",
+                "maxPop": 80,
+                "bonusPerc": 25,
+                "bonusType": 2,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Cardassia 4",
+                "type": 1,
+                "size": 2,
+                "img": "btol.gif",
+                "maxPop": 70,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Cardassia 5",
+                "type": 0,
+                "size": 1,
+                "img": "arom.gif",
+                "maxPop": 55,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Cardassia 6",
+                "type": 0,
+                "size": 1,
+                "img": "atom.gif",
+                "maxPop": 45,
+                "reqStartLevel": 0
+            }
+        ],
+        "hasDilithium": true,
+        "startingPopulation": [200, 300, 400, 400, 400]
+    }
+}

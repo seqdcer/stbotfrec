@@ -1,0 +1,87 @@
+{
+    "homeSystem": {
+        "name": "Sol",
+        "starType": 4,
+        "numPlanets": 9,
+        "planets": [
+            {
+                "name": "Mercury",
+                "type": 5,
+                "size": 0,
+                "img": "merc.gif",
+                "maxPop": 25,
+                "bonusPerc": 25,
+                "bonusType": 2,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Venus",
+                "type": 5,
+                "size": 1,
+                "img": "venu.gif",
+                "maxPop": 40,
+                "bonusPerc": 75,
+                "bonusType": 2,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Earth",
+                "type": 4,
+                "size": 1,
+                "img": "eart.gif",
+                "maxPop": 140,
+                "bonusPerc": 15,
+                "bonusType": 0,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Mars",
+                "type": 2,
+                "size": 0,
+                "img": "mars.gif",
+                "maxPop": 85,
+                "bonusPerc": 50,
+                "bonusType": 2,
+                "reqStartLevel": 0
+            },
+            {
+                "name": "Jupiter",
+                "type": 6,
+                "size": 0,
+                "img": "jupi.gif",
+                "maxPop": 0
+            },
+            {
+                "name": "Saturn",
+                "type": 6,
+                "size": 0,
+                "img": "satu.gif",
+                "maxPop": 0
+            },
+            {
+                "name": "Uranus",
+                "type": 6,
+                "size": 0,
+                "img": "uran.gif",
+                "maxPop": 0
+            },
+            {
+                "name": "Neptune",
+                "type": 6,
+                "size": 0,
+                "img": "nept.gif",
+                "maxPop": 0
+            },
+            {
+                "name": "Pluto",
+                "type": 0,
+                "size": 0,
+                "img": "plut.gif",
+                "maxPop": 45,
+                "reqStartLevel": 0
+            }
+        ],
+        "hasDilithium": true,
+        "startingPopulation": [210, 310, 335, 335, 335]
+    }
+}

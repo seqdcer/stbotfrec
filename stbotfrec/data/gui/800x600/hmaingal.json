@@ -1,0 +1,429 @@
+{
+    "components": [{
+            "imageOff": "h_turn.png",
+            "x": 63,
+            "width": 138,
+            "y": 6,
+            "type": "button",
+            "height": 31,
+            "imageOn": "h_turnon.png",
+            "onClick": "runScript turn",
+            "clickSound": "sfx/hturn"
+        }, {
+            "imageOff": "h_summ.png",
+            "x": 63,
+            "width": 138,
+            "y": 42,
+            "type": "button",
+            "height": 31,
+            "imageOn": "h_summon.png",
+            "onClick": "showDialog hsummary true",
+            "clickSound": "sfx/hturn"
+        }, {
+            "imageOff": "h_event.png",
+            "x": 464,
+            "width": 88,
+            "y": 432,
+            "type": "toggle",
+            "height": 24,
+            "imageOn": "h_eveon.png",
+            "toggleGroup": {
+                "toggleGroupRef": "runtime/ui/galaxyViewMode",
+                "toggleIndex": 1
+            }
+        }, {
+            "imageOff": "h_econ.png",
+            "x": 370,
+            "width": 88,
+            "y": 432,
+            "type": "toggle",
+            "height": 24,
+            "imageOn": "h_econon.png",
+            "toggleGroup": {
+                "toggleGroupRef": "runtime/ui/galaxyViewMode",
+                "toggleIndex": 2
+            }
+        }, {
+            "imageOff": "h_mil.png",
+            "x": 558,
+            "width": 87,
+            "y": 432,
+            "type": "toggle",
+            "height": 24,
+            "imageOn": "h_milon.png",
+            "toggleGroup": {
+                "toggleGroupRef": "runtime/ui/galaxyViewMode",
+                "toggleIndex": 0
+            }
+        }, {
+            "imageOff": "h_lmap.png",
+            "x": 650,
+            "width": 88,
+            "y": 432,
+            "type": "button",
+            "height": 24,
+            "imageOn": "h_lmapon.png"
+        }, {
+            "imageOff": "h_ovr.png",
+            "x": 275,
+            "width": 89,
+            "y": 432,
+            "type": "toggle",
+            "height": 24,
+            "imageOn": "h_ovron.png"
+        }, {
+            "repeatClicks": true,
+            "repeatClickRate": 1,
+            "imageOff": "hm_sup.png",
+            "x": 16,
+            "width": 9,
+            "y": 154,
+            "type": "button",
+            "height": 8,
+            "imageOn": "hm_supon.png"
+        }, {
+            "repeatClicks": true,
+            "repeatClickRate": 1,
+            "imageOff": "hm_sdn.png",
+            "x": 16,
+            "width": 9,
+            "y": 491,
+            "type": "button",
+            "height": 8,
+            "imageOn": "hm_sdnon.png"
+        }, {
+            "handleOff": "hm_tmb10.png",
+            "background": "hm_slid2.png",
+            "x": 9,
+            "width": 24,
+            "handleOn": "hm_tmb11.png",
+            "y": 167,
+            "type": "scrollbar",
+            "height": 320
+        }, {
+            "x": 249,
+            "width": 526,
+            "y": 36,
+            "type": "grid",
+            "height": 391,
+            "gridWidth": "[user/galaxy/mapWidth]",
+            "gridHeight": "[user/galaxy/mapHeight]",
+            "gridOffsetX": "[local/gridOffsetX]",
+            "gridOffsetY": "[local/gridOffsetY]",
+            "gapBetweenElements": -1,
+            "gridElement": {
+                "width": 60,
+                "height": 60,
+                "gridX": -1,
+                "gridY": -1,
+                "type": "container",
+                "border": {
+                    "color": "FF4F4FFF",
+                    "width": 1,
+                    "dashed": true,
+                    "dashLength": 1,
+                    "dashSpacing": 2
+                },
+                "components": [{
+                        "x": 1,
+                        "width": 58,
+                        "y": 1,
+                        "type": "imagebox",
+                        "height": 58,
+                        "visible": false,
+                        "border": {
+                            "color": "FFBF8F00",
+                            "width": 2,
+                            "dashed": false
+                        },
+                        "triggers": [
+                            {
+                                "condition": {
+                                    "operator": "AND",
+                                    "value1": {
+                                        "value1": "[runtime/ui/selectedSectorX]",
+                                        "value2": "[local/gridX]",
+                                        "operator": "=="
+                                    },
+                                    "value2": {
+                                        "value1": "[runtime/ui/selectedSectorY]",
+                                        "value2": "[local/gridY]",
+                                        "operator": "=="
+                                    }
+                                },
+                                "onTriggered": [
+                                    "setVariable this/visible \"true\""
+                                ]
+                            }, {
+                                "condition": {
+                                    "operator": "OR",
+                                    "value1": {
+                                        "value1": "[runtime/ui/selectedSectorX]",
+                                        "value2": "[local/gridX]",
+                                        "operator": "!="
+                                    },
+                                    "value2": {
+                                        "value1": "[runtime/ui/selectedSectorY]",
+                                        "value2": "[local/gridY]",
+                                        "operator": "!="
+                                    }
+                                },
+                                "onTriggered": [
+                                    "setVariable this/visible \"false\""
+                                ]
+                            }
+                        ]
+                    }, {
+                        "x": 1,
+                        "width": 58,
+                        "y": 1,
+                        "type": "button",
+                        "height": 58,
+                        "onClick": [
+                            "setVariable runtime/ui/selectedSectorX [local/gridX]",
+                            "setVariable runtime/ui/selectedSectorY [local/gridY]"
+                        ],
+                        "onMouseEntered": [
+                            "setVariable runtime/ui/sectorHoverX [local/gridX]",
+                            "setVariable runtime/ui/sectorHoverY [local/gridY]"
+                        ]
+                    }, {
+                        "x": 0,
+                        "y": 0,
+                        "height": 60,
+                        "width": 60,
+                        "type": "imagebox",
+                        "image": "[static/gen/galaxy/anomaly/[user/galaxy/anomalies/[user/galaxy/map/[local/gridX]/[local/gridY]/anomaly]/anomalyType]/imgPrefix]map.png",
+                        "visible": "[user/galaxy/map/[local/gridX]/[local/gridY]/anomaly]",
+                        "onLoad": [
+                            "setVariable local/tmp [local/width]",
+                            "subVariable local/tmp [this/image/width]",
+                            "subVariable local/tmp 10",
+                            "mulVariable local/tmp [user/galaxy/anomalies/[user/galaxy/map/[local/gridX]/[local/gridY]/anomaly]/offsetX] 0 [local/width]",
+                            "modVariable local/tmp 5 0 [local/width]",
+                            "setVariable this/x [local/tmp]",
+                            "setVariable local/tmp [local/height]",
+                            "subVariable local/tmp [this/image/height]",
+                            "subVariable local/tmp 10",
+                            "mulVariable local/tmp [user/galaxy/anomalies/[user/galaxy/map/[local/gridX]/[local/gridY]/anomaly]/offsetY] 0 [local/height]",
+                            "modVariable local/tmp 5 0 [local/height]",
+                            "setVariable this/y [local/tmp]"
+                        ]
+                    }, {
+                        "x": 0,
+                        "y": 0,
+                        "height": 60,
+                        "width": 60,
+                        "type": "imagebox",
+                        "image": "[static/gen/galaxy/star/[user/galaxy/systems/[user/galaxy/map/[local/gridX]/[local/gridY]/system]/starType]/imgPrefix]map.png",
+                        "visible": "[user/galaxy/map/[local/gridX]/[local/gridY]/system]",
+                        "onLoad": [
+                            "setVariable local/tImgOffsetX [local/width]",
+                            "subVariable local/tImgOffsetX [this/image/width]",
+                            "subVariable local/tImgOffsetX 10",
+                            "mulVariable local/tImgOffsetX [user/galaxy/systems/[user/galaxy/map/[local/gridX]/[local/gridY]/system]/offsetX] 0 [local/width]",
+                            "modVariable local/tImgOffsetX 5 0 [local/width]",
+                            "setVariable this/x [local/tImgOffsetX]",
+                            "setVariable local/tImgOffsetY [local/height]",
+                            "subVariable local/tImgOffsetY [this/image/height]",
+                            "subVariable local/tImgOffsetY 10",
+                            "mulVariable local/tImgOffsetY [user/galaxy/systems/[user/galaxy/map/[local/gridX]/[local/gridY]/system]/offsetY] 0 [local/height]",
+                            "modVariable local/tImgOffsetY 5 0 [local/height]",
+                            "setVariable this/y [local/tImgOffsetY]"
+                        ]
+                    }, {
+                        "text": "[user/galaxy/systems/[user/galaxy/map/[local/gridX]/[local/gridY]/system]/name]",
+                        "textHeight": 11,
+                        "x": -30,
+                        "width": 120,
+                        "y": 0,
+                        "visible": "[user/galaxy/map/[local/gridX]/[local/gridY]/system]",
+                        "textWidth": 120,
+                        "horizontalTextAlignment": "center",
+                        "verticalTextAlignment": "top",
+                        "type": "textbox",
+                        "height": 30,
+                        "ignoreDrawBorder": true,
+                        "font": {
+                            "fontFile": "human9.zip",
+                            "color": "7f3f00ff"
+                        },
+                        "triggers": [
+                            {
+                                "condition": {
+                                    "operator": "==",
+                                    "value1": "[user/galaxy/systems/[user/galaxy/map/[local/gridX]/[local/gridY]/system]/owner]",
+                                    "value2": "0"
+                                },
+                                "onTriggered": "setVariable this/font/color 007f007f"
+                            }, {
+                                "condition": {
+                                    "operator": "==",
+                                    "value1": "[user/galaxy/systems/[user/galaxy/map/[local/gridX]/[local/gridY]/system]/owner]",
+                                    "value2": "1"
+                                },
+                                "onTriggered": "setVariable this/font/color 0000ffff"
+                            }, {
+                                "condition": {
+                                    "operator": "==",
+                                    "value1": "[user/galaxy/systems/[user/galaxy/map/[local/gridX]/[local/gridY]/system]/owner]",
+                                    "value2": "2"
+                                },
+                                "onTriggered": "setVariable this/font/color 007f7f00"
+                            }, {
+                                "condition": {
+                                    "operator": "==",
+                                    "value1": "[user/galaxy/systems/[user/galaxy/map/[local/gridX]/[local/gridY]/system]/owner]",
+                                    "value2": "3"
+                                },
+                                "onTriggered": "setVariable this/font/color 007f0000"
+                            }, {
+                                "condition": {
+                                    "operator": "==",
+                                    "value1": "[user/galaxy/systems/[user/galaxy/map/[local/gridX]/[local/gridY]/system]/owner]",
+                                    "value2": "4"
+                                },
+                                "onTriggered": "setVariable this/font/color 00007f00"
+                            }, {
+                                "condition": {
+                                    "operator": "!in",
+                                    "value1": "[user/galaxy/systems/[user/galaxy/map/[local/gridX]/[local/gridY]/system]/owner]",
+                                    "value2": "0,1,2,3,4"
+                                },
+                                "onTriggered": "setVariable this/font/color 00ffffff"
+                            }, {
+                                "condition": {
+                                    "operator": "!=",
+                                    "value1": "[user/galaxy/systems/[user/galaxy/map/[local/gridX]/[local/gridY]/system]/name]",
+                                    "value2": ""
+                                },
+                                "onTriggered": [
+                                    "setVariable this/tmp [local/components/3/image/width]",
+                                    "mulVariable this/tmp 0.5",
+                                    "subVariable this/tmp 60",
+                                    "modVariable this/tmp [local/tImgOffsetX]",
+                                    "setVariable this/x [this/tmp]",
+                                    "setVariable this/tmp [local/tImgOffsetY]",
+                                    "modVariable this/tmp [local/components/3/image/height]",
+                                    "setVariable this/y [this/tmp]"
+                                ]
+                            }
+                        ]
+                    }]
+            },
+            "keyBinds": [
+                {
+                    "key": "[settings/mapScrollRight]",
+                    "action": "modVariable local/gridOffsetX 0.4 0 [user/galaxy/mapWidth]"
+                },
+                {
+                    "key": "[settings/mapScrollLeft]",
+                    "action": "modVariable local/gridOffsetX -0.4 0 [user/galaxy/mapWidth]"
+                },
+                {
+                    "key": "[settings/mapScrollDown]",
+                    "action": "modVariable local/gridOffsetY 0.4 0 [user/galaxy/mapHeight]"
+                },
+                {
+                    "key": "[settings/mapScrollUp]",
+                    "action": "modVariable local/gridOffsetY -0.4 0 [user/galaxy/mapHeight]"
+                }
+            ]
+        }, {
+            "x": 7,
+            "y": 459,
+            "type": "externalComponent",
+            "component": "h_sysmap"
+        }, {
+            "x": 7,
+            "y": 459,
+            "type": "externalComponent",
+            "component": "h_starmp"
+        }, {
+            "x": 28,
+            "width": 196,
+            "y": 110,
+            "type": "tmp",
+            "height": 380
+        }, {
+            "x": 564,
+            "width": 175,
+            "y": 353,
+            "type": "tmp",
+            "height": 76
+        }, {
+            "x": 273,
+            "width": 208,
+            "y": 198,
+            "type": "tmp",
+            "height": 229
+        }, {
+            "x": 143,
+            "width": 255,
+            "y": 299,
+            "type": "tmp",
+            "height": 277
+        }, {
+            "x": 166,
+            "width": 35,
+            "y": 76,
+            "type": "tmp",
+            "height": 30
+        }, {
+            "text": "TURN [user/game/turn]",
+            "horizontalTextAlignment": "left",
+            "verticalTextAlignment": "center",
+            "textHeight": 30,
+            "textXPos": 0,
+            "textYPos": 0,
+            "x": 63,
+            "width": 100,
+            "y": 76,
+            "textWidth": 100,
+            "type": "textbox",
+            "height": 30,
+            "font": {
+                "fontFile": "human28.zip"
+            }
+        }, {
+            "textHeight": 22,
+            "horizontalTextAlignment": "left",
+            "verticalTextAlignment": "center",
+            "textXPos": 0,
+            "textYPos": 0,
+            "x": 262,
+            "width": 500,
+            "y": 8,
+            "textWidth": 500,
+            "type": "textbox",
+            "height": 22,
+            "font": {
+                "fontFile": "human20.zip"
+            },
+            "triggers": [
+                {
+                    "condition": {
+                        "operator": "AND",
+                        "value1": {
+                            "operator": "!=",
+                            "value1": "[runtime/ui/sectorHoverX]",
+                            "value2": ""
+                        },
+                        "value2": {
+                            "operator": "!=",
+                            "value1": "[runtime/ui/sectorHoverY]",
+                            "value2": ""
+                        }
+                    },
+                    "onTriggered": "setVariable this/text \"[static/text/lexicon/UI/sectorDescriptor$FIXME$[runtime/ui/sectorHoverX]$[runtime/ui/sectorHoverY]]\""
+                }
+            ]
+        }],
+    "background": "hm_scrn.png",
+    "x": 0,
+    "width": 800,
+    "y": 0,
+    "type": "container",
+    "height": 600,
+    "cursor": "hempire.gif"
+}

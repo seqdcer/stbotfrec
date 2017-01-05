@@ -1,0 +1,1 @@
+{"components":[{"background":"rb_flt.png","imageOff":"rb_flt.png","x":18,"width":143,"y":0,"type":"toggle","height":22,"imageOn":"rb_flton.png"},{"background":"rb_ene.png","imageOff":"rb_ene.png","x":18,"width":143,"y":27,"type":"toggle","height":22,"imageOn":"rb_eneon.png"}],"background":"rbcmdbkg.png","x":0,"width":180,"y":0,"type":"container","height":49}

@@ -1,0 +1,1 @@
+{"components":[{"background":"km_trte.png","imageOff":"km_trte.png","x":9,"width":156,"y":7,"type":"button","height":31,"imageOn":"km_trton.png"},{"background":"km_sout.png","x":168,"width":26,"y":0,"type":"imagebox","height":29}],"background":"none","x":0,"width":200,"y":0,"type":"container","height":38}

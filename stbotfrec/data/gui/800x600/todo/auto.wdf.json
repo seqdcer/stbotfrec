@@ -1,0 +1,1 @@
+{"components":[{"background":"yestxtop.png","imageOff":"yestxtop.png","x":20,"width":124,"y":36,"type":"toggle","height":28,"imageOn":"yes_on.png"},{"background":"notxtop.png","imageOff":"notxtop.png","x":20,"width":124,"y":68,"type":"toggle","height":28,"imageOn":"no_on.png"}],"background":"asavebkg.png","x":0,"width":144,"y":0,"type":"container","height":96}

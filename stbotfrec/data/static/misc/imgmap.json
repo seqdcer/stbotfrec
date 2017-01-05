@@ -1,0 +1,30 @@
+{
+    "options": {
+        "settings": {
+            "galaxySize": ["cc_gzsm.png", "cc_gzmd.png", "cc_gzlg.png"],
+            "galaxyShape": ["cc_gsir.png", "cc_gsel.png", "cc_gsrg.png", "cc_gssp.png"]
+        }
+    },
+    "runtime": {
+        "isEmpire0SlotFree": {
+            "false": "es_cicn0.png",
+            "true": "es_cicn1.png"
+        },
+        "isEmpire1SlotFree": {
+            "false": "es_hicn0.png",
+            "true": "es_hicn1.png"
+        },
+        "isEmpire2SlotFree": {
+            "false": "es_ficn0.png",
+            "true": "es_ficn1.png"
+        },
+        "isEmpire3SlotFree": {
+            "false": "es_kicn0.png",
+            "true": "es_kicn1.png"
+        },
+        "isEmpire4SlotFree": {
+            "false": "es_ricn0.png",
+            "true": "es_ricn1.png"
+        }
+    }
+}
