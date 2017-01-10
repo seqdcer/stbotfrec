@@ -272,6 +272,7 @@ function placeHomeSystem(rindex, system)
     
     // add system to list of owned system for this race
     CI.run("addToList", "user/races/" + rindex + "/systems", system);
+    CI.run("setVariable", "user/races/" + rindex + "/home", system);
 }
 
 function placeRandomSystem(system, systemNames)

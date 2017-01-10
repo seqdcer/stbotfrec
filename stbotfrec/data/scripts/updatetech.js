@@ -21,6 +21,8 @@ if (CI.run("getVariable", "user/races/" + scriptArgs[0] + "/tech/ships") === nul
     CI.run("createList", "user/races/" + scriptArgs[0] + "/tech/ships");
 }
 
+
+
 for (i = 0; i < shipTech.size(); i++)
 {
     // get ship requirements
@@ -45,6 +47,16 @@ for (i = 0; i < shipTech.size(); i++)
         // add only if the ship is not already on the list
         CI.run("addToList", "user/races/" + scriptArgs[0] + "/tech/ships", 0, ship, true);
 
+
+        // create ship function list if needed
+        if (CI.run("getVariable", "user/races/" + scriptArgs[0] + "/tech/shipfun/[static/stats/ships/" + ship + "/function]") === null)
+        {
+            CI.run("createList", "user/races/" + scriptArgs[0] + "/tech/shipfun/[static/stats/ships/" + ship + "/function]");
+        }
+        
+        // add to function list
+        CI.run("addToList", "user/races/" + scriptArgs[0] + "/tech/shipfun/[static/stats/ships/" + ship + "/function]", 0, ship, true);
+        
         // remove from future tech
         CI.run("removeItemFromList", "runtime/races/" + scriptArgs[0] + "/futuretech/ships", ship);
         

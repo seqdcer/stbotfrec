@@ -307,8 +307,8 @@
         ["Worm Hole %s1.%s2"],
         ["X-Ray Pulsar %s1.%s2"]
     ],
-    "galaxyDensity": [0.25, 0.25, 0.25, 0.25],
-    "anomalyRatio": [0.2, 0.2, 0.2, 0.2],
+    "galaxyDensity": [0.25, 0.25, 0.25],
+    "anomalyRatio": [0.2, 0.2, 0.2],
     "minDesiredEmpireDistance": [4, 4, 6],
     "maxPlanetsPerSystem": 7
 }

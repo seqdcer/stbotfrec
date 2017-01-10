@@ -30,14 +30,14 @@ if (CI.run("getVariable runtime/gamesetup/playerEmpire") >= 0)
             
             // add minor races
             
+            // generate galaxy
+            CI.run("runScript", "galaxygen");
+            
             // setup races
             for (rindex = 0; rindex < racesCount; rindex++)
             {
                 setupRace(rindex, empireList);
             }
-            
-            // generate galaxy
-            CI.run("runScript", "galaxygen");
             
             // once done display maingal screen
             CI.run("showScreen [runtime/player/empireSmallPreffix]maingal");
@@ -74,4 +74,18 @@ function setupRace(rindex, empireList)
     
     CI.run("runScript setuptech " + params);
     CI.run("runScript", "updatetech", rindex);
+    
+    // ADD STARTING SHIPS
+    
+    var ships = CI.run("getVariable static/stats/races/[user/races/" + rindex + "/id]/startingShips/[settings/startingLevels/" + rindex + "/index]");
+    
+    for (i = 0; i < ships.size(); i++)
+    {
+        var ship = CI.run("getRandomFromList user/races/" + rindex + "/tech/shipfun/" + ships.get(i));
+        
+        if (ship !== null)
+        {
+            CI.run("runScript placeShip " + ship + " " + rindex + " [user/races/" + rindex + "/home]");
+        }
+    }
 }
