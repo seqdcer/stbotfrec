@@ -32,6 +32,7 @@ public class CommandInterface {
     private final Window window;
     
     public static final String ADD_TO_LIST = "addToList";
+    public static final String ADD_UNIQUE_TO_LIST = "addUniqueToList";
     public static final String CLEAR_VARIABLE = "clearVariable";
     public static final String CLOSE_DIALOG = "closeDialog";
     public static final String CREATE_LIST = "createList";
@@ -45,6 +46,7 @@ public class CommandInterface {
     public static final String MUL_VARIABLE = "mulVariable";
     public static final String PLAY_SOUND = "playSound";
     public static final String PLAY_VOICE = "playVoice";
+    public static final String REMOVE_ITEM_FROM_LIST = "removeItemFromList";
     public static final String RUN_COMMAND = "runCommand";
     public static final String RUN_SCRIPT = "runScript";
     public static final String SAVE_USER_DATA = "saveUserData";
@@ -90,11 +92,16 @@ public class CommandInterface {
                 {
                     if (args.length == 2)
                         Base.addToList(localContext, thisContext, StringValueRef.create(localContext, thisContext, args[0], false).toString(), -1,
-                                StringValueRef.create(localContext, thisContext, args[1], false).toString());
+                                StringValueRef.create(localContext, thisContext, args[1], false).toString(), false);
                     else if (args.length >= 3)
                         Base.addToList(localContext, thisContext, StringValueRef.create(localContext, thisContext, args[0], false).toString(),
                                 ((NumberValueRef)NumberValueRef.create(localContext, thisContext, args[1], false)).intValue(),
-                                StringValueRef.create(localContext, thisContext, args[2], false).toString());
+                                StringValueRef.create(localContext, thisContext, args[2], false).toString(), false);
+                    else if (args.length >= 4)
+                        Base.addToList(localContext, thisContext, StringValueRef.create(localContext, thisContext, args[0], false).toString(),
+                                ((NumberValueRef)NumberValueRef.create(localContext, thisContext, args[1], false)).intValue(),
+                                StringValueRef.create(localContext, thisContext, args[2], false).toString(),
+                                ((BooleanValueRef)BooleanValueRef.create(localContext, thisContext, args[3], false)).getValue());
                     else
                         missingArgs = true;
 
@@ -274,6 +281,16 @@ public class CommandInterface {
                     else
                         missingArgs = true;
                     
+                    break;
+                }
+                case REMOVE_ITEM_FROM_LIST:
+                {
+                    if (args.length == 2)
+                        Base.removeItemFromList(localContext, thisContext, StringValueRef.create(localContext, thisContext, args[0], false).toString(),
+                                StringValueRef.create(localContext, thisContext, args[1], false).toString());
+                    else
+                        missingArgs = true;
+
                     break;
                 }
                 case RUN_COMMAND:

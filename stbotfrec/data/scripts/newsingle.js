@@ -64,5 +64,14 @@ function setupRace(rindex, empireList)
     CI.run("createList user/races/" + rindex + "/systems");
     
     // SETUP TECH TREE
-    CI.run("runScript", "setuptech", rindex);
+    var tech = CI.run("getVariable static/stats/races/[user/races/" + rindex + "/id]/startingTech/[settings/startingLevels/" + rindex + "/index]");
+    var params = rindex;
+    
+    for (i = 0; i < tech.size(); i++)
+    {
+        params = params + " " + tech.get(i);
+    }
+    
+    CI.run("runScript setuptech " + params);
+    CI.run("runScript", "updatetech", rindex);
 }

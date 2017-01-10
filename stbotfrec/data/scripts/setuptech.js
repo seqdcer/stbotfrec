@@ -1,6 +1,9 @@
 //
 // This script setups the tech "tree" for the given race.
 //
+// Call this on new game and game load.
+//
+// Args: race index, optional: [tech levels]
 
 // set tech levels if present otherwise load them
 if (scriptArgs.length > 1)
@@ -14,7 +17,7 @@ if (scriptArgs.length > 1)
 }
 else
 {
-    techcount = CI.run("getVariable", "user/races/" + scriptArgs[0] + "/techLevel/count");
+    var techcount = CI.run("getVariable", "user/races/" + scriptArgs[0] + "/techLevel/count");
     
     for (i = 0; i < techcount; i++)
     {
@@ -23,8 +26,9 @@ else
 }
 
 // empire or minor race ?
-empireCount = parseInt(CI.run("getVariable", "static/stats/empires/list/count"));
-isEmpire = parseInt(scriptArgs[0]) < empireCount;
+var empireCount = parseInt(CI.run("getVariable", "static/stats/empires/list/count"));
+var isEmpire = parseInt(scriptArgs[0]) < empireCount;
+var ships = null;
 
 // setup ships
 if (isEmpire === true)
@@ -38,10 +42,10 @@ else
 
 if (ships !== null)
 {
-    CI.run("createList", "user/races/" + scriptArgs[0] + "/tech/future/ships");
+    CI.run("createList", "runtime/races/" + scriptArgs[0] + "/futuretech/ships");
     
     for (i = 0; i < ships.size(); i++)
     {
-        CI.run("addToList", "user/races/" + scriptArgs[0] + "/tech/future/ships", ships.get(i));
+        CI.run("addToList", "runtime/races/" + scriptArgs[0] + "/futuretech/ships", ships.get(i));
     }
 }

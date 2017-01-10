@@ -1,7 +1,7 @@
 {
     "homeSystem": {
         "name": "Cardassia",
-        "starType": 1, 
+        "starType": 1,
         "numPlanets": 6,
         "planets": [
             {
@@ -64,5 +64,12 @@
     },
     "shiplist": [
         "ccs1", "css1"
+    ],
+    "startingTech": [
+        [1, 1, 1, 1, 1, 1],
+        [2, 2, 2, 2, 2, 2],
+        [3, 3, 3, 3, 3, 3],
+        [5, 5, 5, 5, 5, 5],
+        [8, 8, 8, 8, 8, 8]
     ]
 }

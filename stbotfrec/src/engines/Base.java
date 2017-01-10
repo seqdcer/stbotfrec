@@ -579,7 +579,7 @@ public abstract class Base {
         setVariable(localContext, thisContext, new JSONArray(), nodes);
     }
     
-    public static void addToList(JSONObject localContext, JSONObject thisContext, String ref, int pos, Object value) throws Exception
+    public static void addToList(JSONObject localContext, JSONObject thisContext, String ref, int pos, Object value, boolean unique) throws Exception
     {
         ref = cleanRef(ref);
         
@@ -596,6 +596,14 @@ public abstract class Base {
         
         if (variable instanceof List && variable instanceof JSONAware)
         {
+            if (unique)
+            {
+                if (((List)variable).contains(value))
+                {
+                    return;
+                }
+            }
+            
             if (pos < 0)
             {
                 setChild((JSONAware)variable, Integer.toString(((List)variable).size()), value);
@@ -613,6 +621,31 @@ public abstract class Base {
             }
             
             fireVariableChangeEvent(localContext, thisContext, null, variable, nodes);
+        }
+    }
+    
+    public static void removeItemFromList(JSONObject localContext, JSONObject thisContext, String ref, String value) {
+        ref = cleanRef(ref);
+        
+        if (ref.length() < 1)
+        {
+            return;
+        }
+        
+        ref = cleanRef(ref);
+        
+        String[] nodes = ref.split(NODE_SEPARATOR.toString());
+        
+        Object variable = getVariable(localContext, thisContext, nodes);
+        
+        if (variable instanceof List && variable instanceof JSONAware)
+        {
+            List list = (List) variable;
+                
+            if (list.remove(value))
+            {
+                fireVariableChangeEvent(localContext, thisContext, null, variable, nodes);
+            }
         }
     }
     
