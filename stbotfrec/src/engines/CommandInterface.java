@@ -304,7 +304,16 @@ public class CommandInterface {
                                 
                                 context.setAttribute("CI", new CIWrapper(localContext, thisContext), ScriptContext.ENGINE_SCOPE);
                                 context.setAttribute(ScriptEngine.FILENAME, scriptFile, ScriptContext.ENGINE_SCOPE);
-
+                                
+                                String[] sargs = new String[args.length - 1];
+                                
+                                for (int k = 0; k < sargs.length; k++)
+                                {
+                                    sargs[k] = StringValueRef.create(localContext, thisContext, args[k + 1], false).toString();
+                                }
+                                
+                                context.setAttribute("scriptArgs", sargs, ScriptContext.ENGINE_SCOPE);
+                                
                                 scriptEngine.eval(script, context);
                             } catch (ScriptException ex) {
                                 Logger.getLogger(CommandInterface.class.getName()).log(Level.SEVERE, null, ex);

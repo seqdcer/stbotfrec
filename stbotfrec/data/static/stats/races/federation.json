@@ -83,5 +83,8 @@
         ],
         "hasDilithium": true,
         "startingPopulation": [210, 310, 335, 335, 335]
-    }
+    },
+    "shiplist": [
+        "hcs1", "hss1"
+    ]
 }

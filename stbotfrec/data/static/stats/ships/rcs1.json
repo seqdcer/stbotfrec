@@ -1,0 +1,21 @@
+{
+    "name": "Colony Ship",
+    "class": "D'retex",
+    "desc": "D'retex-class colony ships are equipped with a wide variety of equipment for making alien worlds habitable for Romulans.  Their hulls are designed to be easily dismantled and reconfigured into the basic structures a new colony requires.  They have no armaments and poor combat maneuverability, and will not generally survive combat without an escort.",
+    "function": "colony",
+    "nameGroup": 30,
+    "mapRange": 1,
+    "mapSpeed": 1,
+    "scanStr": 1,
+    "cost": 860,
+    "upkeep": 23,
+    "stealth": 0,
+    "terraRate": 1,
+    "shieldReg": 7,
+    "shields": 50,
+    "hull": 45,
+    "defense": 15,
+    "agility": 100,
+    "imgPrefix": "rc",
+    "techReq": [1, 1, 1, 1, 1, 1]
+}

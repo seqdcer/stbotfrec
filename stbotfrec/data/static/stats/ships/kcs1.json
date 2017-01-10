@@ -1,0 +1,35 @@
+{
+    "name": "Armed Colony Ship",
+    "class": "LI'wI'",
+    "desc": "LI'wI'-class colony ships are equipped with a wide variety of equipment for making alien worlds habitable for Klingons.  Their hulls are designed to be easily dismantled and reconfigured into the basic structures a new colony requires.  They are not well-suited for combat, but enemies expecting an easy kill will find that even Klingon colony ships have teeth.",
+    "function": "colony",
+    "nameGroup": 20,
+    "mapRange": 1,
+    "mapSpeed": 1,
+    "scanStr": 1,
+    "cost": 1160,
+    "upkeep": 26,
+    "stealth": 0,
+    "beams": {
+        "acc": 122,
+        "num": 3,
+        "dmg": 15,
+        "minRange": 90,
+        "maxRange": 300
+    },
+    "torps": {
+        "acc": 112,
+        "num": 2,
+        "dmg": 28,
+        "minRange": 50,
+        "maxRange": 540
+    },
+    "terraRate": 1,
+    "shieldReg": 7,
+    "shields": 50,
+    "hull": 35,
+    "defense": 21,
+    "agility": 100,
+    "imgPrefix": "ku",
+    "techReq": [1, 1, 1, 1, 1, 1]
+}

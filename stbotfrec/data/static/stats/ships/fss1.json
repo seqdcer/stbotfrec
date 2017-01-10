@@ -1,0 +1,34 @@
+{
+    "name": "Explorer",
+    "class": "Bronta",
+    "desc": "Bronta-class scouts are small, lightly armed vessels designed to search the galaxy for opportunities to exploit and keep an eye on the Alliance's enemies.  Their reports are used to direct the efforts of colony ships and warships.",
+    "function": "scout",
+    "nameGroup": 37,
+    "mapRange": 2,
+    "mapSpeed": 1,
+    "scanStr": 2,
+    "cost": 460,
+    "upkeep": 26,
+    "stealth": 0,
+    "beams": {
+        "acc": 115,
+        "num": 2,
+        "dmg": 15,
+        "minRange": 120,
+        "maxRange": 300
+    },
+    "torps": {
+        "acc": 112,
+        "num": 3,
+        "dmg": 28,
+        "minRange": 50,
+        "maxRange": 540
+    },
+    "shieldReg": 11,
+    "shields": 95,
+    "hull": 15,
+    "defense": 24,
+    "agility": 100,
+    "imgPrefix": "fl3",
+    "techReq": [1, 1, 1, 1, 1, 1]
+}

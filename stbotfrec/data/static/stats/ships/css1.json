@@ -1,0 +1,34 @@
+{
+    "name": "Scout",
+    "class": "Nerok",
+    "desc": "The Nerok-class scout vessel is a light, poorly armed ship, whose main features are its extended range and powerful sensors.  It is designed as an expendable exploratory vehicle but can, in a pinch, operate as a light escort or raider.  Its sensors can be quite helpful to other commanders battle, and may assist in interception attempts.",
+    "function": "scout",
+    "nameGroup": 46,
+    "mapRange": 2,
+    "mapSpeed": 1,
+    "scanStr": 2,
+    "cost": 400,
+    "upkeep": 26,
+    "stealth": 0,
+    "beams": {
+        "acc": 115,
+        "num": 2,
+        "dmg": 16,
+        "minRange": 90,
+        "maxRange": 330
+    },
+    "torps": {
+        "acc": 112,
+        "num": 2,
+        "dmg": 28,
+        "minRange": 50,
+        "maxRange": 540
+    },
+    "shieldReg": 9,
+    "shields": 80,
+    "hull": 30,
+    "defense": 20,
+    "agility": 100,
+    "imgPrefix": "cl2",
+    "techReq": [1, 1, 1, 1, 1, 1]
+}

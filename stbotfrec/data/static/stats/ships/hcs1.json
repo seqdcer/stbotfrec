@@ -1,0 +1,21 @@
+{
+    "name": "Colony Ship",
+    "class": "Edward",
+    "desc": "Edward-class colony ships are equipped with a wide variety of equipment for making alien worlds habitable for humans.  Their hulls are designed to be easily dismantled and reconfigured into the basic structures a new colony requires.  They have no armaments and poor combat maneuverability, and will not generally survive combat without an escort.",
+    "function": "colony",
+    "nameGroup": 10,
+    "mapRange": 1,
+    "mapSpeed": 1,
+    "scanStr": 1,
+    "cost": 1210,
+    "upkeep": 23,
+    "stealth": 0,
+    "terraRate": 1,
+    "shieldReg": 10,
+    "shields": 70,
+    "hull": 55,
+    "defense": 15,
+    "agility": 100,
+    "imgPrefix": "hc",
+    "techReq": [1, 1, 1, 1, 1, 1]
+}

@@ -61,5 +61,8 @@
         ],
         "hasDilithium": true,
         "startingPopulation": [200, 300, 400, 400, 400]
-    }
+    },
+    "shiplist": [
+        "ccs1", "css1"
+    ]
 }

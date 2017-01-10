@@ -1,0 +1,34 @@
+{
+    "name": "Scout",
+    "class": "D'renet",
+    "desc": "The D'renet-class scout is a lightly armed, long-range explorer.  It carries enough weaponry to harass enemy support vessels, but the tiny D'renet will not survive long in battle with a warship.  Its captains are advised to use the cloaking device to escape such engagements.",
+    "function": "scout",
+    "nameGroup": 28,
+    "mapRange": 2,
+    "mapSpeed": 1,
+    "scanStr": 2,
+    "cost": 370,
+    "upkeep": 26,
+    "stealth": 4,
+    "beams": {
+        "acc": 119,
+        "num": 2,
+        "dmg": 15,
+        "minRange": 90,
+        "maxRange": 300
+    },
+    "torps": {
+        "acc": 115,
+        "num": 2,
+        "dmg": 30,
+        "minRange": 50,
+        "maxRange": 580
+    },
+    "shieldReg": 9,
+    "shields": 80,
+    "hull": 15,
+    "defense": 20,
+    "agility": 100,
+    "imgPrefix": "rl2",
+    "techReq": [1, 1, 1, 1, 1, 1]
+}

@@ -62,4 +62,7 @@ function setupRace(rindex, empireList)
     CI.run("setRefVariable", "user/races/" + rindex + "/summary/systems/0/text", "static/text/lexicon/UI/summary/systemsListTitle");
     // setup list of owned systems
     CI.run("createList user/races/" + rindex + "/systems");
+    
+    // SETUP TECH TREE
+    CI.run("runScript", "setuptech", rindex);
 }

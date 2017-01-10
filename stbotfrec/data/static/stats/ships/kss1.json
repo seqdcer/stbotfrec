@@ -1,0 +1,34 @@
+{
+    "name": "Scout",
+    "class": "B'rel",
+    "desc": "As the proverb says, a sharp knife is nothing without a sharp eye.  The B'rel-class Bird of Prey is the eyes of the fleet.  It is a small, swift craft whose mission is to locate targets of opportunity and map out the enemy's position.",
+    "function": "scout",
+    "nameGroup": 17,
+    "mapRange": 2,
+    "mapSpeed": 1,
+    "scanStr": 2,
+    "cost": 390,
+    "upkeep": 26,
+    "stealth": 0,
+    "beams": {
+        "acc": 122,
+        "num": 3,
+        "dmg": 15,
+        "minRange": 70,
+        "maxRange": 300
+    },
+    "torps": {
+        "acc": 112,
+        "num": 2,
+        "dmg": 28,
+        "minRange": 50,
+        "maxRange": 540
+    },
+    "shieldReg": 9,
+    "shields": 80,
+    "hull": 15,
+    "defense": 28,
+    "agility": 100,
+    "imgPrefix": "kl1",
+    "techReq": [1, 1, 1, 1, 1, 1]
+}

@@ -45,5 +45,8 @@
         ],
         "hasDilithium": true,
         "startingPopulation": [190, 280, 370, 370, 370]
-    }
+    },
+    "shiplist": [
+        "kcs1", "kss1"
+    ]
 }
