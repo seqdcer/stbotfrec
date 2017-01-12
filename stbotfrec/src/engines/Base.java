@@ -596,6 +596,8 @@ public abstract class Base {
         
         if (variable instanceof List && variable instanceof JSONAware)
         {
+            List list = (List) variable;
+                
             if (unique)
             {
                 if (((List)variable).contains(value))
@@ -610,8 +612,6 @@ public abstract class Base {
             }
             else
             {
-                List list = (List) variable;
-                
                 while (list.size() < pos)
                 {
                     list.add(new JSONObject());
@@ -620,6 +620,7 @@ public abstract class Base {
                 list.add(pos, value);
             }
             
+            fireVariableChangeEvent(ref + Base.NODE_SEPARATOR + Base.PROPERTY_LIST_SIZE, list.size() - 1, list.size());
             fireVariableChangeEvent(localContext, thisContext, null, variable, nodes);
         }
     }
@@ -644,6 +645,7 @@ public abstract class Base {
                 
             if (list.remove(value))
             {
+                fireVariableChangeEvent(ref + Base.NODE_SEPARATOR + Base.PROPERTY_LIST_SIZE, list.size() + 1, list.size());
                 fireVariableChangeEvent(localContext, thisContext, null, variable, nodes);
             }
         }

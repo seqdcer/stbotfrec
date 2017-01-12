@@ -146,7 +146,7 @@ public class KeyBindsRef extends ValueRef {
     
     @Override
     public String[] getProperties() {
-        return null;
+        return new String[]{Base.PROPERTY_LIST_SIZE};
     }
 
     @Override
