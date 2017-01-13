@@ -67,18 +67,18 @@
                 "value1": {
                     "operator": "AND",
                     "value1": {
-                        "operator": ">=",
+                        "operator": "!==",
                         "value1": "[runtime/ui/selectedSectorY]",
-                        "value2": "0"
+                        "value2": ""
                     },
                     "value2": {
-                        "operator": ">=",
+                        "operator": "!==",
                         "value1": "[runtime/ui/selectedSectorX]",
-                        "value2": "0"
+                        "value2": ""
                     }
                 },
                 "value2": {
-                    "operator": "!=",
+                    "operator": "!==",
                     "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/anomaly]",
                     "value2": ""
                 }
@@ -89,7 +89,7 @@
             ]
         }, {
             "condition": {
-                "operator": "==",
+                "operator": "===",
                 "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/anomaly]",
                 "value2": ""
             },

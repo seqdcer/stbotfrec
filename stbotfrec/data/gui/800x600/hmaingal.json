@@ -143,12 +143,12 @@
                                     "value1": {
                                         "value1": "[runtime/ui/selectedSectorX]",
                                         "value2": "[local/gridX]",
-                                        "operator": "=="
+                                        "operator": "==="
                                     },
                                     "value2": {
                                         "value1": "[runtime/ui/selectedSectorY]",
                                         "value2": "[local/gridY]",
-                                        "operator": "=="
+                                        "operator": "==="
                                     }
                                 },
                                 "onTriggered": [
@@ -160,12 +160,12 @@
                                     "value1": {
                                         "value1": "[runtime/ui/selectedSectorX]",
                                         "value2": "[local/gridX]",
-                                        "operator": "!="
+                                        "operator": "!=="
                                     },
                                     "value2": {
                                         "value1": "[runtime/ui/selectedSectorY]",
                                         "value2": "[local/gridY]",
-                                        "operator": "!="
+                                        "operator": "!=="
                                     }
                                 },
                                 "onTriggered": [
@@ -182,6 +182,7 @@
                         "onClick": [
                             "setVariable runtime/ui/selectedSectorX [local/gridX]",
                             "setVariable runtime/ui/selectedSectorY [local/gridY]"
+                            
                         ],
                         "onMouseEntered": [
                             "setVariable runtime/ui/sectorHoverX [local/gridX]",
@@ -286,14 +287,14 @@
                                 "onTriggered": "setVariable this/font/color 00007f00"
                             }, {
                                 "condition": {
-                                    "operator": "!in",
+                                    "operator": "!IN",
                                     "value1": "[user/galaxy/systems/[user/galaxy/map/[local/gridX]/[local/gridY]/system]/owner]",
                                     "value2": "0,1,2,3,4"
                                 },
                                 "onTriggered": "setVariable this/font/color 00ffffff"
                             }, {
                                 "condition": {
-                                    "operator": "!=",
+                                    "operator": "!==",
                                     "value1": "[user/galaxy/systems/[user/galaxy/map/[local/gridX]/[local/gridY]/system]/name]",
                                     "value2": ""
                                 },
@@ -306,6 +307,157 @@
                                     "setVariable this/tmp [local/tImgOffsetY]",
                                     "modVariable this/tmp [local/components/3/image/height]",
                                     "setVariable this/y [this/tmp]"
+                                ]
+                            }
+                        ]
+                    }, {
+                        "x": 2,
+                        "width": 26,
+                        "y": 2,
+                        "type": "imagebox",
+                        "height": 30,
+                        "visible": true,
+                        "image": "i_[static/stats/empires/smallPrefixes/1]26.png",
+                        "triggers": [
+                            {
+                                "condition": {
+                                    "value1": "[user/galaxy/map/[local/gridX]/[local/gridY]/tfs/1/count]",
+                                    "value2": "0",
+                                    "operator": ">"
+                                },
+                                "onTriggered": [
+                                    "setVariable this/visible true"
+                                ]
+                            }, {
+                                "condition": {
+                                    "value1": "[user/galaxy/map/[local/gridX]/[local/gridY]/tfs/1/count]",
+                                    "value2": "0",
+                                    "operator": "<="
+                                },
+                                "onTriggered": [
+                                    "setVariable this/visible false"
+                                ]
+                            }
+                        ]
+                    }, {
+                        "x": 28,
+                        "width": 28,
+                        "y": 2,
+                        "type": "grid",
+                        "height": 23,
+                        "gridWidth": 0,
+                        "gridHeight": 1,
+                        "gridOffsetX": 0,
+                        "gridOffsetY": 0,
+                        "gapBetweenElements": 0,
+                        "gridX": "[local/gridX]",
+                        "gridY": "[local/gridY]",
+                        "gridElement": {
+                            "width": 18,
+                            "height": 23,
+                            "gridX": -1,
+                            "gridY": -1,
+                            "type": "imagebox",
+                            "visible": "true",
+                            "image": "i_h18.png",
+                            "triggers": [{
+                                    "condition": {
+                                        "value1": {
+                                            "value1": "[user/galaxy/map/[local/gridX]/[local/gridY]/tfs/prefixes/count]",
+                                            "value2": "0",
+                                            "operator": "<"
+                                        },
+                                        "value2": {
+                                            "value1": "[user/galaxy/map/[local/gridX]/[local/gridY]/tfs/1/count]",
+                                            "value2": "0",
+                                            "operator": ">"
+                                        },
+                                        "operator": "AND"
+                                    },
+                                    "onTriggered": [
+                                        "setVariable this/x 28",
+                                        "setVariable this/width 28",
+                                        "setVariable this/cnt [user/galaxy/map/[local/gridX]/[local/gridY]/tfs/prefixes/count]",
+                                        "setVariable this/tmp [this/gridElement/width]",
+                                        "mulVariable this/tmp [this/cnt]",
+                                        "subVariable this/tmp [this/width]",
+                                        "modVariable this/cnt -1 1",
+                                        "divVariable this/tmp [this/cnt] 0",
+                                        "roundVariable this/tmp",
+                                        "setVariable this/gapBetweenElements -[this/tmp]",
+                                        "setVariable this/gridWidth [user/galaxy/map/[local/gridX]/[local/gridY]/tfs/prefixes/count]",
+                                        "setVariable this/visible true"
+                                    ]
+                                }
+                            ]
+                        },
+                        "triggers": [{
+                                "condition": {
+                                    "value1": {
+                                        "value1": "[user/galaxy/map/[local/gridX]/[local/gridY]/tfs/prefixes/count]",
+                                        "value2": "0",
+                                        "operator": ">"
+                                    },
+                                    "value2": {
+                                        "value1": "[user/galaxy/map/[local/gridX]/[local/gridY]/tfs/1/count]",
+                                        "value2": "0",
+                                        "operator": ">"
+                                    },
+                                    "operator": "AND"
+                                },
+                                "onTriggered": [
+                                    "setVariable this/x 28",
+                                    "setVariable this/width 28",
+                                    "setVariable this/cnt [user/galaxy/map/[local/gridX]/[local/gridY]/tfs/prefixes/count]",
+                                    "setVariable this/tmp [this/gridElement/width]",
+                                    "mulVariable this/tmp [this/cnt]",
+                                    "subVariable this/tmp [this/width]",
+                                    "modVariable this/cnt -1 1",
+                                    "divVariable this/tmp [this/cnt] 0",
+                                    "roundVariable this/tmp",
+                                    "setVariable this/gapBetweenElements -[this/tmp]",
+                                    "setVariable this/cnt [user/galaxy/map/[local/gridX]/[local/gridY]/tfs/prefixes/count]",
+                                    "modVariable this/cnt -1",
+                                    "setVariable this/gridWidth [this/cnt]",
+                                    "setVariable this/visible true"
+                                ]
+                            }, {
+                                "condition": {
+                                    "value1": {
+                                        "value1": "[user/galaxy/map/[local/gridX]/[local/gridY]/tfs/prefixes/count]",
+                                        "value2": "0",
+                                        "operator": ">"
+                                    },
+                                    "value2": {
+                                        "value1": "[user/galaxy/map/[local/gridX]/[local/gridY]/tfs/1/count]",
+                                        "value2": "0",
+                                        "operator": "<="
+                                    },
+                                    "operator": "AND"
+                                },
+                                "onTriggered": [
+                                    "setVariable this/x 2",
+                                    "setVariable this/width 56",
+                                    "setVariable this/cnt [user/galaxy/map/[local/gridX]/[local/gridY]/tfs/prefixes/count]",
+                                    "setVariable this/tmp [this/gridElement/width]",
+                                    "mulVariable this/tmp [this/cnt]",
+                                    "subVariable this/tmp [this/width]",
+                                    "modVariable this/cnt -1 1",
+                                    "divVariable this/tmp [this/cnt] 0",
+                                    "roundVariable this/tmp",
+                                    "setVariable this/gapBetweenElements -[this/tmp]",
+                                    "setVariable this/gridWidth [user/galaxy/map/[local/gridX]/[local/gridY]/tfs/prefixes/count]",
+                                    "setVariable this/visible true"
+                                ]
+                            }, {
+                                "condition": {
+                                    "value1": "[user/galaxy/map/[local/gridX]/[local/gridY]/tfs/prefixes/count]",
+                                    "value2": "0",
+                                    "operator": "<="
+                                },
+                                "onTriggered": [
+                                    "setVariable this/gridWidth 0",
+                                    "setVariable this/visible false"
                                 ]
                             }
                         ]
@@ -405,12 +557,12 @@
                     "condition": {
                         "operator": "AND",
                         "value1": {
-                            "operator": "!=",
+                            "operator": "!==",
                             "value1": "[runtime/ui/sectorHoverX]",
                             "value2": ""
                         },
                         "value2": {
-                            "operator": "!=",
+                            "operator": "!==",
                             "value1": "[runtime/ui/sectorHoverY]",
                             "value2": ""
                         }

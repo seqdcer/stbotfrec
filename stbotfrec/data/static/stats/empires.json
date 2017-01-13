@@ -6,5 +6,5 @@
         "klingons",
         "romulans"
     ],
-    "smallPrefixes": ["c", "h", "f", "k", "r"]
+    "smallPrefixes": ["c", "h", "f", "k", "r", "m", "t"]
 }

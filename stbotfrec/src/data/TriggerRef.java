@@ -31,9 +31,9 @@ public class TriggerRef extends ValueRef {
             
             if (action != null)
             {
-                if (evaluate(triggerObject.get(CONDITION_KEY)) != null)
+                if (evaluate())
                 {
-                    Main.CI.runSyncUICommand(localContext, thisContext, action);
+                    Main.CI.runSyncUICommand(localContext, thisContext, TriggerRef.this);
                 }
             }
             
@@ -87,127 +87,116 @@ public class TriggerRef extends ValueRef {
         else if (!(val instanceof ValueRef))
         {
             val = StringValueRef.create(localContext, thisContext, val, this.isSynced());
-            triggerObject.put(key, val);
+            parent.put(key, val);
         }
 
         ((ValueRef)val).setChangeListener(l);
     }
     
-    private boolean isTriggered(Object value1, Object value2, Object comp)
+    private boolean isTriggered(String value1, String value2, Object comp)
     {
-        if (value1 instanceof Double && value2 instanceof Double)
+        
+        String str1 = value1.toString();
+        String str2 = value2.toString();
+        double dbl1 = 0, dbl2 = 0;
+        
+        // int cval = str1.compareTo(str2);
+
+        // prep
+        switch (comp.toString())
         {
-            double dbl1 = (Double) value1;
-            double dbl2 = (Double) value2;
-            
-            switch (comp.toString())
+            case "==":
+            case "!=":
+            case "<":
+            case "<=":
+            case ">":
+            case ">=":
             {
-                case "==":
+                try
                 {
-                    return Math.abs(dbl1 - dbl2) < 0.000001;
+                    dbl1 = Double.parseDouble(value1);
                 }
-                case "!=":
+                catch (Exception ex) {}
+                try
                 {
-                    return Math.abs(dbl1 - dbl2) >= 0.000001;
+                    dbl2 = Double.parseDouble(value2);
                 }
-                case "<":
-                {
-                    return dbl1 < dbl2;
-                }
-                case "<=":
-                {
-                    return dbl1 <= dbl2;
-                }
-                case ">":
-                {
-                    return dbl1 > dbl2;
-                }
-                case ">=":
-                {
-                    return dbl1 >= dbl2;
-                }
-                case "AND":
-                {
-                    return dbl1 != 0 && dbl2 != 0;
-                }
-                case "OR":
-                {
-                    return dbl1 != 0 || dbl2 != 0;
-                }
-                default:
-                    return false;
+                catch (Exception ex) {}
+                break;
             }
         }
-        else
+        
+        // eval
+        switch (comp.toString())
         {
-            String str1 = value1.toString();
-            String str2 = value2.toString();
-            
-            int cval = str1.compareTo(str2);
-            
-            switch (comp.toString())
+            case "==":
             {
-                case "==":
-                {
-                    return cval == 0;
-                }
-                case "!=":
-                {
-                    return cval != 0;
-                }
-                case "<":
-                {
-                    return cval < 0;
-                }
-                case "<=":
-                {
-                    return cval <= 0;
-                }
-                case ">":
-                {
-                    return cval > 0;
-                }
-                case ">=":
-                {
-                    return cval >= 0;
-                }
-                case "AND":
-                {
-                    return BooleanValueRef.toBoolean(str1) && BooleanValueRef.toBoolean(str2);
-                }
-                case "OR":
-                {
-                    return BooleanValueRef.toBoolean(str1) || BooleanValueRef.toBoolean(str2);
-                }
-                case "in":
-                {
-                    String[] list = str2.split(",");
-                    
-                    for (String val : list)
-                    {
-                        cval = str1.compareTo(val);
-                            
-                        if (cval == 0) return true;
-                    }
-                    
-                    return false;
-                }
-                case "!in":
-                {
-                    String[] list = str2.split(",");
-                    
-                    for (String val : list)
-                    {
-                        cval = str1.compareTo(val);
-                            
-                        if (cval == 0) return false;
-                    }
-                    
-                    return true;
-                }
-                default:
-                    return false;
+                return Math.abs(dbl1 - dbl2) < 0.000001;
             }
+            case "!=":
+            {
+                return Math.abs(dbl1 - dbl2) >= 0.000001;
+            }
+            case "<":
+            {
+                return dbl1 < dbl2;
+            }
+            case "<=":
+            {
+                return dbl1 <= dbl2;
+            }
+            case ">":
+            {
+                return dbl1 > dbl2;
+            }
+            case ">=":
+            {
+                return dbl1 >= dbl2;
+            }
+            case "!==":
+            {
+                return !str1.equals(str2);
+            }
+            case "===":
+            {
+                return str1.equals(str2);
+            }
+            case "AND":
+            {
+                return BooleanValueRef.toBoolean(str1) && BooleanValueRef.toBoolean(str2);
+            }
+            case "NOT":
+            {
+                return BooleanValueRef.toBoolean(str1) && !BooleanValueRef.toBoolean(str2);
+            }
+            case "OR":
+            {
+                return BooleanValueRef.toBoolean(str1) || BooleanValueRef.toBoolean(str2);
+            }
+            case "IN":
+            {
+                String[] list = str2.split(",");
+
+                for (String val : list)
+                {
+                    if (str1.equals(val)) return true;
+                }
+
+                return false;
+            }
+            case "!IN":
+            {
+                String[] list = str2.split(",");
+
+                for (String val : list)
+                {
+                    if (str1.equals(val)) return false;
+                }
+
+                return true;
+            }
+            default:
+                return false;
         }
     }
 
@@ -267,7 +256,17 @@ public class TriggerRef extends ValueRef {
         fireChangeEvent();
     }
     
-    public Object evaluate(Object condition)
+    public boolean evaluate()
+    {
+        return evaluate(triggerObject.get(CONDITION_KEY)) != null;
+    }
+    
+    public Object getAction()
+    {
+        return triggerObject.get(ACTION_KEY);
+    }
+    
+    private Object evaluate(Object condition)
     {
         if (condition != null && condition.toString().length() > 0)
         {
@@ -278,19 +277,9 @@ public class TriggerRef extends ValueRef {
                 String value2 = StringValueRef.create(localContext, thisContext, evaluate(json.get(VALUE2_KEY)), false).toString();
                 String operator = StringValueRef.create(localContext, thisContext, evaluate(json.get(OPERATOR_KEY)), false).toString();
                 
-                try
+                if (isTriggered(value1, value2, operator))
                 {
-                    if (isTriggered(Double.parseDouble(value1), Double.parseDouble(value2), operator))
-                    {
-                        return true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    if (isTriggered(value1, value2, operator))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
             else

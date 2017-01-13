@@ -14,7 +14,7 @@
                     "image": "[static/gen/galaxy/star/[user/galaxy/systems/[runtime/ui/selectedSystem]/starType]/imgPrefix].zip",
                     "triggers": [{
                             "condition": {
-                                "operator": "!=",
+                                "operator": "!==",
                                 "value1": "[static/gen/galaxy/star/[user/galaxy/systems/[runtime/ui/selectedSystem]/starType]/imgPrefix]",
                                 "value2": ""
                             },
@@ -33,7 +33,7 @@
                     "image": "bid.png",
                     "triggers": [{
                             "condition": {
-                                "operator": "!=",
+                                "operator": "!==",
                                 "value1": "[this/image]",
                                 "value2": ""
                             },
@@ -180,15 +180,23 @@
             "triggers": [
                 {
                     "condition": {
-                        "operator": "==",
-                        "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/inhabited]",
-                        "value2": "true"
+                        "operator": "AND",
+                        "value1": {
+                            "operator": "AND",
+                            "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/inhabited]",
+                            "value2": "true"
+                        },
+                        "value2": {
+                            "operator": "!==",
+                            "value1": "[runtime/ui/selectedSystem]",
+                            "value2": ""
+                        }
                     },
                     "onTriggered": "setVariable this/text [static/text/races/[user/galaxy/systems/[runtime/ui/selectedSystem]/race]/populationLabel"
                 },
                 {
                     "condition": {
-                        "operator": "!=",
+                        "operator": "NOT",
                         "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/inhabited]",
                         "value2": "true"
                     },
@@ -236,7 +244,7 @@
                             "value2": "[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPopCapacity]"
                         },
                         "value2": {
-                            "operator": "!=",
+                            "operator": "!==",
                             "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/pop]",
                             "value2": ""
                         }
@@ -252,7 +260,7 @@
                             "value2": "[user/galaxy/systems/[runtime/ui/selectedSystem]/maxPopCapacity]"
                         },
                         "value2": {
-                            "operator": "!=",
+                            "operator": "!==",
                             "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/pop]",
                             "value2": ""
                         }
@@ -273,23 +281,32 @@
                 "value1": {
                     "operator": "AND",
                     "value1": {
-                        "operator": ">=",
-                        "value1": "[runtime/ui/selectedSectorY]",
-                        "value2": "0"
+                        "operator": "!==",
+                        "value1": "[runtime/ui/selectedSectorX]",
+                        "value2": ""
                     },
                     "value2": {
-                        "operator": ">=",
-                        "value1": "[runtime/ui/selectedSectorX]",
-                        "value2": "0"
+                        "operator": "!==",
+                        "value1": "[runtime/ui/selectedSectorY]",
+                        "value2": ""
                     }
                 },
                 "value2": {
-                    "operator": "!=",
-                    "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/system]",
-                    "value2": ""
+                    "operator": "AND",
+                    "value1": {
+                        "operator": "!==",
+                        "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/system]",
+                        "value2": ""
+                    },
+                    "value2": {
+                        "operator": ">",
+                        "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/system]",
+                        "value2": "0"
+                    }
                 }
             },
             "onTriggered": [
+                "setVariable this/visible false",
                 "setVariable runtime/ui/selectedSystem [user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/system]",
                 "setVariable this/components/0/components/2/setup true",
                 "setVariable this/components/0/components/3/setup true",
@@ -299,16 +316,30 @@
                 "setVariable this/components/0/components/7/setup true",
                 "setVariable this/components/0/components/8/setup true",
                 "setVariable this/components/0/components/9/setup true",
-                "setVariable this/components/0/components/10/setup true",
-                "setVariable this/visible true"
+                "setVariable this/components/0/components/10/setup true"
             ]
         }, {
             "condition": {
-                "operator": "==",
+                "operator": "===",
                 "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/system]",
                 "value2": ""
             },
             "onTriggered": "setVariable this/visible false"
+        }, {
+            "condition": {
+                "operator": "AND",
+                "value1": {
+                    "operator": "!==",
+                    "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/system]",
+                    "value2": ""
+                },
+                "value2": {
+                    "operator": "!==",
+                    "value1": "[this/components/0/components/10/setup]",
+                    "value2": true
+                }
+            },
+            "onTriggered": "setVariable this/visible true"
         }
     ]
 }

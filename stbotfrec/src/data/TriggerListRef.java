@@ -6,6 +6,7 @@
 package data;
 
 import engines.Base;
+import init.Main;
 import javax.swing.event.ChangeListener;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -121,11 +122,11 @@ public class TriggerListRef extends ValueRef {
 
     @Override
     public void reEvaluate() {
+        // reevaluate all triggers
         for (int i = 0; triggers != null && i < triggers.size(); i++)
         {
             ((TriggerRef)triggers.get(i)).runTrigger();
-        }        
-        // nothing to do
+        }
     }
 
     @Override

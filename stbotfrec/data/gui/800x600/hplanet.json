@@ -57,30 +57,14 @@
                     "condition": {
                         "operator": "AND",
                         "value1": {
-                            "operator": "AND",
-                            "value1": {
-                                "operator": "!=",
-                                "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/[local/planetIndex]/maxPop]",
-                                "value2": "0"
-                            },
-                            "value2": {
-                                "operator": "!=",
-                                "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/[local/planetIndex]/maxPop]",
-                                "value2": ""
-                            }
+                            "operator": "!=",
+                            "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/[local/planetIndex]/maxPop]",
+                            "value2": "0"
                         },
                         "value2": {
-                            "operator": "OR",
-                            "value1": {
-                                "operator": "==",
-                                "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/[local/planetIndex]/terraformCost]",
-                                "value2": "0"
-                            },
-                            "value2": {
-                                "operator": "==",
-                                "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/[local/planetIndex]/terraformCost]",
-                                "value2": ""
-                            }
+                            "operator": "==",
+                            "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/[local/planetIndex]/terraformCost]",
+                            "value2": "0"
                         }
                     },
                     "onTriggered": "setVariable this/font/color FF00FF00"
@@ -89,17 +73,9 @@
                     "condition": {
                         "operator": "AND",
                         "value1": {
-                            "operator": "AND",
-                            "value1": {
-                                "operator": "!=",
-                                "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/[local/planetIndex]/maxPop]",
-                                "value2": "0"
-                            },
-                            "value2": {
-                                "operator": "!=",
-                                "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/[local/planetIndex]/maxPop]",
-                                "value2": ""
-                            }
+                            "operator": "!=",
+                            "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/[local/planetIndex]/maxPop]",
+                            "value2": "0"
                         },
                         "value2": {
                             "operator": ">",
@@ -117,7 +93,7 @@
                             "value2": "0"
                         },
                         "value2": {
-                            "operator": "==",
+                            "operator": "===",
                             "value1": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/[local/planetIndex]/maxPop]",
                             "value2": ""
                         }
@@ -134,7 +110,7 @@
     "triggers": [
         {
             "condition": {
-                "operator": "==",
+                "operator": "AND",
                 "value1": "[this/setup]",
                 "value2": true
             },

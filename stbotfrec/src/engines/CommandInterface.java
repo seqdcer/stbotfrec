@@ -9,11 +9,19 @@ import data.BooleanValueRef;
 import data.EnumValueRef;
 import data.NumberValueRef;
 import data.StringValueRef;
+import data.TriggerRef;
 import gui.Window;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
+import java.util.Set;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.script.ScriptContext;
@@ -21,6 +29,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import javax.script.SimpleScriptContext;
+import javax.swing.event.ChangeListener;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -33,10 +42,13 @@ public class CommandInterface {
     
     public static final String ADD_TO_LIST = "addToList";
     public static final String ADD_UNIQUE_TO_LIST = "addUniqueToList";
+    public static final String CEIL_VARIABLE = "ceilVariable";
     public static final String CLEAR_VARIABLE = "clearVariable";
     public static final String CLOSE_DIALOG = "closeDialog";
     public static final String CREATE_LIST = "createList";
     public static final String DEBUG_PRINT = "debugPrint";
+    public static final String DIV_VARIABLE = "divVariable";
+    public static final String ROUND_VARIABLE = "roundVariable";
     public static final String GET_VARIABLE = "getVariable";
     public static final String GET_RANDOM_DOUBLE = "getRandomDouble";
     public static final String GET_RANDOM_LONG = "getRandomLong";
@@ -62,24 +74,55 @@ public class CommandInterface {
     private final ScriptEngineManager SEManager = new ScriptEngineManager();
     private final ScriptEngine scriptEngine = SEManager.getEngineByName("JavaScript");
     private final Random rng = new Random();
-
-    private int nextTicket = 0;
-    private int nextQueueTicket = 0;
+    private final LinkedBlockingQueue<QueuedCommand> cmdQueue = new LinkedBlockingQueue<>();
+    private final Set<QueuedCommand> triggerQueue = Collections.synchronizedSet(new LinkedHashSet<QueuedCommand>());
     
     public CommandInterface(Window window)
     {
         this.window = window;
+        
+        Thread daemon = new Thread(new Runnable()
+        {
+            @Override
+            public void run() {
+                QueuedCommand cmd;
+                
+                while (true)
+                {
+                    try {
+                        cmd = cmdQueue.take();
+                        runUICommand(cmd.localContext, cmd.thisContext, cmd.command);
+                        
+                        while (cmdQueue.isEmpty() && !triggerQueue.isEmpty())
+                        {
+                            synchronized(CommandInterface.this)
+                            {
+                                cmd = triggerQueue.iterator().next();
+                                triggerQueue.remove(cmd);
+                            }
+                            
+                            runUICommand(cmd.localContext, cmd.thisContext, cmd.command);
+                        }
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(CommandInterface.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
+        
+        daemon.setDaemon(true);
+        daemon.start();
     }
     
-    private Object run(JSONObject localContext, JSONObject thisContext, String command, String... passedArgs)
+    private Object run(JSONObject localContext, JSONObject thisContext, String passedCommand, String... passedArgs)
     {
         Object retVal = null;
         
         try
         {
-            String[] tokens = parseCmd(command, passedArgs);
+            String[] tokens = parseCmd(passedCommand, passedArgs);
 
-            command = tokens[0];
+            String command = tokens[0];
 
             String[] args = new String[tokens.length - 1];
             System.arraycopy(tokens, 1, args, 0, tokens.length - 1);
@@ -105,6 +148,23 @@ public class CommandInterface {
                     else
                         missingArgs = true;
 
+                    break;
+                }
+                case CEIL_VARIABLE:
+                {
+                    if (args.length >= 1)
+                    {
+                        String ref = StringValueRef.create(localContext, thisContext, args[0], false).toString();
+                        Object var = Base.getVariable(localContext, thisContext, ref);
+                        double val = ((NumberValueRef) NumberValueRef.create(localContext, thisContext, var, false)).doubleValue();
+                        
+                        Base.setVariable(localContext, thisContext, ref, Math.ceil(val));
+                    }
+                    else
+                    {
+                        missingArgs = true;
+                    }
+                    
                     break;
                 }
                 case CLEAR_VARIABLE:
@@ -148,6 +208,25 @@ public class CommandInterface {
                     else
                         missingArgs = true;
 
+                    break;
+                }
+                case DIV_VARIABLE:
+                {
+                    if (args.length == 2)
+                        Base.mulVariable(localContext, thisContext, StringValueRef.create(localContext, thisContext, args[0], false).toString(),
+                                1 / ((NumberValueRef) NumberValueRef.create(localContext, thisContext, args[1], false)).doubleValue(), - Double.MAX_VALUE, Double.MAX_VALUE);
+                    else if (args.length == 3)
+                        Base.mulVariable(localContext, thisContext, StringValueRef.create(localContext, thisContext, args[0], false).toString(),
+                                1 / ((NumberValueRef) NumberValueRef.create(localContext, thisContext, args[1], false)).doubleValue(),
+                                ((NumberValueRef) NumberValueRef.create(localContext, thisContext, args[2], false)).doubleValue(), Double.MAX_VALUE);
+                    else if (args.length == 4)
+                        Base.mulVariable(localContext, thisContext, StringValueRef.create(localContext, thisContext, args[0], false).toString(),
+                                1 / ((NumberValueRef) NumberValueRef.create(localContext, thisContext, args[1], false)).doubleValue(),
+                                ((NumberValueRef) NumberValueRef.create(localContext, thisContext, args[2], false)).doubleValue(),
+                                ((NumberValueRef) NumberValueRef.create(localContext, thisContext, args[3], false)).doubleValue());
+                    else
+                        missingArgs = true;
+                    
                     break;
                 }
                 case GET_VARIABLE:
@@ -291,6 +370,23 @@ public class CommandInterface {
                     else
                         missingArgs = true;
 
+                    break;
+                }
+                case ROUND_VARIABLE:
+                {
+                    if (args.length >= 1)
+                    {
+                        String ref = StringValueRef.create(localContext, thisContext, args[0], false).toString();
+                        Object var = Base.getVariable(localContext, thisContext, ref);
+                        double val = ((NumberValueRef) NumberValueRef.create(localContext, thisContext, var, false)).doubleValue();
+                        
+                        Base.setVariable(localContext, thisContext, ref, Math.round(val));
+                    }
+                    else
+                    {
+                        missingArgs = true;
+                    }
+                    
                     break;
                 }
                 case RUN_COMMAND:
@@ -470,18 +566,18 @@ public class CommandInterface {
                 }
                 default:
                 {
-                    Logger.getLogger(CommandInterface.class.getName()).log(Level.WARNING, "Unknown game command: {0}", command + " (" + Arrays.toString(passedArgs) + ")");
+                    Logger.getLogger(CommandInterface.class.getName()).log(Level.WARNING, "Unknown game command: {0}", passedCommand + " (" + Arrays.toString(passedArgs) + ")");
                 }
             }
 
             if (missingArgs)
             {
-                Logger.getLogger(CommandInterface.class.getName()).log(Level.WARNING, "Missing arguments for command: {0}", command + " (" + Arrays.toString(passedArgs) + ")");
+                Logger.getLogger(CommandInterface.class.getName()).log(Level.WARNING, "Missing arguments for command: {0}", passedCommand + " (" + Arrays.toString(passedArgs) + ") at \n" + thisContext.get(Base.ID_KEY));
             }
         }
         catch (Exception e)
         {
-            Logger.getLogger(CommandInterface.class.getName()).log(Level.SEVERE, "Error running command: " + command + " (" + Arrays.toString(passedArgs) + ")", e);
+            Logger.getLogger(CommandInterface.class.getName()).log(Level.SEVERE, "Error running command: " + passedCommand + " (" + Arrays.toString(passedArgs) + ")", e);
         }
         
         return retVal;
@@ -566,39 +662,20 @@ public class CommandInterface {
     
     public void runSyncUICommand(JSONObject localContext, JSONObject config, Object json)
     {
-        if (!Thread.holdsLock(this))
-        {
-            int ticket;
-            
-            synchronized (this)
-            {
-                ticket = nextQueueTicket;
-                nextQueueTicket++;
-
-                while (ticket != nextTicket)
+        try {
+            if (json instanceof TriggerRef)
+                synchronized(CommandInterface.this)
                 {
-                    try {
-                        this.wait();
-                    } catch (InterruptedException ex) {
-                    }
+                    triggerQueue.add(new QueuedCommand(localContext, config, json));
                 }
-               
-                runUICommand(localContext, config, json);
-                nextTicket++;
-                notifyAll();
-            }
-        }
-        else
-        {
-            synchronized (this)
-            {
-                runUICommand(localContext, config, json);
-                notifyAll();
-            }
+            else
+                cmdQueue.put(new QueuedCommand(localContext, config, json));
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CommandInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    private void runUICommand(JSONObject localContext, JSONObject config, Object json)
+    public void runUICommand(JSONObject localContext, JSONObject config, Object json)
     {
         if (json != null)
         {
@@ -611,6 +688,15 @@ public class CommandInterface {
                     runUICommand(localContext, config, cmd);
                 }
             }
+            else if (json instanceof TriggerRef)
+            {
+                TriggerRef trig = (TriggerRef)json;
+                
+                if (trig.evaluate())
+                {
+                    runUICommand(localContext, config, trig.getAction());
+                }
+            }
             else
             {
                 String command = StringValueRef.create(localContext, config, json, false).toString();
@@ -618,7 +704,6 @@ public class CommandInterface {
                 if (command.length() > 0)
                 {
                     run(localContext, config, command);
-                    command = StringValueRef.create(localContext, config, json, false).toString();
                 }
             }
         }
@@ -648,6 +733,40 @@ public class CommandInterface {
         public Object run(String command, String... args)
         {
             return runCommand(localContext, thisContext, command, args);
+        }
+    }
+    
+    public class QueuedCommand
+    {
+        private final JSONObject localContext;
+        private final JSONObject thisContext;
+        private final Object command;
+        
+        private QueuedCommand(JSONObject localContext, JSONObject thisContext, Object command)
+        {
+            this.localContext = localContext;
+            this.thisContext = thisContext;
+            this.command = command;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hashCode(this.command);
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final QueuedCommand other = (QueuedCommand) obj;
+            if (!Objects.equals(this.command, other.command)) {
+                return false;
+            }
+            return true;
         }
     }
 }

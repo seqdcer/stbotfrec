@@ -41,10 +41,10 @@ if (CI.run("getVariable", "user/galaxy/map/" + x + "/" + y + "/tfs/" + scriptArg
 CI.run("addToList", "user/galaxy/map/" + x + "/" + y + "/tfs/" + scriptArgs[1], nextId);
 
 // add to minors list if needed
-var empireCount = CI.run("getVariable", "static/stats/empires/list/count");
-var racesCount = CI.run("getVariable", "user/races/count");
+var empireCount = parseInt(CI.run("getVariable", "static/stats/empires/list/count"));
+var racesCount = parseInt(CI.run("getVariable", "user/races/count"));
 
-if (parseInt(scriptArgs[1]) >= parseInt(empireCount) && parseInt(scriptArgs[1]) < parseInt(racesCount))
+if (parseInt(scriptArgs[1]) >= empireCount && parseInt(scriptArgs[1]) < racesCount)
 {
     if (CI.run("getVariable", "user/galaxy/map/" + x + "/" + y + "/tfs/minors") === null)
     {
@@ -55,7 +55,7 @@ if (parseInt(scriptArgs[1]) >= parseInt(empireCount) && parseInt(scriptArgs[1]) 
 }
 
 // add to aliens list of needed
-if (parseInt(scriptArgs[1]) >= parseInt(racesCount))
+if (parseInt(scriptArgs[1]) >= racesCount)
 {
     if (CI.run("getVariable", "user/galaxy/map/" + x + "/" + y + "/tfs/aliens") === null)
     {
@@ -69,4 +69,23 @@ if (parseInt(scriptArgs[1]) >= parseInt(racesCount))
 nextId = nextId + 1;
 CI.run("setVariable", "user/races/" + scriptArgs[1] + "/tf/nextId", nextId);
 
-CI.run("debugPrint", "Added ship: " + scriptArgs[0] + ": " + scriptArgs[1] + ": " + scriptArgs[2]);
+// set distinct ship races
+CI.run("createList", "user/galaxy/map/" + x + "/" + y + "/tfs/prefixes");
+
+for (i = 0; i < empireCount; i++)
+{
+    if (CI.run("getVariable", "user/galaxy/map/" + x + "/" + y + "/tfs/" + i + "/count") > 0)
+    {
+        CI.run("addToList", "user/galaxy/map/" + x + "/" + y + "/tfs/prefixes", "[static/stats/empires/smallPrefixes/" + i + "]");
+    }
+}
+
+if (CI.run("getVariable", "user/galaxy/map/" + x + "/" + y + "/tfs/minors/count") > 0)
+{
+    CI.run("addToList", "user/galaxy/map/" + x + "/" + y + "/tfs/prefixes", "[static/stats/empires/smallPrefixes/" + empireCount + "]");
+}
+
+if (CI.run("getVariable", "user/galaxy/map/" + x + "/" + y + "/tfs/aliens/count") > 0)
+{
+    CI.run("addToList", "user/galaxy/map/" + x + "/" + y + "/tfs/prefixes", "[static/stats/empires/smallPrefixes/" + (empireCount + 1) + "]");
+}
