@@ -336,7 +336,7 @@
                 "value2": {
                     "operator": "!==",
                     "value1": "[this/components/0/components/10/setup]",
-                    "value2": true
+                    "value2": false
                 }
             },
             "onTriggered": "setVariable this/visible true"
