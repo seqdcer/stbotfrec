@@ -20,6 +20,7 @@ public class TriggerRef extends ValueRef {
     public static final String VALUE2_KEY = "value2";
     public static final String OPERATOR_KEY = "operator";
     public static final String ACTION_KEY = "onTriggered";
+    public static final String ELSE_ACTION_KEY = "onElse";
 
     private JSONObject triggerObject;
     
@@ -28,10 +29,15 @@ public class TriggerRef extends ValueRef {
         @Override
         public synchronized void stateChanged(ChangeEvent e) {
             Object action = triggerObject.get(ACTION_KEY);
+            Object elseAction = triggerObject.get(ELSE_ACTION_KEY);
             
             if (action != null)
             {
                 if (evaluate())
+                {
+                    Main.CI.runSyncUICommand(localContext, thisContext, TriggerRef.this);
+                }
+                else if (elseAction != null)
                 {
                     Main.CI.runSyncUICommand(localContext, thisContext, TriggerRef.this);
                 }
@@ -95,10 +101,8 @@ public class TriggerRef extends ValueRef {
     
     private boolean isTriggered(String value1, String value2, Object comp)
     {
-        
-        String str1 = value1.toString();
-        String str2 = value2.toString();
         double dbl1 = 0, dbl2 = 0;
+        String[] list = null;
         
         // int cval = str1.compareTo(str2);
 
@@ -122,6 +126,23 @@ public class TriggerRef extends ValueRef {
                     dbl2 = Double.parseDouble(value2);
                 }
                 catch (Exception ex) {}
+                break;
+            }
+            case "IN":
+            case "!IN":
+            {
+                if (value2.startsWith("{") && value2.endsWith("}"))
+                {
+                    value2 = value2.substring(1, value2.length() - 1);
+                }
+
+                list = value2.split(",");
+                
+                for (int i = 0; i < list.length; i++)
+                {
+                    list[i] = list[i].trim();
+                }
+                
                 break;
             }
         }
@@ -155,42 +176,38 @@ public class TriggerRef extends ValueRef {
             }
             case "!==":
             {
-                return !str1.equals(str2);
+                return !value1.equals(value2);
             }
             case "===":
             {
-                return str1.equals(str2);
+                return value1.equals(value2);
             }
             case "AND":
             {
-                return BooleanValueRef.toBoolean(str1) && BooleanValueRef.toBoolean(str2);
+                return BooleanValueRef.toBoolean(value1) && BooleanValueRef.toBoolean(value2);
             }
             case "NOT":
             {
-                return BooleanValueRef.toBoolean(str1) && !BooleanValueRef.toBoolean(str2);
+                return BooleanValueRef.toBoolean(value1) && !BooleanValueRef.toBoolean(value2);
             }
             case "OR":
             {
-                return BooleanValueRef.toBoolean(str1) || BooleanValueRef.toBoolean(str2);
+                return BooleanValueRef.toBoolean(value1) || BooleanValueRef.toBoolean(value2);
             }
             case "IN":
             {
-                String[] list = str2.split(",");
-
                 for (String val : list)
                 {
-                    if (str1.equals(val)) return true;
+                    if (value1.equals(val)) return true;
                 }
 
                 return false;
             }
             case "!IN":
             {
-                String[] list = str2.split(",");
-
                 for (String val : list)
                 {
-                    if (str1.equals(val)) return false;
+                    if (value1.equals(val)) return false;
                 }
 
                 return true;
@@ -264,6 +281,11 @@ public class TriggerRef extends ValueRef {
     public Object getAction()
     {
         return triggerObject.get(ACTION_KEY);
+    }
+    
+    public Object getElseAction()
+    {
+        return triggerObject.get(ELSE_ACTION_KEY);
     }
     
     private Object evaluate(Object condition)

@@ -358,35 +358,19 @@
                             "gridX": -1,
                             "gridY": -1,
                             "type": "imagebox",
-                            "visible": "true",
+                            "visible": true,
                             "image": "i_h18.png",
                             "triggers": [{
                                     "condition": {
-                                        "value1": {
-                                            "value1": "[user/galaxy/map/[local/gridX]/[local/gridY]/tfs/prefixes/count]",
-                                            "value2": "0",
-                                            "operator": "<"
-                                        },
-                                        "value2": {
-                                            "value1": "[user/galaxy/map/[local/gridX]/[local/gridY]/tfs/1/count]",
-                                            "value2": "0",
-                                            "operator": ">"
-                                        },
-                                        "operator": "AND"
+                                            "value1": "[runtime/ui/map/[local/gridX]/[local/gridY]/tfs/prefixes/[this/gridX]]",
+                                            "value2": "",
+                                            "operator": "!=="
                                     },
                                     "onTriggered": [
-                                        "setVariable this/x 28",
-                                        "setVariable this/width 28",
-                                        "setVariable this/cnt [user/galaxy/map/[local/gridX]/[local/gridY]/tfs/prefixes/count]",
-                                        "setVariable this/tmp [this/gridElement/width]",
-                                        "mulVariable this/tmp [this/cnt]",
-                                        "subVariable this/tmp [this/width]",
-                                        "modVariable this/cnt -1 1",
-                                        "divVariable this/tmp [this/cnt] 0",
-                                        "roundVariable this/tmp",
-                                        "setVariable this/gapBetweenElements -[this/tmp]",
-                                        "setVariable this/gridWidth [user/galaxy/map/[local/gridX]/[local/gridY]/tfs/prefixes/count]",
-                                        "setVariable this/visible true"
+                                        "setVariable this/image i_[runtime/ui/map/[local/gridX]/[local/gridY]/tfs/prefixes/[this/gridX]]18.png"
+                                    ],
+                                    "onElse": [
+                                        "clearVariable this/image"
                                     ]
                                 }
                             ]
@@ -418,6 +402,9 @@
                                     "setVariable this/gapBetweenElements -[this/tmp]",
                                     "setVariable this/cnt [user/galaxy/map/[local/gridX]/[local/gridY]/tfs/prefixes/count]",
                                     "modVariable this/cnt -1",
+                                    "createList runtime/ui/map/[local/gridX]/[local/gridY]/tfs/prefixes",
+                                    "addAllToList runtime/ui/map/[local/gridX]/[local/gridY]/tfs/prefixes user/galaxy/map/[local/gridX]/[local/gridY]/tfs/prefixes",
+                                    "removeItemFromList runtime/ui/map/[local/gridX]/[local/gridY]/tfs/prefixes [static/stats/empires/smallPrefixes/1]",
                                     "setVariable this/gridWidth [this/cnt]",
                                     "setVariable this/visible true"
                                 ]
@@ -446,6 +433,8 @@
                                     "divVariable this/tmp [this/cnt] 0",
                                     "roundVariable this/tmp",
                                     "setVariable this/gapBetweenElements -[this/tmp]",
+                                    "createList runtime/ui/map/[local/gridX]/[local/gridY]/tfs/prefixes",
+                                    "addAllToList runtime/ui/map/[local/gridX]/[local/gridY]/tfs/prefixes user/galaxy/map/[local/gridX]/[local/gridY]/tfs/prefixes",
                                     "setVariable this/gridWidth [user/galaxy/map/[local/gridX]/[local/gridY]/tfs/prefixes/count]",
                                     "setVariable this/visible true"
                                 ]

@@ -329,9 +329,17 @@
             "condition": {
                 "operator": "AND",
                 "value1": {
-                    "operator": "!==",
-                    "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/system]",
-                    "value2": ""
+                    "operator": "AND",
+                    "value1": {
+                        "operator": "===",
+                        "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/system]",
+                        "value2": "[runtime/ui/selectedSystem]"
+                    },
+                    "value2": {
+                        "operator": "!==",
+                        "value1": "",
+                        "value2": "[runtime/ui/selectedSystem]"
+                    }
                 },
                 "value2": {
                     "operator": "!==",

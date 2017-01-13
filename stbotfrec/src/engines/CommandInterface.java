@@ -14,8 +14,6 @@ import gui.Window;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
@@ -29,7 +27,6 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import javax.script.SimpleScriptContext;
-import javax.swing.event.ChangeListener;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -41,6 +38,7 @@ public class CommandInterface {
     private final Window window;
     
     public static final String ADD_TO_LIST = "addToList";
+    public static final String ADD_ALL_TO_LIST = "addAllToList";
     public static final String ADD_UNIQUE_TO_LIST = "addUniqueToList";
     public static final String CEIL_VARIABLE = "ceilVariable";
     public static final String CLEAR_VARIABLE = "clearVariable";
@@ -76,12 +74,13 @@ public class CommandInterface {
     private final Random rng = new Random();
     private final LinkedBlockingQueue<QueuedCommand> cmdQueue = new LinkedBlockingQueue<>();
     private final Set<QueuedCommand> triggerQueue = Collections.synchronizedSet(new LinkedHashSet<QueuedCommand>());
+    private Thread daemon;
     
     public CommandInterface(Window window)
     {
         this.window = window;
         
-        Thread daemon = new Thread(new Runnable()
+        daemon = new Thread(new Runnable()
         {
             @Override
             public void run() {
@@ -92,19 +91,19 @@ public class CommandInterface {
                     try {
                         cmd = cmdQueue.take();
                         runUICommand(cmd.localContext, cmd.thisContext, cmd.command);
-                        
-                        while (cmdQueue.isEmpty() && !triggerQueue.isEmpty())
-                        {
-                            synchronized(CommandInterface.this)
-                            {
-                                cmd = triggerQueue.iterator().next();
-                                triggerQueue.remove(cmd);
-                            }
-                            
-                            runUICommand(cmd.localContext, cmd.thisContext, cmd.command);
-                        }
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(CommandInterface.class.getName()).log(Level.SEVERE, null, ex);
+                        // expected from console - ignore
+                    }
+                        
+                    while (cmdQueue.isEmpty() && !triggerQueue.isEmpty())
+                    {
+                        synchronized(CommandInterface.this)
+                        {
+                            cmd = triggerQueue.iterator().next();
+                            triggerQueue.remove(cmd);
+                        }
+
+                        runUICommand(cmd.localContext, cmd.thisContext, cmd.command);
                     }
                 }
             }
@@ -145,6 +144,50 @@ public class CommandInterface {
                                 ((NumberValueRef)NumberValueRef.create(localContext, thisContext, args[1], false)).intValue(),
                                 StringValueRef.create(localContext, thisContext, args[2], false).toString(),
                                 ((BooleanValueRef)BooleanValueRef.create(localContext, thisContext, args[3], false)).getValue());
+                    else
+                        missingArgs = true;
+
+                    break;
+                }
+                case ADD_ALL_TO_LIST:
+                {
+                    if (args.length >= 2)
+                    {
+                        String listRef = StringValueRef.create(localContext, thisContext, args[0], false).toString();
+                        int pos = -1;
+                        boolean unique = false;
+                        Object value = Base.getVariable(localContext, thisContext, StringValueRef.create(localContext, thisContext, args[1], false).toString());
+
+                        if (value instanceof List)
+                        {
+                            List srcList = (List)value;
+                            
+                            if (args.length >= 3)
+                                pos = ((NumberValueRef)NumberValueRef.create(localContext, thisContext, args[1], false)).intValue();
+
+                            if (args.length >= 4)
+                                unique = ((BooleanValueRef)BooleanValueRef.create(localContext, thisContext, args[3], false)).getValue();
+
+                            if (pos < 0)
+                            {
+                                for (int i = 0; i < srcList.size(); i++)
+                                {
+                                    Base.addToList(localContext, thisContext, listRef, pos, srcList.get(i), unique);
+                                }
+                            }
+                            else
+                            {
+                                for (int i = srcList.size() - 1; i >= 0; i--)
+                                {
+                                    Base.addToList(localContext, thisContext, listRef, pos, srcList.get(i), unique);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Logger.getLogger(CommandInterface.class.getName()).log(Level.WARNING, "Second argument is not a reference to a list in command: {0}", passedCommand + " (" + Arrays.toString(passedArgs) + ") at \n" + thisContext.get(Base.ID_KEY));
+                        }
+                    }
                     else
                         missingArgs = true;
 
@@ -692,9 +735,16 @@ public class CommandInterface {
             {
                 TriggerRef trig = (TriggerRef)json;
                 
-                if (trig.evaluate())
+                if (trig.getAction() != null)
                 {
-                    runUICommand(localContext, config, trig.getAction());
+                    if (trig.evaluate())
+                    {
+                        runUICommand(localContext, config, trig.getAction());
+                    }
+                    else if (trig.getElseAction() != null)
+                    {
+                        runUICommand(localContext, config, trig.getElseAction());
+                    }
                 }
             }
             else
@@ -711,7 +761,12 @@ public class CommandInterface {
     
     public Object runCommand(JSONObject localContext, JSONObject config, String command, String... args)
     {
-        return run(localContext, config, command, args);
+        Object ret = run(localContext, config, command, args);
+        
+        if (cmdQueue.isEmpty() && !triggerQueue.isEmpty())
+            daemon.interrupt();
+        
+        return ret;
     }
     
     public class CIWrapper
@@ -727,12 +782,12 @@ public class CommandInterface {
         
         public Object run(String command)
         {
-            return runCommand(localContext, thisContext, command);
+            return CommandInterface.this.run(localContext, thisContext, command);
         }
         
         public Object run(String command, String... args)
         {
-            return runCommand(localContext, thisContext, command, args);
+            return CommandInterface.this.run(localContext, thisContext, command, args);
         }
     }
     
