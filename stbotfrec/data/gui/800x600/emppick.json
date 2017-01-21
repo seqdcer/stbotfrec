@@ -7,7 +7,10 @@
             "type": "button",
             "height": 36,
             "imageOn": "es_acb2.png",
-            "onClick": "runScript newSingle",
+            "onClick": [
+                "executeTriggers",
+                "runScript newSingle"
+            ],
             "clickSound": "sfx/success_click"
         }, {
             "imageOff": "es_cnlb1.png",

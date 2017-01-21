@@ -73,14 +73,24 @@
             "imageOn": "h_ovron.png"
         }, {
             "repeatClicks": true,
-            "repeatClickRate": 1,
+            "repeatClickRate": 3,
             "imageOff": "hm_sup.png",
             "x": 16,
             "width": 9,
             "y": 154,
             "type": "button",
             "height": 8,
-            "imageOn": "hm_supon.png"
+            "imageOn": "hm_supon.png",
+            "onClick": "modVariable local/components/13/components/1/gridOffsetY -0.4 0 [local/components/13/components/1/gridHeight]",
+            "triggers": [{
+                    "condition": {
+                        "value1": "[local/components/13/components/1/gridHeight]",
+                        "value2": 7,
+                        "operator": "<="
+                    },
+                    "onTriggered": "setVariable this/visible false",
+                    "onElse": "setVariable this/visible true"
+            }]
         }, {
             "repeatClicks": true,
             "repeatClickRate": 1,
@@ -90,7 +100,17 @@
             "y": 491,
             "type": "button",
             "height": 8,
-            "imageOn": "hm_sdnon.png"
+            "imageOn": "hm_sdnon.png",
+            "onClick": "modVariable local/components/13/components/1/gridOffsetY 0.4 0 [local/components/13/components/1/gridHeight]",
+            "triggers": [{
+                    "condition": {
+                        "value1": "[local/components/13/components/1/gridHeight]",
+                        "value2": 7,
+                        "operator": "<="
+                    },
+                    "onTriggered": "setVariable this/visible false",
+                    "onElse": "setVariable this/visible true"
+            }]
         }, {
             "handleOff": "hm_tmb10.png",
             "background": "hm_slid2.png",
@@ -99,7 +119,20 @@
             "handleOn": "hm_tmb11.png",
             "y": 167,
             "type": "scrollbar",
-            "height": 320
+            "height": 320,
+            "min": 0,
+            "max": "[local/components/13/components/1/gridHeight]",
+            "valueRef": "local/components/13/components/1/gridOffsetY",
+            "handleTreshold": "[local/components/13/components/1/gridHeight]",
+            "triggers": [{
+                    "condition": {
+                        "value1": "[local/components/13/components/1/gridHeight]",
+                        "value2": 7,
+                        "operator": "<="
+                    },
+                    "onTriggered": "setVariable this/visible false",
+                    "onElse": "setVariable this/visible true"
+            }]
         }, {
             "x": 249,
             "width": 526,
@@ -182,7 +215,7 @@
                         "onClick": [
                             "setVariable runtime/ui/selectedSectorX [local/gridX]",
                             "setVariable runtime/ui/selectedSectorY [local/gridY]"
-                            
+
                         ],
                         "onMouseEntered": [
                             "setVariable runtime/ui/sectorHoverX [local/gridX]",
@@ -362,9 +395,9 @@
                             "image": "i_h18.png",
                             "triggers": [{
                                     "condition": {
-                                            "value1": "[runtime/ui/map/[local/gridX]/[local/gridY]/tfs/prefixes/[this/gridX]]",
-                                            "value2": "",
-                                            "operator": "!=="
+                                        "value1": "[runtime/ui/map/[local/gridX]/[local/gridY]/tfs/prefixes/[this/gridX]]",
+                                        "value2": "",
+                                        "operator": "!=="
                                     },
                                     "onTriggered": [
                                         "setVariable this/image i_[runtime/ui/map/[local/gridX]/[local/gridY]/tfs/prefixes/[this/gridX]]18.png"
@@ -483,9 +516,97 @@
         }, {
             "x": 28,
             "width": 196,
+            "y": 200,
+            "type": "container",
+            "height": 380,
+            "components": [{
+                    "x": 0,
+                    "width": 194,
+                    "y": 0,
+                    "type": "externalComponent",
+                    "component": "hinf_tf",
+                    "height": 17
+                }, {
+                    "x": 0,
+                    "width": 196,
+                    "y": 17,
+                    "type": "grid",
+                    "height": "363",
+                    "gridWidth": 1,
+                    "gridHeight": 0,
+                    "gridOffsetX": 0,
+                    "gridOffsetY": 0,
+                    "gapBetweenElements": 0,
+                    "gridElement": {
+                        "type": "externalComponent",
+                        "component": "h_tfinfo",
+                        "width": 195,
+                        "height": 40
+                    },
+                    "triggers": [{
+                            "condition": {
+                                "value1": {
+                                    "value1": {
+                                        "value1": "[runtime/ui/selectedSectorX]",
+                                        "value2": "",
+                                        "operator": "!=="
+                                    },
+                                    "value2": {
+                                        "value1": "[runtime/ui/selectedSectorY]",
+                                        "value2": "",
+                                        "operator": "!=="
+                                    },
+                                    "operator": "AND"
+                                },
+                                "value2": {
+                                    "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/tfs/list/count]",
+                                    "value2": 0,
+                                    "operator": ">="
+                                },
+                                "operator": "AND"
+                            },
+                            "onTriggered": [
+                                "setVariable this/gridHeight 0",
+                                "createList runtime/ui/tfs/list",
+                                "addAllToList runtime/ui/tfs/list user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/tfs/aliens -1 true",
+                                "addAllToList runtime/ui/tfs/list user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/tfs/[user/player/playerEmpire] -1 true",
+                                "addAllToList runtime/ui/tfs/list user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/tfs/0 -1 true",
+                                "addAllToList runtime/ui/tfs/list user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/tfs/1 -1 true",
+                                "addAllToList runtime/ui/tfs/list user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/tfs/2 -1 true",
+                                "addAllToList runtime/ui/tfs/list user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/tfs/3 -1 true",
+                                "addAllToList runtime/ui/tfs/list user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/tfs/4 -1 true",
+                                "addAllToList runtime/ui/tfs/list user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/tfs/minors -1 true",
+                                "setVariable this/gridHeight [runtime/ui/tfs/list/count]"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "triggers": [{
+                    "condition": {
+                        "value1": "[runtime/ui/infoBoxMod]",
+                        "value2": 0,
+                        "operator": "=="
+                    },
+                    "onTriggered": [
+                        "setVariable this/height 297",
+                        "setVariable this/components/1/height 280",
+                        "setVariable this/y 200"
+                    ],
+                    "onElse": [
+                        "setVariable this/height 357",
+                        "setVariable this/components/1/height 340",
+                        "setVariable this/y 140"
+                    ]
+                }
+            ]
+        }, {
+            "x": 28,
+            "width": 200,
             "y": 110,
-            "type": "tmp",
-            "height": 380
+            "type": "externalComponent",
+            "component": "hinfobox",
+            "height": 90
         }, {
             "x": 564,
             "width": 175,

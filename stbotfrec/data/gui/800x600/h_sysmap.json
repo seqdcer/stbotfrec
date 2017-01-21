@@ -52,8 +52,7 @@
                     "width": 0,
                     "component": "hplanet",
                     "planetIndex": 0,
-                    "offsetIndex": 0,
-                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/0/name]"
+                    "offsetIndex": 0
                 }, {
                     "x": 0,
                     "y": 0,
@@ -62,8 +61,7 @@
                     "width": 0,
                     "component": "hplanet",
                     "planetIndex": 1,
-                    "offsetIndex": 2,
-                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/1/name]"
+                    "offsetIndex": 2
                 }, {
                     "x": 0,
                     "y": 0,
@@ -72,8 +70,7 @@
                     "width": 0,
                     "component": "hplanet",
                     "planetIndex": 2,
-                    "offsetIndex": 3,
-                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/2/name]"
+                    "offsetIndex": 3
                 }, {
                     "x": 0,
                     "y": 0,
@@ -82,8 +79,7 @@
                     "width": 0,
                     "component": "hplanet",
                     "planetIndex": 3,
-                    "offsetIndex": 4,
-                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/3/name]"
+                    "offsetIndex": 4
                 }, {
                     "x": 0,
                     "y": 0,
@@ -92,8 +88,7 @@
                     "width": 0,
                     "component": "hplanet",
                     "planetIndex": 4,
-                    "offsetIndex": 5,
-                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/4/name]"
+                    "offsetIndex": 5
                 }, {
                     "x": 0,
                     "y": 0,
@@ -102,8 +97,7 @@
                     "width": 0,
                     "component": "hplanet",
                     "planetIndex": 5,
-                    "offsetIndex": 6,
-                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/5/name]"
+                    "offsetIndex": 6
                 }, {
                     "x": 0,
                     "y": 0,
@@ -112,8 +106,7 @@
                     "width": 0,
                     "component": "hplanet",
                     "planetIndex": 6,
-                    "offsetIndex": 7,
-                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/6/name]"
+                    "offsetIndex": 7
                 }, {
                     "x": 0,
                     "y": 0,
@@ -122,8 +115,7 @@
                     "width": 0,
                     "component": "hplanet",
                     "planetIndex": 7,
-                    "offsetIndex": 8,
-                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/7/name]"
+                    "offsetIndex": 8
                 }, {
                     "x": 0,
                     "y": 0,
@@ -132,8 +124,7 @@
                     "width": 0,
                     "component": "hplanet",
                     "planetIndex": 8,
-                    "offsetIndex": 9,
-                    "visible": "[user/galaxy/systems/[runtime/ui/selectedSystem]/planets/8/name]"
+                    "offsetIndex": 9
                 }]
         }, {
             "text": "[static/text/lexicon/galaxy/system]",
@@ -156,9 +147,9 @@
             "textHeight": 17,
             "textXPos": 52,
             "x": 239,
-            "width": 126,
+            "width": 130,
             "y": 0,
-            "textWidth": 126,
+            "textWidth": 130,
             "type": "textbox",
             "height": 17,
             "font": {
@@ -331,20 +322,28 @@
                 "value1": {
                     "operator": "AND",
                     "value1": {
-                        "operator": "===",
-                        "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/system]",
-                        "value2": "[runtime/ui/selectedSystem]"
+                        "operator": "!==",
+                        "value1": "[runtime/ui/selectedSectorX]",
+                        "value2": ""
                     },
                     "value2": {
                         "operator": "!==",
-                        "value1": "",
-                        "value2": "[runtime/ui/selectedSystem]"
+                        "value1": "[runtime/ui/selectedSectorY]",
+                        "value2": ""
                     }
                 },
                 "value2": {
-                    "operator": "!==",
-                    "value1": "[this/components/0/components/10/setup]",
-                    "value2": false
+                    "operator": "AND",
+                    "value1": {
+                        "operator": "===",
+                        "value1": "[this/components/0/components/10/setup]",
+                        "value2": "false"
+                    },
+                    "value2": {
+                        "operator": ">",
+                        "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/system]",
+                        "value2": "0"
+                    }
                 }
             },
             "onTriggered": "setVariable this/visible true"

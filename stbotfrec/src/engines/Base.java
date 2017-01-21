@@ -608,7 +608,7 @@ public abstract class Base {
             
             if (pos < 0)
             {
-                setChild((JSONAware)variable, Integer.toString(((List)variable).size()), value);
+                list.add(value);
             }
             else
             {

@@ -254,9 +254,11 @@ public abstract class UIElement extends JLayeredPane implements MouseInputListen
                     {
                         config.remove(COMPONENT_KEY);
                         config.remove(TYPE_KEY);
+                        json.remove(Base.ID_KEY);
                         json.putAll(config);
-
-                        return create(json, localContext, index);
+                        config.putAll(json);
+ 
+                        return create(config, localContext, index);
                     }
                 }
                 catch (Exception ex)

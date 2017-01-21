@@ -1,0 +1,25 @@
+{
+    "components": [{
+            "background": "h_task.png",
+            "imageOff": "h_task.png",
+            "x": 16,
+            "width": 157,
+            "y": 0,
+            "type": "button",
+            "height": 17,
+            "imageOn": "h_task.png"
+        }, {
+            "background": "hm_tab22.png",
+            "x": 179,
+            "width": 15,
+            "y": 0,
+            "type": "imagebox",
+            "height": 17
+        }],
+    "background": "hm_bktfi.png",
+    "x": 0,
+    "width": 194,
+    "y": 0,
+    "type": "container",
+    "height": 17
+}

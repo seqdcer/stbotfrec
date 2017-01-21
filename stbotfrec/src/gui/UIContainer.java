@@ -37,7 +37,7 @@ public class UIContainer extends UIElement
         addMouseListener( new MouseAdapter() { } );
 
         // setup        
-        cursorRef = (ImageValueRef) ImageValueRef.create(this.config, config, this.config.get(CURSOR_KEY), true);
+        cursorRef = (ImageValueRef) ImageValueRef.create(localContext, config, this.config.get(CURSOR_KEY), true);
         this.config.put(CURSOR_KEY, cursorRef);
         
         cursorRef.setChangeListener(new ChangeListener()

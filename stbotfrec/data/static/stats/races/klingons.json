@@ -62,5 +62,6 @@
         ["colony", "scout"],
         ["colony", "scout"],
         ["colony", "scout", "destroyer"]
-    ]
+    ],
+    "tfTypes": ["Support Ships", "Ships", "Warships"]
 }

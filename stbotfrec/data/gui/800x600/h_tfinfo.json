@@ -1,0 +1,117 @@
+{
+    "components": [{
+            "x": 17,
+            "width": 26,
+            "y": 5,
+            "type": "imagebox",
+            "height": 30,
+            "triggers": [{
+                    "condition": {
+                        "value1": {
+                            "value1": "[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/owner]",
+                            "value2": "[static/stats/empires/list/count]",
+                            "operator": "<"
+                        },
+                        "value2": {
+                            "value1": "[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/owner]",
+                            "value2": "",
+                            "operator": "!=="
+                        },
+                        "operator": "AND"
+                    },
+                    "onTriggered": [
+                        "setVariable this/image i_[static/stats/empires/smallPrefixes/[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/owner]]26.png"
+                    ]
+                }, {
+                    "condition": {
+                        "value1": {
+                            "value1": "[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/owner]",
+                            "value2": "[static/stats/empires/list/count]",
+                            "operator": ">="
+                        },
+                        "value2": {
+                            "value1": "[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/owner]",
+                            "value2": "[user/races/count]",
+                            "operator": "<"
+                        },
+                        "operator": "AND"
+                    },
+                    "onTriggered": [
+                        "setVariable this/image i_[static/stats/empires/smallPrefixes/[static/stats/empires/list/count]]26.png"
+                    ]
+                }, {
+                    "condition": {
+                        "value1": "[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/owner]",
+                        "operator": ">=",
+                        "value2": "[user/races/count]"
+                    },
+                    "onTriggered": [
+                        "setVariable this/image i_[static/stats/empires/smallPrefixes/6]26.png"
+                    ]
+                }]
+        }, {
+            "x": 8,
+            "width": 44,
+            "y": 4,
+            "type": "imagebox",
+            "height": 32,
+            "image": "h_sl_30.png",
+            "visible": false,
+            "triggers": [{
+                    "condition": {
+                        "value1": "[runtime/ui/tfs/selected]",
+                        "value2": "[runtime/ui/tfs/list/[local/gridY]]",
+                        "operator": "==="
+                    },
+                    "onTriggered": "setVariable this/visible true",
+                    "onElse": "setVariable this/visible false"
+                }]
+        }, {
+            "textHeight": 34,
+            "textXPos": 0,
+            "textYPos": 0,
+            "x": 66,
+            "width": 125,
+            "y": 3,
+            "textWidth": 125,
+            "type": "textbox",
+            "height": 34,
+            "font": {
+                "fontFile": "human15.zip"
+            },
+            "triggers": [{
+                    "condition": {
+                        "value1": "[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/desc]",
+                        "value2": "-1",
+                        "operator": "=="
+                    },
+                    "onTriggered": [
+                        "setVariable this/text \"[static/text/lexicon/taskforce/mapOrder/[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/order]]\n1 Colony Ship\""
+                    ]
+                }, {
+                    "condition": {
+                        "value1": "[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/desc]",
+                        "value2": "-2",
+                        "operator": "=="
+                    },
+                    "onTriggered": [
+                        "setVariable this/text \"[static/text/lexicon/taskforce/mapOrder/[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/order]]\n1 Colony\""
+                    ]
+                }, {
+                    "condition": {
+                        "value1": "[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/desc]",
+                        "value2": "0",
+                        "operator": ">="
+                    },
+                    "onTriggered": [
+                        "setVariable this/text \"[static/text/lexicon/taskforce/mapOrder/[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/order]]\n1 Non-Combatant\""
+                    ]
+                }]
+        }],
+    "x": 0,
+    "width": 195,
+    "y": 0,
+    "type": "container",
+    "height": 40,
+    "onClick": "serVariable runtime/ui/tfs/selected [runtime/ui/tfs/list/[local/gridY]]"
+}

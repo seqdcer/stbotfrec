@@ -8,29 +8,40 @@ var x = CI.run("getVariable", "user/galaxy/systems/" + scriptArgs[2] + "/x");
 var y = CI.run("getVariable", "user/galaxy/systems/" + scriptArgs[2] + "/y");
 
 // get next tf id
-var nextId = CI.run("getVariable", "user/races/" + scriptArgs[1] + "/tfs/nextId");
+var nextId = CI.run("getVariable", "user/tfs/nextTaskforceId");
 
 if (nextId === null)
 {
     nextId = 0;
 }
 
-nextId = parseInt(nextId);
-
-while (CI.run("getVariable", "user/races/" + scriptArgs[1] + "/tfs/list/" + nextId) !== null)
+while (CI.run("getVariable", "user/tfs/list/" + nextId) !== null)
 {
-    nextId = nextId + 1;
+    nextId = parseInt(nextId) + 1;
 }
 
 // create taskforce
-CI.run("createList", "user/races/" + scriptArgs[1] + "/tfs/list/" + nextId + "/ships");
+CI.run("createList", "user/tfs/list/" + nextId + "/ships");
 
-CI.run("setVariable", "user/races/" + scriptArgs[1] + "/tfs/list/" + nextId + "/ships/" + 0 + "/ship", scriptArgs[0]);
-CI.run("setVariable", "user/races/" + scriptArgs[1] + "/tfs/list/" + nextId + "/ships/" + 0 + "/hull", "static/stats/ships/" + scriptArgs[0] + "/hull");
-CI.run("setVariable", "user/races/" + scriptArgs[1] + "/tfs/list/" + nextId + "/ships/" + 0 + "/xp", 0);
-CI.run("setVariable", "user/races/" + scriptArgs[1] + "/tfs/list/" + nextId + "/ships/" + 0 + "/level", 0);
-CI.run("setVariable", "user/races/" + scriptArgs[1] + "/tfs/list/" + nextId + "/mapSpeed", "static/stats/ships/" + scriptArgs[0] + "/mapSpeed");
-CI.run("setVariable", "user/races/" + scriptArgs[1] + "/tfs/list/" + nextId + "/mapRange", "static/stats/ships/" + scriptArgs[0] + "/mapRange");
+CI.run("setVariable", "user/tfs/list/" + nextId + "/ships/" + 0 + "/ship", scriptArgs[0]);
+CI.run("setVariable", "user/tfs/list/" + nextId + "/ships/" + 0 + "/hull", "static/stats/ships/" + scriptArgs[0] + "/hull");
+CI.run("setVariable", "user/tfs/list/" + nextId + "/ships/" + 0 + "/xp", 0);
+CI.run("setVariable", "user/tfs/list/" + nextId + "/ships/" + 0 + "/level", 0);
+CI.run("setVariable", "user/tfs/list/" + nextId + "/mapSpeed", "static/stats/ships/" + scriptArgs[0] + "/mapSpeed");
+CI.run("setVariable", "user/tfs/list/" + nextId + "/mapRange", "static/stats/ships/" + scriptArgs[0] + "/mapRange");
+CI.run("setVariable", "user/tfs/list/" + nextId + "/desc", -1);
+CI.run("setVariable", "user/tfs/list/" + nextId + "/owner", scriptArgs[1]);
+
+var func = CI.run("getVariable", "static/stats/ships/" + scriptArgs[0] + "function");
+
+if (func === "colony" || func === "transport")
+{
+    CI.run("setVariable", "user/tfs/list/" + nextId + "/order", 0);
+}
+else
+{
+    CI.run("setVariable", "user/tfs/list/" + nextId + "/order", 1);
+}
 
 // add taskforce to sector
 if (CI.run("getVariable", "user/galaxy/map/" + x + "/" + y + "/tfs/" + scriptArgs[1]) === null)
@@ -39,6 +50,13 @@ if (CI.run("getVariable", "user/galaxy/map/" + x + "/" + y + "/tfs/" + scriptArg
 }
 
 CI.run("addToList", "user/galaxy/map/" + x + "/" + y + "/tfs/" + scriptArgs[1], nextId);
+
+if (CI.run("getVariable", "user/galaxy/map/" + x + "/" + y + "/tfs/list") === null)
+{
+    CI.run("createList", "user/galaxy/map/" + x + "/" + y + "/tfs/list");
+}
+
+CI.run("addToList", "user/galaxy/map/" + x + "/" + y + "/tfs/list", nextId);
 
 // add to minors list if needed
 var empireCount = parseInt(CI.run("getVariable", "static/stats/empires/list/count"));
@@ -67,7 +85,7 @@ if (parseInt(scriptArgs[1]) >= racesCount)
 
 // update nextId
 nextId = nextId + 1;
-CI.run("setVariable", "user/races/" + scriptArgs[1] + "/tf/nextId", nextId);
+CI.run("setVariable", "user/tfs/nextTaskforceId", nextId);
 
 // set distinct ship races
 CI.run("createList", "user/galaxy/map/" + x + "/" + y + "/tfs/prefixes");

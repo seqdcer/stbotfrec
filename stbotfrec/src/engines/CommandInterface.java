@@ -46,6 +46,7 @@ public class CommandInterface {
     public static final String CREATE_LIST = "createList";
     public static final String DEBUG_PRINT = "debugPrint";
     public static final String DIV_VARIABLE = "divVariable";
+    public static final String EXECUTE_TRIGGERS = "executeTriggers";
     public static final String ROUND_VARIABLE = "roundVariable";
     public static final String GET_VARIABLE = "getVariable";
     public static final String GET_RANDOM_DOUBLE = "getRandomDouble";
@@ -74,7 +75,8 @@ public class CommandInterface {
     private final Random rng = new Random();
     private final LinkedBlockingQueue<QueuedCommand> cmdQueue = new LinkedBlockingQueue<>();
     private final Set<QueuedCommand> triggerQueue = Collections.synchronizedSet(new LinkedHashSet<QueuedCommand>());
-    private Thread daemon;
+    private final Thread daemon;
+    private boolean clearTriggersFirst = false;
     
     public CommandInterface(Window window)
     {
@@ -88,6 +90,22 @@ public class CommandInterface {
                 
                 while (true)
                 {
+                    if (clearTriggersFirst)
+                    {
+                        while (!triggerQueue.isEmpty())
+                        {
+                            synchronized(CommandInterface.this)
+                            {
+                                cmd = triggerQueue.iterator().next();
+                                triggerQueue.remove(cmd);
+                            }
+
+                            runUICommand(cmd.localContext, cmd.thisContext, cmd.command);
+                        }
+                        
+                        clearTriggersFirst = false;
+                    }
+                    
                     try {
                         cmd = cmdQueue.take();
                         runUICommand(cmd.localContext, cmd.thisContext, cmd.command);
@@ -163,7 +181,7 @@ public class CommandInterface {
                             List srcList = (List)value;
                             
                             if (args.length >= 3)
-                                pos = ((NumberValueRef)NumberValueRef.create(localContext, thisContext, args[1], false)).intValue();
+                                pos = ((NumberValueRef)NumberValueRef.create(localContext, thisContext, args[2], false)).intValue();
 
                             if (args.length >= 4)
                                 unique = ((BooleanValueRef)BooleanValueRef.create(localContext, thisContext, args[3], false)).getValue();
@@ -185,7 +203,7 @@ public class CommandInterface {
                         }
                         else
                         {
-                            Logger.getLogger(CommandInterface.class.getName()).log(Level.WARNING, "Second argument is not a reference to a list in command: {0}", passedCommand + " (" + Arrays.toString(passedArgs) + ") at \n" + thisContext.get(Base.ID_KEY));
+                            // Logger.getLogger(CommandInterface.class.getName()).log(Level.WARNING, "Second argument is not a reference to a list in command: {0}", passedCommand + " (" + Arrays.toString(passedArgs) + ") at \n" + thisContext.get(Base.ID_KEY));
                         }
                     }
                     else
@@ -434,12 +452,21 @@ public class CommandInterface {
                 }
                 case RUN_COMMAND:
                 {
-                    if (args.length >= 1)
+                    if (args.length == 1)
                     {
                         Object json = Base.getVariable(localContext, thisContext, StringValueRef.create(localContext, thisContext, args[0], false).toString());
                         
                         if (json != null)
                             this.runUICommand(localContext, thisContext, json);
+                    }
+                    else if (args.length == 3)
+                    {
+                        Object json = Base.getVariable(localContext, thisContext, StringValueRef.create(localContext, thisContext, args[0], false).toString());
+                        JSONObject newLocalContext = (JSONObject) Base.getVariable(localContext, thisContext, StringValueRef.create(localContext, thisContext, args[1], false).toString());
+                        JSONObject newThisContext = (JSONObject) Base.getVariable(localContext, thisContext, StringValueRef.create(localContext, thisContext, args[2], false).toString());
+                        
+                        if (json != null)
+                            this.runUICommand(newLocalContext, newThisContext, json);
                     }
                     else
                         missingArgs = true;
@@ -607,6 +634,11 @@ public class CommandInterface {
                     
                     break;
                 }
+                case EXECUTE_TRIGGERS:
+                {
+                    clearTriggersFirst = true;
+                    break;
+                }
                 default:
                 {
                     Logger.getLogger(CommandInterface.class.getName()).log(Level.WARNING, "Unknown game command: {0}", passedCommand + " (" + Arrays.toString(passedArgs) + ")");
@@ -633,6 +665,7 @@ public class CommandInterface {
         
         boolean quoted = false;
         boolean escaped = false;
+        boolean quoted2 = false;
         
         for (int i = 0; i < cmd.length(); i++)
         {
@@ -647,6 +680,10 @@ public class CommandInterface {
                         builder.append(ch);
                         escaped = false;
                     }
+                    else if (quoted2)
+                    {
+                        builder.append(ch);
+                    }
                     else
                     {
                         if (builder.length() > 0)
@@ -659,9 +696,32 @@ public class CommandInterface {
                     }
                     break;
                 }
+                case '\'':
+                {
+                    if (escaped)
+                    {
+                        builder.append(ch);
+                        escaped = false;
+                    }
+                    else if (quoted)
+                    {
+                        builder.append(ch);
+                    }
+                    else
+                    {
+                        if (builder.length() > 0)
+                        {
+                            result.add(builder.toString());
+                            builder.setLength(0);
+                        }
+                        
+                        quoted2 = !quoted2;
+                    }
+                    break;
+                }
                 case ' ':
                 {
-                    if (quoted)
+                    if (quoted || quoted2)
                     {
                         builder.append(ch);
                     }

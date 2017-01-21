@@ -22,7 +22,8 @@
             "relationshipsListTitle": "NAME\t%s\t%s\t%s\t%s\t%s",
             "systemsListTitle": "NAME\tINDUSTRY\tFOOD\tMORALE\tBUILD"
         },
-        "sysInfoPanel": "POPULATION\nMAX POP\nGROWTH RATE\nORBITALS"
+        "sysInfoPanel": "POPULATION\nMAX POP\nGROWTH RATE\nORBITALS",
+        "infobox": "TOTAL CREDITS\nCREDITS PER TURN\n+1 DILITHIUM"
     },
     "galaxy": {
         "star": ["Blue Star", "Orange Star", "Red Giant", "White Star", "Yellow Star"],
@@ -45,5 +46,9 @@
     },
     "tech": {
         "damageTypes": ["Gravimetric"]
+    },
+    "taskforce": {
+        "mapOrder": ["AVOID", "ENGAGE", "Intercept", "Raid", "Scrap", "Build Outpost", "Build Starbase", "Attack System", "Colonize System", "Enter wormhole", "Terraform Planet", "Train Crew"]
     }
+            
 }

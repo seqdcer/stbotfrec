@@ -1,0 +1,61 @@
+{
+    "components": [{
+            "imageOff": "h_info.png",
+            "x": 16,
+            "width": 157,
+            "y": 0,
+            "type": "button",
+            "height": 24,
+            "imageOn": "h_infoon.png",
+            "onClick": [
+                "setVariable this/tmp [runtime/ui/infoBoxMod] 0",
+                "mulVariable this/tmp 2",
+                "modVariable this/tmp -1",
+                "mulVariable this/tmp -1",
+                "modVariable runtime/ui/infoBoxMod [this/tmp]"
+            ]
+        }, {
+            "x": 179,
+            "width": 17,
+            "y": 0,
+            "type": "imagebox",
+            "height": 24,
+            "triggers": [{
+                    "condition": {
+                        "value1": "[runtime/ui/infoBoxMod]",
+                        "value2": 0,
+                        "operator": "=="
+                    },
+                    "onTriggered": "setVariable this/image hm_tab10.png",
+                    "onElse": "setVariable this/image hm_tab11.png"
+                }]
+        }, {
+            "textHeight": 51,
+            "textXPos": 0,
+            "textYPos": 0,
+            "x": 17,
+            "width": 159,
+            "y": 30,
+            "textWidth": 159,
+            "type": "textbox",
+            "text": "[static/text/lexicon/UI/infobox]",
+            "height": 51,
+            "font": {
+                "fontFile": "human15.zip"
+            }
+        }],
+    "x": 0,
+    "width": 200,
+    "y": 0,
+    "type": "container",
+    "height": 90,
+    "triggers": [{
+            "condition": {
+                "value1": "[runtime/ui/infoBoxMod]",
+                "value2": 0,
+                "operator": "=="
+            },
+            "onTriggered": "setVariable this/height 90",
+            "onElse": "setVariable this/height 24"
+        }]
+}
