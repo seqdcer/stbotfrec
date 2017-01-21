@@ -12,10 +12,10 @@ var nextId = CI.run("getVariable", "user/tfs/nextTaskforceId");
 
 if (nextId === null)
 {
-    nextId = 0;
+    nextId = 1;
 }
 
-while (CI.run("getVariable", "user/tfs/list/" + nextId) !== null)
+while (CI.run("getVariable", "user/tfs/list/" + nextId) !== null || parseInt(nextId) === 0)
 {
     nextId = parseInt(nextId) + 1;
 }
@@ -84,7 +84,7 @@ if (parseInt(scriptArgs[1]) >= racesCount)
 }
 
 // update nextId
-nextId = nextId + 1;
+nextId = parseInt(nextId) + 1;
 CI.run("setVariable", "user/tfs/nextTaskforceId", nextId);
 
 // set distinct ship races

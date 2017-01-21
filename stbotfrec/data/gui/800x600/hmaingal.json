@@ -214,8 +214,8 @@
                         "height": 58,
                         "onClick": [
                             "setVariable runtime/ui/selectedSectorX [local/gridX]",
-                            "setVariable runtime/ui/selectedSectorY [local/gridY]"
-
+                            "setVariable runtime/ui/selectedSectorY [local/gridY]",
+                            "clearVariable runtime/ui/tfs/selected"
                         ],
                         "onMouseEntered": [
                             "setVariable runtime/ui/sectorHoverX [local/gridX]",

@@ -51,10 +51,10 @@
                 }]
         }, {
             "x": 8,
-            "width": 44,
+            "width": 190,
             "y": 4,
             "type": "imagebox",
-            "height": 32,
+            "height": 36,
             "image": "h_sl_30.png",
             "visible": false,
             "triggers": [{
@@ -65,7 +65,8 @@
                     },
                     "onTriggered": "setVariable this/visible true",
                     "onElse": "setVariable this/visible false"
-                }]
+                }],
+            "onClick": "setVariable runtime/ui/tfs/selected [runtime/ui/tfs/list/[local/gridY]]"
         }, {
             "textHeight": 34,
             "textXPos": 0,
@@ -112,6 +113,5 @@
     "width": 195,
     "y": 0,
     "type": "container",
-    "height": 40,
-    "onClick": "serVariable runtime/ui/tfs/selected [runtime/ui/tfs/list/[local/gridY]]"
+    "height": 40
 }
