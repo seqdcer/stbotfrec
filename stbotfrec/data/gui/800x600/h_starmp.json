@@ -78,22 +78,24 @@
                     }
                 },
                 "value2": {
-                    "operator": "!==",
-                    "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/anomaly]",
-                    "value2": ""
+                    "operator": "AND",
+                    "value1": {
+                        "operator": "!==",
+                        "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/anomaly]",
+                        "value2": ""
+                    },
+                    "value2": {
+                        "operator": "==",
+                        "value1": "[runtime/ui/tfs/selected]",
+                        "value2": "0"
+                    }
                 }
             },
             "onTriggered": [
                 "setVariable runtime/ui/selectedAnomaly [user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/anomaly]",
                 "setVariable this/visible true"
-            ]
-        }, {
-            "condition": {
-                "operator": "===",
-                "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/anomaly]",
-                "value2": ""
-            },
-            "onTriggered": "setVariable this/visible false"
+            ],
+            "onElse": "setVariable this/visible false"
         }
     ]
 }

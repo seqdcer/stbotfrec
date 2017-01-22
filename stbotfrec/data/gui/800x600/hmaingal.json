@@ -514,6 +514,11 @@
             "type": "externalComponent",
             "component": "h_starmp"
         }, {
+            "x": 7,
+            "y": 459,
+            "type": "externalComponent",
+            "component": "h_tfship"
+        }, {
             "x": 28,
             "width": 196,
             "y": 200,

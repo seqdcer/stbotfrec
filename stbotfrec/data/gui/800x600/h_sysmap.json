@@ -311,13 +311,6 @@
             ]
         }, {
             "condition": {
-                "operator": "===",
-                "value1": "[user/galaxy/map/[runtime/ui/selectedSectorX]/[runtime/ui/selectedSectorY]/system]",
-                "value2": ""
-            },
-            "onTriggered": "setVariable this/visible false"
-        }, {
-            "condition": {
                 "operator": "AND",
                 "value1": {
                     "operator": "AND",
@@ -335,9 +328,17 @@
                 "value2": {
                     "operator": "AND",
                     "value1": {
-                        "operator": "===",
-                        "value1": "[this/components/0/components/10/setup]",
-                        "value2": "false"
+                        "operator": "AND",
+                        "value1": {
+                            "operator": "===",
+                            "value1": "[this/components/0/components/10/setup]",
+                            "value2": "false"
+                        },
+                        "value2": {
+                            "operator": "==",
+                            "value1": "[runtime/ui/tfs/selected]",
+                            "value2": "0"
+                        }
                     },
                     "value2": {
                         "operator": ">",
@@ -346,7 +347,8 @@
                     }
                 }
             },
-            "onTriggered": "setVariable this/visible true"
+            "onTriggered": "setVariable this/visible true",
+            "onElse": "setVariable this/visible false"
         }
     ]
 }
