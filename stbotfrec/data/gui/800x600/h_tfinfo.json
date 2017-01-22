@@ -87,7 +87,7 @@
                         "operator": "=="
                     },
                     "onTriggered": [
-                        "setVariable this/text \"[static/text/lexicon/taskforce/mapOrder/[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/order]]\n1 Colony Ship\""
+                        "setVariable this/text \"[static/text/lexicon/taskforce/mapOrder/[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/order]]\n1 [static/stats/ships/[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/ships/0/ship]/name]\""
                     ]
                 }, {
                     "condition": {
@@ -96,7 +96,7 @@
                         "operator": "=="
                     },
                     "onTriggered": [
-                        "setVariable this/text \"[static/text/lexicon/taskforce/mapOrder/[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/order]]\n1 Colony\""
+                        "setVariable this/text \"[static/text/lexicon/taskforce/mapOrder/[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/order]]\n1 FIXME:Class\""
                     ]
                 }, {
                     "condition": {
@@ -105,7 +105,7 @@
                         "operator": ">="
                     },
                     "onTriggered": [
-                        "setVariable this/text \"[static/text/lexicon/taskforce/mapOrder/[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/order]]\n1 Non-Combatant\""
+                        "setVariable this/text \"[static/text/lexicon/taskforce/mapOrder/[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/order]]\n1 FIXME: Group\""
                     ]
                 }]
         }],
