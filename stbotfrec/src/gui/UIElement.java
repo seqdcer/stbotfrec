@@ -11,6 +11,7 @@ import data.ImageValueRef;
 import data.KeyBindsRef;
 import data.NumberValueRef;
 import data.StringValueRef;
+import data.Toolkit;
 import data.TriggerListRef;
 import engines.Base;
 import init.Main;
@@ -22,6 +23,8 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
@@ -45,7 +48,7 @@ import org.json.simple.JSONObject;
  *
  * @author AP
  */
-public abstract class UIElement extends JLayeredPane implements MouseInputListener {
+public abstract class UIElement extends JLayeredPane implements MouseInputListener, ContainerListener {
     public static final List<String> HORIZONTAL_ALIGNMENT = Collections.unmodifiableList(Arrays.asList("left", "center", "right"));
     public static final List<String> VERTICAL_ALIGNMENT = Collections.unmodifiableList(Arrays.asList("top", "center", "bottom"));
     public static final List<String> ORIENTATION = Collections.unmodifiableList(Arrays.asList("vertical", "horizontal"));
@@ -172,6 +175,7 @@ public abstract class UIElement extends JLayeredPane implements MouseInputListen
         ((NumberValueRef)config.get(HEIGHT_KEY)).setChangeListener(bounds);
         
         bounds.stateChanged(null);
+        this.addContainerListener(this);
         setVisible(false);
     }
     
@@ -534,5 +538,25 @@ public abstract class UIElement extends JLayeredPane implements MouseInputListen
     protected synchronized void runCommand(Object json)
     {
         Main.CI.runSyncUICommand(localContext, config, json);
+    }
+    
+    @Override
+    public void componentRemoved(ContainerEvent e)
+    {
+        if (e.getChild() instanceof UIElement)
+        {
+            ((UIElement)e.getChild()).destroy();
+        }
+    }
+    
+    @Override
+    public void componentAdded(ContainerEvent e)
+    {
+        // do nothing
+    }
+    
+    private void destroy()
+    {
+        Toolkit.destroy(config);
     }
 }

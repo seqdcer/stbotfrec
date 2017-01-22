@@ -66,7 +66,7 @@
                     "onTriggered": "setVariable this/visible true",
                     "onElse": "setVariable this/visible false"
                 }],
-            "onClick": "setVariable runtime/ui/tfs/selected [runtime/ui/tfs/list/[local/gridY]]"
+            "onClick": "toggleVariable runtime/ui/tfs/selected [runtime/ui/tfs/list/[local/gridY]] 0"
         }, {
             "textHeight": 34,
             "textXPos": 0,

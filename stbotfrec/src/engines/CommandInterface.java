@@ -69,6 +69,7 @@ public class CommandInterface {
     public static final String SHOW_DIALOG = "showDialog";
     public static final String SHOW_SCREEN = "showScreen";
     public static final String SUB_VARIABLE = "subVariable";
+    public static final String TOGGLE_VARIABLE = "toggleVariable";
 
     private final ScriptEngineManager SEManager = new ScriptEngineManager();
     private final ScriptEngine scriptEngine = SEManager.getEngineByName("JavaScript");
@@ -629,6 +630,43 @@ public class CommandInterface {
                                 - ((NumberValueRef) NumberValueRef.create(localContext, thisContext, args[1], false)).doubleValue(),
                                 ((NumberValueRef) NumberValueRef.create(localContext, thisContext, args[2], false)).doubleValue(),
                                 ((NumberValueRef) NumberValueRef.create(localContext, thisContext, args[3], false)).doubleValue());
+                    else
+                        missingArgs = true;
+                    
+                    break;
+                }
+                case TOGGLE_VARIABLE:
+                {
+                    if (args.length >= 2)
+                    {
+                        String ref = StringValueRef.create(localContext, thisContext, args[0], false).toString();
+                        Object orgVar = Base.getVariable(localContext, thisContext, ref);
+                        
+                        if (orgVar == null)
+                        {
+                            Base.setVariable(localContext, thisContext, ref, StringValueRef.create(localContext, thisContext, args[1], false).toString());
+                        }
+                        else
+                        {
+                            int nextIndex = 1;
+
+                            for (int i = 1; i < args.length; i++)
+                            {
+                                String val = StringValueRef.create(localContext, thisContext, args[i], false).toString();
+                                
+                                if (val.equals(orgVar))
+                                {
+                                    nextIndex = i + 1;
+                                    break;
+                                }
+                            }
+                            
+                            if (nextIndex >= args.length)
+                                nextIndex = 1;
+                            
+                            Base.setVariable(localContext, thisContext, ref, StringValueRef.create(localContext, thisContext, args[nextIndex], false).toString());
+                        }
+                    }
                     else
                         missingArgs = true;
                     
