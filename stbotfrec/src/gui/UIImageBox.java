@@ -11,6 +11,7 @@ import engines.Sound;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
 import org.json.simple.JSONObject;
 
 /**
@@ -44,7 +45,15 @@ public class UIImageBox extends UIElement {
         BufferedImage image = ((ImageValueRef)config.get(IMAGE_KEY)).getValue(Window.UI_TICK, Window.MAX_UITICK_VALUE);
 
         if (image != null)
-            g.drawImage(image, 0, 0, this);
+        {
+            if (disabled.getValue())
+            {
+                RescaleOp op = new RescaleOp(new float[]{0.5f, 0.5f, 0.5f, 1}, new float[]{0f, 0f,0f,0f}, null);
+                image = op.filter(image, null);
+            }
+        }
+
+        g.drawImage(image, 0, 0, this);
     }
     
     @Override

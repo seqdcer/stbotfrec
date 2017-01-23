@@ -70,7 +70,12 @@
             "y": 432,
             "type": "toggle",
             "height": 24,
-            "imageOn": "h_ovron.png"
+            "imageOn": "h_ovron.png",
+            "allowDeselect": true,
+            "toggleGroup": {
+                "toggleGroupRef": "runtime/ui/showGalOverlay",
+                "toggleIndex": 1
+            }
         }, {
             "repeatClicks": true,
             "repeatClickRate": 3,
@@ -682,7 +687,7 @@
                             "value2": ""
                         }
                     },
-                    "onTriggered": "setVariable this/text \"[static/text/lexicon/UI/sectorDescriptor$FIXME$[runtime/ui/sectorHoverX]$[runtime/ui/sectorHoverY]]\""
+                    "onTriggered": "setVariable this/text \"[static/text/lexicon/ui/sectorDescriptor$FIXME$[runtime/ui/sectorHoverX]$[runtime/ui/sectorHoverY]]\""
                 }
             ]
         }],

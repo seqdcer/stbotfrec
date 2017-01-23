@@ -24,13 +24,15 @@ while (CI.run("getVariable", "user/tfs/list/" + nextId) !== null || parseInt(nex
 CI.run("createList", "user/tfs/list/" + nextId + "/ships");
 
 CI.run("setVariable", "user/tfs/list/" + nextId + "/ships/" + 0 + "/ship", scriptArgs[0]);
-CI.run("setVariable", "user/tfs/list/" + nextId + "/ships/" + 0 + "/hull", "static/stats/ships/" + scriptArgs[0] + "/hull");
+CI.run("setVariable", "user/tfs/list/" + nextId + "/ships/" + 0 + "/hull", "[static/stats/ships/" + scriptArgs[0] + "/hull]");
 CI.run("setVariable", "user/tfs/list/" + nextId + "/ships/" + 0 + "/xp", 0);
 CI.run("setVariable", "user/tfs/list/" + nextId + "/ships/" + 0 + "/level", 0);
-CI.run("setVariable", "user/tfs/list/" + nextId + "/mapSpeed", "static/stats/ships/" + scriptArgs[0] + "/mapSpeed");
-CI.run("setVariable", "user/tfs/list/" + nextId + "/mapRange", "static/stats/ships/" + scriptArgs[0] + "/mapRange");
+CI.run("setVariable", "user/tfs/list/" + nextId + "/mapSpeed", "[static/stats/ships/" + scriptArgs[0] + "/mapSpeed]");
+CI.run("setVariable", "user/tfs/list/" + nextId + "/mapRange", "[static/stats/ships/" + scriptArgs[0] + "/mapRange]");
+CI.run("setVariable", "user/tfs/list/" + nextId + "/scanRange", "[static/stats/ships/" + scriptArgs[0] + "/scanRange]");
 CI.run("setVariable", "user/tfs/list/" + nextId + "/desc", -1);
 CI.run("setVariable", "user/tfs/list/" + nextId + "/owner", scriptArgs[1]);
+CI.run("setVariable", "user/tfs/list/" + nextId + "/canCloak", "[static/stats/ships/" + scriptArgs[0] + "/cloak]");
 
 var func = CI.run("getVariable", "static/stats/ships/" + scriptArgs[0] + "function");
 

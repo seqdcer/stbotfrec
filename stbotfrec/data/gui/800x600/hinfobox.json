@@ -38,7 +38,7 @@
             "y": 30,
             "textWidth": 159,
             "type": "textbox",
-            "text": "[static/text/lexicon/UI/infobox]",
+            "text": "[static/text/lexicon/ui/infobox]",
             "height": 51,
             "font": {
                 "fontFile": "human15.zip"

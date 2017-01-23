@@ -13,7 +13,7 @@
             "randomEvents": ["ON", "OFF"]
         }
     },
-    "UI": {
+    "ui": {
         "description": "Description",
         "processingTurn": "PROCESSING TURN",
         "sectorDescriptor": "%s1 Sector %s2.%s3",
@@ -23,6 +23,7 @@
             "systemsListTitle": "NAME\tINDUSTRY\tFOOD\tMORALE\tBUILD"
         },
         "sysInfoPanel": "POPULATION\nMAX POP\nGROWTH RATE\nORBITALS",
+        "shipInfoPanel": "GAL. SPEED\nGAL. RANGE\nSCANNER RANGE",
         "infobox": "TOTAL CREDITS\nCREDITS PER TURN\n+1 DILITHIUM"
     },
     "galaxy": {
@@ -48,7 +49,8 @@
         "damageTypes": ["Gravimetric"]
     },
     "taskforce": {
-        "mapOrder": ["AVOID", "ENGAGE", "Intercept", "Raid", "Scrap", "Build Outpost", "Build Starbase", "Attack System", "Colonize System", "Enter wormhole", "Terraform Planet", "Train Crew"]
+        "mapOrder": ["AVOID", "ENGAGE", "Intercept", "Raid", "Scrap", "Build Outpost", "Build Starbase", "Attack System", "Colonize System", "Enter wormhole", "Terraform Planet", "Train Crew"],
+        "mapRange": ["SHORT", "MEDIUM", "LONG"]
     }
             
 }

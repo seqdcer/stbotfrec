@@ -31,7 +31,7 @@
             "y": 0,
             "textWidth": 126,
             "type": "textbox",
-            "text": "[static/text/lexicon/UI/description]",
+            "text": "[static/text/lexicon/ui/description]",
             "height": 17,
             "font": {
                 "fontFile": "human15.zip",

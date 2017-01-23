@@ -109,6 +109,14 @@ public class BooleanValueRef extends StringValueRef {
     
     public static boolean toBoolean(String val)
     {
+        try
+        {
+            double dbl = Double.parseDouble(val);
+            
+            return dbl > 0;
+        }
+        catch (Exception ex){}
+        
         return !(val == null  || val.length() <= 0 || "false".equalsIgnoreCase(val) || "no".equalsIgnoreCase(val));
     }
 }

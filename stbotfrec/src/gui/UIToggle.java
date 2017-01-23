@@ -34,12 +34,14 @@ public class UIToggle extends UIElement
     public static final String TOGGLE_SOUND_KEY = "toggleSound";
     public static final String ONTOGGLE_KEY = "onToggle";
     public static final String ISON_KEY = "isOn";
+    public static final String ALLOWDESELECT_KEY = "allowDeselect";
 
     private final ToggleRef toggleGroup;
     private final StringValueRef toggleSound;
     
     // state
     private final BooleanValueRef isOn;
+    private final BooleanValueRef allowDeselect;
     
     protected UIToggle(JSONObject config, JSONObject localContext, int index)
     {
@@ -52,6 +54,9 @@ public class UIToggle extends UIElement
         
         isOn = (BooleanValueRef) BooleanValueRef.create(localContext, config, config.get(ISON_KEY), true);
         this.config.put(ISON_KEY, isOn);
+        
+        allowDeselect = (BooleanValueRef) BooleanValueRef.create(localContext, config, config.get(ALLOWDESELECT_KEY), true);
+        this.config.put(ALLOWDESELECT_KEY, allowDeselect);
         
         toggleGroup = (ToggleRef) ToggleRef.create(localContext, config, config.get(TOGGLE_GROUP_KEY), true);
         this.config.put(TOGGLE_GROUP_KEY, toggleGroup);
@@ -72,7 +77,7 @@ public class UIToggle extends UIElement
         
         if (toggleGroup.isSelected())
         {
-            turnOn(false);
+            toggle(true, false);
         }
     }
     
@@ -80,27 +85,30 @@ public class UIToggle extends UIElement
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        Graphics2D g2 = (Graphics2D) g;
+        if (!disabled.getValue())
+        {
+            Graphics2D g2 = (Graphics2D) g;
+
+            BufferedImage imageOff = ((ImageValueRef)this.config.get(IMAGEOFF_KEY)).getValue(Window.UI_TICK, Window.MAX_UITICK_VALUE);
+            BufferedImage imageOn = ((ImageValueRef)this.config.get(IMAGEON_KEY)).getValue(Window.UI_TICK, Window.MAX_UITICK_VALUE);
         
-        BufferedImage imageOff = ((ImageValueRef)this.config.get(IMAGEOFF_KEY)).getValue(Window.UI_TICK, Window.MAX_UITICK_VALUE);
-        BufferedImage imageOn = ((ImageValueRef)this.config.get(IMAGEON_KEY)).getValue(Window.UI_TICK, Window.MAX_UITICK_VALUE);
-        
-        if (mouseHover.getValue() && !isOn.getValue() && imageOn != null && imageOff != null)
-        {
-            float transparency = Math.abs(100 - Window.UI_TICK % 200) / 100f;
-            
-            g2.drawImage(imageOff, 0, 0, this);
-            
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, transparency));
-            g2.drawImage(imageOn, 0, 0, this);
-        }
-        else if (imageOn != null && isOn.getValue())
-        {
-            g2.drawImage(imageOn, 0, 0, this);
-        }
-        else if (imageOff != null && !isOn.getValue())
-        {
-            g2.drawImage(imageOff, 0, 0, this);
+            if (mouseHover.getValue() && !isOn.getValue() && imageOn != null && imageOff != null)
+            {
+                float transparency = Math.abs(100 - Window.UI_TICK % 200) / 100f;
+
+                g2.drawImage(imageOff, 0, 0, this);
+
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, transparency));
+                g2.drawImage(imageOn, 0, 0, this);
+            }
+            else if (imageOn != null && isOn.getValue())
+            {
+                g2.drawImage(imageOn, 0, 0, this);
+            }
+            else if (imageOff != null && !isOn.getValue())
+            {
+                g2.drawImage(imageOff, 0, 0, this);
+            }
         }
     }
     
@@ -108,15 +116,22 @@ public class UIToggle extends UIElement
     public void mousePressed(MouseEvent e) {
         super.mousePressed(e);
 
-        if (isOn.getValue()) return;
+        if (disabled.getValue()) return;
         
-        turnOn(true);
+        boolean nval = !isOn.getValue();
+        
+        if (nval == false && !allowDeselect.getValue())
+        {
+            return;
+        }
+        
+        toggle(nval, true);
     }
     
-    private void turnOn(boolean playSound)
+    private void toggle(boolean value, boolean playSound)
     {
         try {
-            Base.setVariable(localContext, config, true, Base.LOCAL_ROOT, UIContainer.COMPONENTS_KEY, Integer.toString(elementIndex), ISON_KEY);
+            Base.setVariable(localContext, config, value, Base.LOCAL_ROOT, UIContainer.COMPONENTS_KEY, Integer.toString(elementIndex), ISON_KEY);
         } catch (Exception ex) {
             Logger.getLogger(UIToggle.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -129,16 +144,19 @@ public class UIToggle extends UIElement
         }
         
         try {
-            toggleGroup.setSelected(isOn.getValue());
+            toggleGroup.setSelected(value);
         } catch (Exception ex) {
             Logger.getLogger(UIToggle.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        Object onToggle = this.config.get(ONTOGGLE_KEY);
-
-        if (onToggle != null)
+        if (value)
         {
-            runCommand(onToggle);
+            Object onToggle = this.config.get(ONTOGGLE_KEY);
+
+            if (onToggle != null)
+            {
+                runCommand(onToggle);
+            }
         }
     }
 }

@@ -19,6 +19,7 @@ import java.awt.BasicStroke;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
@@ -27,6 +28,7 @@ import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -83,10 +85,12 @@ public abstract class UIElement extends JLayeredPane implements MouseInputListen
     public static final String KEYBINDS_KEY = "keyBinds";
     public static final String TRIGGERS_KEY = "triggers";
     public static final String BORDER_KEY = "border";
+    public static final String DISABLED_KEY = "disabled";
     
     // state
     protected final BooleanValueRef mouseHover;
     protected final BooleanValueRef visible;
+    protected final BooleanValueRef disabled;
     private final Object onMouseEntered;
     private final Object onMouseExited;
     private final KeyBindsRef keyBinds;
@@ -134,6 +138,9 @@ public abstract class UIElement extends JLayeredPane implements MouseInputListen
                 setVisible(visible.getValue());
             }
         });
+        
+        disabled = (BooleanValueRef) BooleanValueRef.create(localContext, config, config.get(DISABLED_KEY), true);
+        this.config.put(DISABLED_KEY, disabled);
         
         onMouseEntered = this.config.get(ON_MOUSE_ENTERED_KEY);
         onMouseExited = this.config.get(ON_MOUSE_EXITED_KEY);
@@ -185,12 +192,19 @@ public abstract class UIElement extends JLayeredPane implements MouseInputListen
         
         super.paintComponent(g);
         
+        
         BufferedImage background = ((ImageValueRef)config.get(BACKGROUND_KEY)).getValue(Window.UI_TICK, Window.MAX_UITICK_VALUE);
 
         if (background != null)
+        {
+            if (disabled.getValue())
+            {
+                RescaleOp op = new RescaleOp(new float[]{0.5f, 0.5f, 0.5f, 1}, new float[]{0f, 0f,0f,0f}, null);
+                background = op.filter(background, null);
+            }
+            
             g.drawImage(background, 0, 0, this);
-        
-        
+        }
     }
 
     public boolean ignoresBorders()

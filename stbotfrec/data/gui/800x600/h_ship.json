@@ -1,0 +1,42 @@
+{
+    "components": [{
+            "cellOn": "hb_b_gr.png",
+            "cellCount": 4,
+            "background": "hb_b_gr.png",
+            "x": 22,
+            "width": 36,
+            "y": 44,
+            "type": "slider",
+            "height": 4
+        }, {
+            "x": 25,
+            "width": 30,
+            "y": 12,
+            "type": "imagebox",
+            "height": 30
+        }, {
+            "x": 7,
+            "width": 5,
+            "y": 12,
+            "type": "imagebox",
+            "height": 30
+        }, {
+            "textHeight": 10,
+            "textXPos": 0,
+            "textYPos": 0,
+            "x": 0,
+            "width": 85,
+            "y": 0,
+            "textWidth": 85,
+            "type": "textbox",
+            "height": 10,
+            "font": {
+                "fontFile": "human9.zip"
+            }
+        }],
+    "x": 0,
+    "width": 85,
+    "y": 0,
+    "type": "container",
+    "height": 50
+}

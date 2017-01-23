@@ -6,10 +6,10 @@
     "nameGroup": 17,
     "mapRange": 2,
     "mapSpeed": 1,
-    "scanStr": 2,
+    "scanRange": 2,
     "cost": 390,
     "upkeep": 26,
-    "stealth": 0,
+    "cloak": false,
     "beams": {
         "acc": 122,
         "num": 3,

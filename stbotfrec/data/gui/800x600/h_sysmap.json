@@ -195,7 +195,7 @@
                 }
             ]
         }, {
-            "text": "[static/text/lexicon/UI/sysInfoPanel]",
+            "text": "[static/text/lexicon/ui/sysInfoPanel]",
             "textHeight": 68,
             "x": 56,
             "width": 100,

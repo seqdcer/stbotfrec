@@ -5,6 +5,7 @@
             "y": 5,
             "type": "imagebox",
             "height": 30,
+            "disabled": "[user/tfs/list/[runtime/ui/tfs/list/[local/gridY]]/cloaked]",
             "triggers": [{
                     "condition": {
                         "value1": {
