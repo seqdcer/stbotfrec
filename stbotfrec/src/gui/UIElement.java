@@ -309,11 +309,14 @@ public abstract class UIElement extends JLayeredPane implements MouseInputListen
     public void mouseEntered(MouseEvent e) {
         forwardMouseEvent(e);
        
-        if (mouseHover.getValue()) return;
-        
-        updateHover(true);
-        
-        runCommand(onMouseEntered);
+        if (!disabled.getValue())
+        {
+            if (mouseHover.getValue()) return;
+
+            updateHover(true);
+
+            runCommand(onMouseEntered);
+        }
         
         forwardMouseEvent(e);
     }

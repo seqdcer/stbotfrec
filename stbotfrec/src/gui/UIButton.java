@@ -59,52 +59,61 @@ public class UIButton extends UIElement implements PropertyChangeListener
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        Graphics2D g2 = (Graphics2D) g;
-        
-        BufferedImage imageOff = ((ImageValueRef)this.config.get(IMAGEOFF_KEY)).getValue(Window.UI_TICK, Window.MAX_UITICK_VALUE);
-        BufferedImage imageOn = ((ImageValueRef)this.config.get(IMAGEON_KEY)).getValue(Window.UI_TICK, Window.MAX_UITICK_VALUE);
-        
-        if (mouseHover.getValue() && !isPressed && imageOn != null && imageOff != null)
+        if (!disabled.getValue())
         {
-            float transparency = Math.abs(100 - Window.UI_TICK % 200) / 100f;
-            
-            g2.drawImage(imageOff, 0, 0, this);
-            
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, transparency));
-            g2.drawImage(imageOn, 0, 0, this);
-        }
-        else if (imageOn != null && isPressed)
-        {
-            g2.drawImage(imageOn, 0, 0, this);
-        }
-        else if (imageOff != null && !isPressed)
-        {
-            g2.drawImage(imageOff, 0, 0, this);
+            Graphics2D g2 = (Graphics2D) g;
+
+            BufferedImage imageOff = ((ImageValueRef)this.config.get(IMAGEOFF_KEY)).getValue(Window.UI_TICK, Window.MAX_UITICK_VALUE);
+            BufferedImage imageOn = ((ImageValueRef)this.config.get(IMAGEON_KEY)).getValue(Window.UI_TICK, Window.MAX_UITICK_VALUE);
+
+            if (mouseHover.getValue() && !isPressed && imageOn != null && imageOff != null)
+            {
+                float transparency = Math.abs(100 - Window.UI_TICK % 200) / 100f;
+
+                g2.drawImage(imageOff, 0, 0, this);
+
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, transparency));
+                g2.drawImage(imageOn, 0, 0, this);
+            }
+            else if (imageOn != null && isPressed)
+            {
+                g2.drawImage(imageOn, 0, 0, this);
+            }
+            else if (imageOff != null && !isPressed)
+            {
+                g2.drawImage(imageOff, 0, 0, this);
+            }
         }
     }
     
     @Override
-    public void mousePressed(MouseEvent e) {       
-        isPressed = true;
-        pressTick = (int) Base.getVariable(localContext, config, Base.RUNTIME_ROOT, Base.RUNTIME_VAR_UI_TICK);
-        clickRepeats = 0;
+    public void mousePressed(MouseEvent e) {
+        if (!disabled.getValue())
+        {
+            isPressed = true;
+            pressTick = (int) Base.getVariable(localContext, config, Base.RUNTIME_ROOT, Base.RUNTIME_VAR_UI_TICK);
+            clickRepeats = 0;
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        isPressed = false;
-        
-        if (clickRepeats == 0)
+        if (!disabled.getValue())
         {
-            String sound = clickSound.toString();
-            
-            if (sound.length() > 0) Sound.playSound(sound);
-            
-            Object onClick = this.config.get(ONCLICK_KEY);
-            
-            if (onClick != null)
+            isPressed = false;
+        
+            if (clickRepeats == 0)
             {
-               runCommand(onClick);
+                String sound = clickSound.toString();
+
+                if (sound.length() > 0) Sound.playSound(sound);
+
+                Object onClick = this.config.get(ONCLICK_KEY);
+
+                if (onClick != null)
+                {
+                   runCommand(onClick);
+                }
             }
         }
     }

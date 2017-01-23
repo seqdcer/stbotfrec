@@ -29,6 +29,7 @@
             "y": 284,
             "type": "toggle",
             "height": 36,
+            "background": "es_fbtn1.png",
             "imageOn": "es_fbtn2.png",
             "onMouseEntered": "setVariable local/playerEmpireHoverIndex 2",
             "onMouseExited": "setVariable local/playerEmpireHoverIndex -1",
@@ -38,7 +39,7 @@
             },
             "toggleSound": "sfx/select_fer_emp",
             "onToggle": "playVoice voice/[static/misc/soundmap/voices/empires/2/empirepick]",
-            "visible": false
+            "disabled": true
         }, {
             "imageOff": "es_cbtn1.png",
             "x": 89,
@@ -46,6 +47,7 @@
             "y": 146,
             "type": "toggle",
             "height": 36,
+            "background": "es_cbtn1.png",
             "imageOn": "es_cbtn2.png",
             "onMouseEntered": "setVariable local/playerEmpireHoverIndex 0",
             "onMouseExited": "setVariable local/playerEmpireHoverIndex -1",
@@ -55,7 +57,7 @@
             },
             "toggleSound": "sfx/select_car_emp",
             "onToggle": "playVoice voice/[static/misc/soundmap/voices/empires/0/empirepick]",
-            "visible": false
+            "disabled": true
         }, {
             "imageOff": "es_kbtn1.png",
             "x": 89,
@@ -63,6 +65,7 @@
             "y": 353,
             "type": "toggle",
             "height": 36,
+            "background": "es_kbtn1.png",
             "imageOn": "es_kbtn2.png",
             "onMouseEntered": "setVariable local/playerEmpireHoverIndex 3",
             "onMouseExited": "setVariable local/playerEmpireHoverIndex -1",
@@ -72,7 +75,7 @@
             },
             "toggleSound": "sfx/select_kli_emp",
             "onToggle": "playVoice voice/[static/misc/soundmap/voices/empires/3/empirepick]",
-            "visible": false
+            "disabled": true
         }, {
             "imageOff": "es_hbtn1.png",
             "x": 89,
@@ -80,6 +83,7 @@
             "y": 218,
             "type": "toggle",
             "height": 36,
+            "background": "es_hbtn1.png",
             "imageOn": "es_hbtn2.png",
             "onMouseEntered": "setVariable local/playerEmpireHoverIndex 1",
             "onMouseExited": "setVariable local/playerEmpireHoverIndex -1",
@@ -96,6 +100,7 @@
             "y": 422,
             "type": "toggle",
             "height": 36,
+            "background": "es_rbtn1.png",
             "imageOn": "es_rbtn2.png",
             "onMouseEntered": "setVariable local/playerEmpireHoverIndex 4",
             "onMouseExited": "setVariable local/playerEmpireHoverIndex -1",
@@ -105,7 +110,7 @@
             },
             "toggleSound": "sfx/select_rom_emp",
             "onToggle": "playVoice voice/[static/misc/soundmap/voices/empires/4/empirepick]",
-            "visible": false
+            "disabled": true
         }, {
             "x": 11,
             "width": 71,
