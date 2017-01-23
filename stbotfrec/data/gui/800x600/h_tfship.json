@@ -12,7 +12,16 @@
             "toggleGroup": {
                 "toggleGroupRef": "runtime/ui/showShipRedeploy",
                 "toggleIndex": 1
-            }
+            },
+            "triggers": [{
+                    "condition": {
+                        "value1": "[user/player/playerEmpire]",
+                        "value2": "[user/tfs/list/[runtime/ui/tfs/selected]/owner]",
+                        "operator": "!="
+                    },
+                    "onTriggered": "setVariable this/disabled true",
+                    "onElse": "setVariable this/disabled false"
+                }]
         }, {
             "background": "h_clokup.png",
             "imageOff": "h_clokup.png",
@@ -29,13 +38,21 @@
             },
             "triggers": [{
                     "condition": {
-                        "value1": "[user/tfs/list/[runtime/ui/tfs/selected]/canCloak]",
-                        "value2": "true",
-                        "operator": "!=="
+                        "value1": {
+                            "value1": "[user/tfs/list/[runtime/ui/tfs/selected]/canCloak]",
+                            "value2": "true",
+                            "operator": "!=="
+                        },
+                        "value2": {
+                            "value1": "[user/player/playerEmpire]",
+                            "value2": "[user/tfs/list/[runtime/ui/tfs/selected]/owner]",
+                            "operator": "!="
+                        },
+                        "operator": "OR"
                     },
                     "onTriggered": "setVariable this/disabled true",
                     "onElse": "setVariable this/disabled false"
-            }]
+                }]
         }, {
             "background": "h_ordup.png",
             "imageOff": "h_ordup.png",
@@ -49,8 +66,16 @@
             "toggleGroup": {
                 "toggleGroupRef": "runtime/ui/showShipOrders",
                 "toggleIndex": 1
-            }
-
+            },
+            "triggers": [{
+                    "condition": {
+                        "value1": "[user/player/playerEmpire]",
+                        "value2": "[user/tfs/list/[runtime/ui/tfs/selected]/owner]",
+                        "operator": "!="
+                    },
+                    "onTriggered": "setVariable this/disabled true",
+                    "onElse": "setVariable this/disabled false"
+                }]
         }, {
             "x": 233,
             "width": 516,
