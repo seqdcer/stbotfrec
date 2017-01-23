@@ -77,12 +77,13 @@ public class ColumnRef extends ValueRef {
     }
 
     @Override
-    public void reEvaluate() {
+    public boolean reEvaluate() {
         // nothing to do
+        return false;
     }
 
     @Override
-    public final void set(Object valueRef) {
+    public final boolean set(Object valueRef) {
         if (valueRef instanceof JSONObject)
         {
             destroy();
@@ -93,7 +94,10 @@ public class ColumnRef extends ValueRef {
             columnData.put(TEXT_ALIGN_KEY, EnumValueRef.create(localContext, thisContext, columnData.get(TEXT_ALIGN_KEY), UIElement.HORIZONTAL_ALIGNMENT, isSynced()));
             
             fireChangeEvent();
+            return true;
         }
+        
+        return false;
     }
     
     public int getWidth()

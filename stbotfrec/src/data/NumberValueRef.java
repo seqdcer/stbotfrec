@@ -6,6 +6,7 @@
 package data;
 
 import engines.Base;
+import java.util.Objects;
 import org.json.simple.JSONObject;
 
 /**
@@ -84,7 +85,7 @@ public class NumberValueRef extends StringValueRef {
     }
     
     @Override
-    public void set(Object valueRef)
+    public boolean set(Object valueRef)
     {
         if (valueRef instanceof Number)
         {
@@ -105,12 +106,19 @@ public class NumberValueRef extends StringValueRef {
             params.clear();
             subRefs.add(resolvedRef);
             
-            if (oldValue != null && value != oldValue)
+            if (!Objects.equals(oldValue, value))
+            {
                 this.fireChangeEvent();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {
-            super.set(valueRef);
+            return super.set(valueRef);
         }
     }
 }

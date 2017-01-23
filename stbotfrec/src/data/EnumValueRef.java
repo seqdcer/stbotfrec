@@ -104,7 +104,7 @@ public class EnumValueRef extends StringValueRef {
         return index;
     }
 
-    public void selectOption(int mod, boolean rotate) {
+    public boolean selectOption(int mod, boolean rotate) {
         int newValue = index + mod;
         
         if (rotate)
@@ -130,6 +130,9 @@ public class EnumValueRef extends StringValueRef {
             subRefs.add(resolvedRef);
 
             this.fireChangeEvent();
+            return true;
         }
+        
+        return false;
     }
 }

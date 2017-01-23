@@ -5,7 +5,6 @@
  */
 package data;
 
-import engines.Base;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.json.simple.JSONAware;
@@ -31,7 +30,11 @@ public abstract class ValueRef implements JSONAware {
         this.isSynced = sync;
     }
     
-    public abstract void reEvaluate();
+    /**
+     * 
+     * @return true if the value has changed as a consequence.
+     */
+    public abstract boolean reEvaluate();
     
     public void setChangeListener(ChangeListener l)
     {
@@ -76,8 +79,13 @@ public abstract class ValueRef implements JSONAware {
     {
         return isSynced;
     }
-    
-    public abstract void set(Object valueRef);
+
+    /**
+     * 
+     * @param valueRef the new value
+     * @return true if the value has changed.
+     */
+    public abstract boolean set(Object valueRef);
     
     public abstract void destroy();
 }

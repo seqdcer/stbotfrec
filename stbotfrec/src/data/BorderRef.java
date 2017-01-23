@@ -5,7 +5,6 @@
  */
 package data;
 
-import engines.Base;
 import java.awt.Color;
 import javax.swing.event.ChangeListener;
 import org.json.simple.JSONObject;
@@ -118,12 +117,13 @@ public class BorderRef extends ValueRef {
     }
 
     @Override
-    public void reEvaluate() {
+    public boolean reEvaluate() {
         // nothing to do
+        return false;
     }
 
     @Override
-    public final void set(Object valueRef)
+    public final boolean set(Object valueRef)
     {
         destroy();
         
@@ -143,6 +143,7 @@ public class BorderRef extends ValueRef {
         setChangeListener(this.getChangeListener());
         
         fireChangeEvent();
+        return true;
     }
 
     @Override

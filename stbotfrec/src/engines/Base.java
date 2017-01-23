@@ -335,41 +335,45 @@ public abstract class Base {
         }
         
         Object child = getChild(parent, nodes[nodes.length - 1]);
+        boolean changed = false;
         
         if (child != null && child instanceof ValueRef)
         {
-            ((ValueRef)child).set(value);
+            changed = ((ValueRef)child).set(value);
         }
         else
         {
-            setChild(parent, nodes[nodes.length - 1], value);
+            changed = setChild(parent, nodes[nodes.length - 1], value);
         }
         
-        if (child instanceof ValueRef)
+        if (changed)
         {
-            ValueRef objRef = (ValueRef)child;
-            
-            String[] properties = objRef.getProperties();
-            
-            if (properties != null)
+            if (child instanceof ValueRef)
             {
-                String[] propNodes = new String[nodes.length + 1];
-                System.arraycopy(nodes, 0, propNodes, 0, nodes.length);
-                
-                for (String p : properties)
+                ValueRef objRef = (ValueRef)child;
+
+                String[] properties = objRef.getProperties();
+
+                if (properties != null)
                 {
-                    propNodes[nodes.length] = p;
-                    fireVariableChangeEvent(localContext, thisContext, child, objRef.getObjectProperty(p), propNodes);
+                    String[] propNodes = new String[nodes.length + 1];
+                    System.arraycopy(nodes, 0, propNodes, 0, nodes.length);
+
+                    for (String p : properties)
+                    {
+                        propNodes[nodes.length] = p;
+                        fireVariableChangeEvent(localContext, thisContext, child, objRef.getObjectProperty(p), propNodes);
+                    }
+                }
+                else
+                {
+                    fireVariableChangeEvent(localContext, thisContext, child, value, nodes);
                 }
             }
             else
             {
                 fireVariableChangeEvent(localContext, thisContext, child, value, nodes);
             }
-        }
-        else
-        {
-            fireVariableChangeEvent(localContext, thisContext, child, value, nodes);
         }
     }
     
@@ -411,6 +415,7 @@ public abstract class Base {
         
         Object child = getChild(parent, nodes[nodes.length - 1]);
         double endValue;
+        boolean changed = false;
         
         if (child != null)
         {
@@ -419,12 +424,12 @@ public abstract class Base {
                 NumberValueRef number = (NumberValueRef)child;
             
                 endValue = Math.max(minValue, Math.min(maxValue, number.doubleValue() * modValue));
-                number.set(endValue);
+                changed = number.set(endValue);
             }
             else if (child instanceof Number)
             {
                 endValue = Math.max(minValue, Math.min(maxValue, ((Number)child).doubleValue() * modValue));
-                setChild(parent, nodes[nodes.length - 1], endValue);
+                changed = setChild(parent, nodes[nodes.length - 1], endValue);
             }
             else
             {
@@ -437,36 +442,39 @@ public abstract class Base {
                 catch (Exception e) {}
                 
                 endValue = Math.max(minValue, Math.min(maxValue, value * modValue));
-                setChild(parent, nodes[nodes.length - 1], endValue);
+                changed = setChild(parent, nodes[nodes.length - 1], endValue);
             }
         }
         else
         {
             endValue = Math.max(minValue, Math.min(maxValue, 0));
-            setChild(parent, nodes[nodes.length - 1], endValue);
+            changed = setChild(parent, nodes[nodes.length - 1], endValue);
         }
         
         // fire events
-        if (child instanceof ValueRef)
+        if (changed)
         {
-            ValueRef objRef = (ValueRef)child;
-            
-            String[] properties = objRef.getProperties();
-            
-            if (properties != null)
+            if (child instanceof ValueRef)
             {
-                String[] propNodes = new String[nodes.length + 1];
-                System.arraycopy(nodes, 0, propNodes, 0, nodes.length);
-                
-                for (String p : properties)
+                ValueRef objRef = (ValueRef)child;
+
+                String[] properties = objRef.getProperties();
+
+                if (properties != null)
                 {
-                    propNodes[nodes.length] = p;
-                    fireVariableChangeEvent(localContext, thisContext, child, objRef.getObjectProperty(p), propNodes);
+                    String[] propNodes = new String[nodes.length + 1];
+                    System.arraycopy(nodes, 0, propNodes, 0, nodes.length);
+
+                    for (String p : properties)
+                    {
+                        propNodes[nodes.length] = p;
+                        fireVariableChangeEvent(localContext, thisContext, child, objRef.getObjectProperty(p), propNodes);
+                    }
                 }
             }
-        }
 
-        fireVariableChangeEvent(localContext, thisContext, child, endValue, nodes);
+            fireVariableChangeEvent(localContext, thisContext, child, endValue, nodes);
+        }
     }
     
     public static void modVariable(JSONObject localContext, JSONObject thisContext, String ref, double modValue, double minValue, double maxValue) throws Exception
@@ -507,6 +515,7 @@ public abstract class Base {
         
         Object child = getChild(parent, nodes[nodes.length - 1]);
         double endValue;
+        boolean changed = false;
         
         if (child != null)
         {
@@ -515,12 +524,12 @@ public abstract class Base {
                 NumberValueRef number = (NumberValueRef)child;
             
                 endValue = Math.max(minValue, Math.min(maxValue, number.doubleValue() + modValue));
-                number.set(endValue);
+                changed = number.set(endValue);
             }
             else if (child instanceof Number)
             {
                 endValue = Math.max(minValue, Math.min(maxValue, ((Number)child).doubleValue() + modValue));
-                setChild(parent, nodes[nodes.length - 1], endValue);
+                changed = setChild(parent, nodes[nodes.length - 1], endValue);
             }
             else
             {
@@ -533,36 +542,39 @@ public abstract class Base {
                 catch (Exception e) {}
                 
                 endValue = Math.max(minValue, Math.min(maxValue, value + modValue));
-                setChild(parent, nodes[nodes.length - 1], endValue);
+                changed = setChild(parent, nodes[nodes.length - 1], endValue);
             }
         }
         else
         {
             endValue = Math.max(minValue, Math.min(maxValue, modValue));
-            setChild(parent, nodes[nodes.length - 1], endValue);
+            changed = setChild(parent, nodes[nodes.length - 1], endValue);
         }
         
         // fire events
-        if (child instanceof ValueRef)
+        if (changed)
         {
-            ValueRef objRef = (ValueRef)child;
-            
-            String[] properties = objRef.getProperties();
-            
-            if (properties != null)
+            if (child instanceof ValueRef)
             {
-                String[] propNodes = new String[nodes.length + 1];
-                System.arraycopy(nodes, 0, propNodes, 0, nodes.length);
-                
-                for (String p : properties)
+                ValueRef objRef = (ValueRef)child;
+
+                String[] properties = objRef.getProperties();
+
+                if (properties != null)
                 {
-                    propNodes[nodes.length] = p;
-                    fireVariableChangeEvent(localContext, thisContext, child, objRef.getObjectProperty(p), propNodes);
+                    String[] propNodes = new String[nodes.length + 1];
+                    System.arraycopy(nodes, 0, propNodes, 0, nodes.length);
+
+                    for (String p : properties)
+                    {
+                        propNodes[nodes.length] = p;
+                        fireVariableChangeEvent(localContext, thisContext, child, objRef.getObjectProperty(p), propNodes);
+                    }
                 }
             }
-        }
 
-        fireVariableChangeEvent(localContext, thisContext, child, endValue, nodes);
+            fireVariableChangeEvent(localContext, thisContext, child, endValue, nodes);
+        }
     }
     
     public static void createList(JSONObject localContext, JSONObject thisContext, String ref) throws Exception
@@ -651,14 +663,18 @@ public abstract class Base {
         }
     }
     
-    private static void setChild(JSONAware parent, String key, Object value)
+    private static boolean setChild(JSONAware parent, String key, Object value)
     {
+        Object prev = null;
+        
         if (parent instanceof JSONObject)
         {
-            ((JSONObject)parent).put(key, value);
+            prev = ((JSONObject)parent).put(key, value);
         }
         else if (parent instanceof ValueRef)
         {
+            prev = ((ValueRef)parent).getObjectProperty(key);
+            
             ((ValueRef)parent).setObjectProperty(key, value);
         }
         else
@@ -683,8 +699,10 @@ public abstract class Base {
                 list.add(new JSONObject());
             }
 
-            list.set(index, value);
+            prev = list.set(index, value);
         }
+        
+        return !(prev == value || (prev != null && prev.equals(value)));
     }
     
     protected static void fireVariableChangeEvent(JSONObject localContext, JSONObject thisContext, Object oldValue, Object newValue, String... nodes)
@@ -975,23 +993,25 @@ public abstract class Base {
         if (enumVariable instanceof EnumValueRef)
         {
             EnumValueRef var = (EnumValueRef)enumVariable;
-            var.selectOption(mod, rotate);
             
-            String[] properties = var.getProperties();
-            
-            if (properties != null)
+            if (var.selectOption(mod, rotate))
             {
-                String[] propNodes = new String[nodes.length + 1];
-                System.arraycopy(nodes, 0, propNodes, 0, nodes.length);
-                
-                for (String p : properties)
+                String[] properties = var.getProperties();
+
+                if (properties != null)
                 {
-                    propNodes[nodes.length] = p;
-                    fireVariableChangeEvent(localContext, thisContext, var, var.getObjectProperty(p), propNodes);
+                    String[] propNodes = new String[nodes.length + 1];
+                    System.arraycopy(nodes, 0, propNodes, 0, nodes.length);
+
+                    for (String p : properties)
+                    {
+                        propNodes[nodes.length] = p;
+                        fireVariableChangeEvent(localContext, thisContext, var, var.getObjectProperty(p), propNodes);
+                    }
                 }
+
+                fireVariableChangeEvent(localContext, thisContext, enumVariable, var.getValue(), nodes);
             }
-            
-            fireVariableChangeEvent(localContext, thisContext, enumVariable, var.getValue(), nodes);
         }
     }
 

@@ -121,16 +121,18 @@ public class TriggerListRef extends ValueRef {
     }
 
     @Override
-    public void reEvaluate() {
+    public boolean reEvaluate() {
         // reevaluate all triggers
         for (int i = 0; triggers != null && i < triggers.size(); i++)
         {
             ((TriggerRef)triggers.get(i)).runTrigger();
         }
+        
+        return false;
     }
 
     @Override
-    public final void set(Object valueRef) {
+    public final boolean set(Object valueRef) {
         destroy();
         
         if (valueRef instanceof JSONArray)
@@ -145,6 +147,7 @@ public class TriggerListRef extends ValueRef {
         setChangeListener(this.getChangeListener());
         
         fireChangeEvent();
+        return true;
     }
     
     @Override

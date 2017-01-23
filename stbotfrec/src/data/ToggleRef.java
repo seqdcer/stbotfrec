@@ -140,14 +140,16 @@ public final class ToggleRef extends ValueRef implements PropertyChangeListener 
     }
 
     @Override
-    public void reEvaluate() {
+    public boolean reEvaluate() {
         // nope
+        return false;
     }
 
     @Override
-    public void set(Object valueRef) {
+    public boolean set(Object valueRef) {
         // nope
-        destroy();
+        // destroy();
+        return false;
     }
 
     @Override

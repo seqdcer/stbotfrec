@@ -9,6 +9,7 @@ import engines.Base;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Objects;
 import org.json.simple.JSONObject;
 
 /**
@@ -58,7 +59,7 @@ public class StringValueRef extends ValueRef implements PropertyChangeListener {
     }
     
     @Override
-    public void set(Object valueRef)
+    public boolean set(Object valueRef)
     {
         originalValue = valueRef;
         subRefs.clear();
@@ -207,7 +208,7 @@ public class StringValueRef extends ValueRef implements PropertyChangeListener {
             params.trimToSize();
         }
         
-        reEvaluate();
+        return reEvaluate();
     }
     
     @Override
@@ -217,7 +218,7 @@ public class StringValueRef extends ValueRef implements PropertyChangeListener {
     }
     
     @Override
-    public void reEvaluate()
+    public boolean reEvaluate()
     {
         Object oldValue = endValue;
         
@@ -296,16 +297,16 @@ public class StringValueRef extends ValueRef implements PropertyChangeListener {
         }
         
         postEvaluate((oldValue == null) ? null : oldValue.toString());
+        
+        return !Objects.equals(oldValue, endValue);
     }
     
     protected void postEvaluate(String oldValue)
     {
-        if (oldValue == null)
+        if (oldValue != null && !Objects.equals(oldValue, endValue))
         {
-            return;
+            fireChangeEvent();
         }
-
-        fireChangeEvent();
     }
     
     @Override

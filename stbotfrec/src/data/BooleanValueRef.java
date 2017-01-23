@@ -77,7 +77,7 @@ public class BooleanValueRef extends StringValueRef {
     }
     
     @Override
-    public void set(Object valueRef)
+    public boolean set(Object valueRef)
     {
         if (valueRef instanceof Boolean)
         {
@@ -98,12 +98,17 @@ public class BooleanValueRef extends StringValueRef {
             params.clear();
             subRefs.add(resolvedRef);
             
-            if (!Objects.equals(value, oldValue) && oldValue != null)
+            if (!Objects.equals(value, oldValue))
+            {
                 this.fireChangeEvent();
+                return true;
+            }
+            
+            return false;
         }
         else
         {
-            super.set(valueRef);
+            return super.set(valueRef);
         }
     }
     

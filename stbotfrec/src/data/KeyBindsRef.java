@@ -150,12 +150,13 @@ public class KeyBindsRef extends ValueRef {
     }
 
     @Override
-    public void reEvaluate() {
+    public boolean reEvaluate() {
         // nothing to do
+        return false;
     }
 
     @Override
-    public final void set(Object valueRef) {
+    public final boolean set(Object valueRef) {
         destroy();
         
         if (valueRef instanceof JSONArray)
@@ -170,6 +171,7 @@ public class KeyBindsRef extends ValueRef {
         setChangeListener(this.getChangeListener());
         
         fireChangeEvent();
+        return true;
     }
     
     @Override

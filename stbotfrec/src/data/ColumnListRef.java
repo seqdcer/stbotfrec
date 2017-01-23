@@ -105,12 +105,13 @@ public class ColumnListRef extends ValueRef {
     }
 
     @Override
-    public void reEvaluate() {
+    public boolean reEvaluate() {
         // nothing to do
+        return false;
     }
 
     @Override
-    public final void set(Object valueRef) {
+    public final boolean set(Object valueRef) {
         if (valueRef instanceof JSONArray)
         {
             destroy();
@@ -123,7 +124,10 @@ public class ColumnListRef extends ValueRef {
             }
             
             fireChangeEvent();
+            return true;
         }
+        
+        return false;
     }
     
     public ColumnRef getColumn(int i)

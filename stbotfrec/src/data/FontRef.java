@@ -122,12 +122,13 @@ public class FontRef extends ValueRef {
     }
 
     @Override
-    public void reEvaluate() {
+    public boolean reEvaluate() {
         // nothing to do
+        return false;
     }
 
     @Override
-    public final void set(Object valueRef) {
+    public final boolean set(Object valueRef) {
         if (valueRef instanceof JSONObject)
         {
             destroy();
@@ -146,7 +147,10 @@ public class FontRef extends ValueRef {
             ((ValueRef)font.get(FONT_UPPERCASE_KEY)).setChangeListener(listener);
             
             fireChangeEvent();
+            return true;
         }
+        
+        return false;
     }
     
     @Override
